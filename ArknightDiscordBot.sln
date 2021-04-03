@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArknightDiscordBot", "ArknightDiscordBot\ArknightDiscordBot.csproj", "{8A94C293-09B7-46C4-88BD-290A896CE6A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArknightApi", "ArknightApi\ArknightApi.csproj", "{C3608E08-E2C1-4221-9684-A01EFA93D708}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A94C293-09B7-46C4-88BD-290A896CE6A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A94C293-09B7-46C4-88BD-290A896CE6A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A94C293-09B7-46C4-88BD-290A896CE6A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A94C293-09B7-46C4-88BD-290A896CE6A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3608E08-E2C1-4221-9684-A01EFA93D708}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3608E08-E2C1-4221-9684-A01EFA93D708}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3608E08-E2C1-4221-9684-A01EFA93D708}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3608E08-E2C1-4221-9684-A01EFA93D708}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {95FE326C-800B-4D26-B7E7-241F9009F9A2}
+	EndGlobalSection
+EndGlobal

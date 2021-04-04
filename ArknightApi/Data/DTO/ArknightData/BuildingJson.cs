@@ -6,6 +6,59 @@ using System.Threading.Tasks;
 
 namespace ArknightApi.Data.DTO.ArknightData
 {
+    public class BuffData
+    {
+        [JsonPropertyName("buffId")]
+        public string BuffId { get; set; }
+    }
+    public class BuffChar
+    {
+        [JsonPropertyName("buffData")]
+        public List<BuffData> BuffData { get; set; }
+    }
+    public class CharBuff
+    {
+        [JsonPropertyName("charId")]
+        public string CharId { get; set; }
+
+        [JsonPropertyName("maxManpower")]
+        public int MaxManpower { get; set; }
+
+        [JsonPropertyName("buffChar")]
+        public List<BuffChar> BuffChar { get; set; }
+    }
+    public class BaseBuff
+    {
+        [JsonPropertyName("buffId")]
+        public string BuffId { get; set; }
+
+        [JsonPropertyName("buffName")]
+        public string BuffName { get; set; }
+
+        [JsonPropertyName("buffIcon")]
+        public string BuffIcon { get; set; }
+
+        [JsonPropertyName("skillIcon")]
+        public string SkillIcon { get; set; }
+
+        [JsonPropertyName("sortId")]
+        public int SortId { get; set; }
+
+        [JsonPropertyName("buffColor")]
+        public string BuffColor { get; set; }
+
+        [JsonPropertyName("textColor")]
+        public string TextColor { get; set; }
+
+        [JsonPropertyName("buffCategory")]
+        public string BuffCategory { get; set; }
+
+        [JsonPropertyName("roomType")]
+        public string RoomType { get; set; }
+
+        [JsonPropertyName("description")]
+        public string Description { get; set; }
+    }
     public class ExtraOutcomeGroup
     {
         [JsonPropertyName("weight")]

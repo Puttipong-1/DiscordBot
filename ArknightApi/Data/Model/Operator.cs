@@ -1,14 +1,8 @@
 ﻿using ArknightApi.Data.DTO.ArknightData;
 using ArknightApi.Utility;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace ArknightApi.Data.Model
 {
@@ -31,10 +25,14 @@ namespace ArknightApi.Data.Model
         public int Rarity { get; set; }
         public string Profession { get; set; }
         public string Trait { get; set; }
+        public string CV { get; set; }
+        public string Artist { get; set; }
         public List<Elite> Elites{get;set;}
         public List<Skill> Skills { get; set; }
         public List<Talent> Talents { get; set; }
         public List<AllSkillUp> AllSkillUps { get; set; }
+        public List<CharInfo> CharInfos { get; set; }
+        public List<BaseBuff> BaseBuffs { get; set; }
         public Operator() { }
         public Operator(string key,Character character)
         {

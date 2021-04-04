@@ -1,5 +1,6 @@
 ﻿using ArknightApi.Data.DTO.ArknightData;
 using ArknightApi.Data.Model;
+using ArknightApi.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -17,21 +18,21 @@ namespace ArknightApi.Controllers
     [Route("api/arknightdata/")]
     public class ArknightDataController : ControllerBase
     {
+        private readonly IArknightDataServicecs arknightDataServicecs;
+        public ArknightDataController(ArknightDataService _arknightDataService)
+        {
+            arknightDataServicecs = _arknightDataService;
+        }
         [Route("addbuilding")]
         [HttpPost]
-        public ActionResult<List<Operator>> AddBuilding([FromBody] JsonElement json)
+        public async Task<ActionResult> AddBuilding([FromBody] JsonElement json)
         {
             try
             {
                 var root = json.GetProperty("workshopFormulas");
                 var dic = JsonSerializer.Deserialize<Dictionary<string, Building>>(root.ToString());
-                var formulas = new List<Formula>();
-                foreach (var item in dic)
-                {
-                    var f = new Formula(item.Value);
-                    formulas.Add(f);
-                }
-                return Ok(formulas);
+                await arknightDataServicecs.AddBuildings(dic);
+                return Ok();
             }
             catch (Exception e)
             {
@@ -40,18 +41,33 @@ namespace ArknightApi.Controllers
         }
         [Route("addcharacter")]
         [HttpPost]
-        public ActionResult<List<Operator>> AddCharacter([FromBody]JsonElement json)
+        public async Task<ActionResult> AddCharacter([FromBody]JsonElement json)
         {
             try
             {
-                var root = JsonSerializer.Deserialize<Dictionary<string, Character>>(json.ToString());
-                var ops = new List<Operator>();
-                foreach (var item in root)
+                var dic = JsonSerializer.Deserialize<Dictionary<string, Character>>(json.ToString());
+                await arknightDataServicecs.AddOperators(dic);
+                return Ok();
+            }catch(Exception e)
+            {
+                return BadRequest(e.ToString());
+            }
+        }
+        [Route("addinfo")]
+        [HttpPost]
+        public ActionResult AddInfo([FromBody] JsonElement json)
+        {
+            try
+            {
+                var p = json.GetProperty("handbookDict");
+                var dic = JsonSerializer.Deserialize<Dictionary<string,Data.DTO.ArknightData.CharInfo>>(json.ToString());
+                var info = new List<Data.Model.CharInfo>();
+                foreach (var item in dic)
                 {
-                    var op = new Operator(item.Key, item.Value);
-                    ops.Add(op);
+                    info.Add(new Data.Model.CharInfo(item.Value));
                 }
-                return Ok(ops);
+                return Ok(info);
+
             }catch(Exception e)
             {
                 return BadRequest(e.ToString());
@@ -63,13 +79,13 @@ namespace ArknightApi.Controllers
         {
             try
             {
-                var root = JsonSerializer.Deserialize<Dictionary<string, CharWordJson>>(json.ToString());
+                var dic = JsonSerializer.Deserialize<Dictionary<string, CharWordJson>>(json.ToString());
                 List<CharWord> chars = new List<CharWord>();
-                foreach (var item in root)
+                foreach (var item in dic)
                 {
                     chars.Add(new CharWord(item.Value));
                 }
-                return Ok(chars);
+                return Ok();
             }catch(Exception e)
             {
                 return BadRequest(e.ToString());
@@ -78,18 +94,14 @@ namespace ArknightApi.Controllers
         }
         [Route("additem")]
         [HttpPost]
-        public ActionResult<List<Item>> AddItem([FromBody] JsonElement json)
+        public async Task<ActionResult> AddItem([FromBody] JsonElement json)
         {
             try
             {
                 var items = json.GetProperty("items");
-                var root = JsonSerializer.Deserialize<Dictionary<string, ItemDetail>>(items.ToString());
-                List<Item> itemList = new List<Item>();
-                foreach (var dic in root)
-                {
-                    if (int.TryParse(dic.Value.ItemId, out _) && dic.Value.ItemType == "MATERIAL") itemList.Add(new Item(dic.Value));
-                }
-                return Ok(itemList);
+                var dic = JsonSerializer.Deserialize<Dictionary<string, ItemDetail>>(items.ToString());
+                await arknightDataServicecs.AddItem(dic);
+                return Ok();
             }catch(Exception e)
             {
                 return BadRequest(e);
@@ -97,18 +109,14 @@ namespace ArknightApi.Controllers
         }
         [Route("addskin")]
         [HttpPost]
-        public ActionResult<List<SkinJson>> AddSkin([FromBody] JsonElement json)
+        public async Task<ActionResult> AddSkin([FromBody] JsonElement json)
         {
             try
             {
                 var items = json.GetProperty("charSkins");
-                var root = JsonSerializer.Deserialize<Dictionary<string, SkinJson>>(items.ToString());
-                List<Skin> skins = new List<Skin>();
-                foreach (var item in root)
-                {
-                    skins.Add(new Skin(item.Value));
-                }
-                return Ok(skins);
+                var dic = JsonSerializer.Deserialize<Dictionary<string, SkinJson>>(items.ToString());
+                await arknightDataServicecs.AddSkin(dic);
+                return Ok();
             }
             catch(Exception e)
             {
@@ -117,20 +125,12 @@ namespace ArknightApi.Controllers
         }
         [Route("addtip")]
         [HttpPost]
-        public ActionResult<List<Data.Model.Tip>> Addtip([FromBody]RootTip json)
+        public async Task<ActionResult> Addtip([FromBody]RootTip json)
         {
             try
             {
-                List<Data.Model.Tip> tips = new List<Data.Model.Tip>();
-                foreach (Data.DTO.ArknightData.Tip t in json.Tips)
-                {
-                    tips.Add(new Data.Model.Tip(t));
-                }
-                foreach (Data.DTO.ArknightData.WorldViewTip t in json.WorldViewTips)
-                {
-                    tips.Add(new Data.Model.Tip(t));
-                }
-                return Ok(tips);
+                await arknightDataServicecs.AddTip(json);
+                return Ok();
             }catch(Exception e)
             {
                 return BadRequest(e.ToString());

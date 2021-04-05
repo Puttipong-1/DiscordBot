@@ -17,9 +17,33 @@ namespace ArknightApi.Service
             applicationDb = _applicationDb;
         }
 
-        public Task AddBaseBuff(JsonElement json)
+        public async Task AddBaseBuff(JsonElement json)
         {
-            throw new NotImplementedException();
+            var chars = json.GetProperty("chars");
+            var dic2 = JsonSerializer.Deserialize<Dictionary<string, CharBuff>>(chars.ToString());
+            JsonElement b = json.GetProperty("buffs");
+            var buffs = JsonSerializer.Deserialize<Dictionary<string, Data.DTO.ArknightData.BaseBuff>>(b.ToString());
+            List<Data.Model.BaseBuff> baseBuffs = new List<Data.Model.BaseBuff>();
+            foreach (var item in dic2)
+            {
+                CharBuff charBuff = item.Value;
+                if (charBuff.BuffChar != null)
+                {
+                    foreach (BuffChar buffChar in charBuff.BuffChar)
+                    {
+                        if (buffChar.BuffData != null)
+                        {
+                            foreach (BuffData buffData in buffChar.BuffData)
+                            {
+                                Data.DTO.ArknightData.BaseBuff bb = buffs[buffData.BuffId];
+                                baseBuffs.Add(new Data.Model.BaseBuff(bb, charBuff));
+                            }
+                        }
+                    }
+                }
+            }
+            await applicationDb.AddRangeAsync(baseBuffs);
+            await applicationDb.SaveChangesAsync();
         }
 
         public async Task AddBuildings(Dictionary<string, Building> dic)

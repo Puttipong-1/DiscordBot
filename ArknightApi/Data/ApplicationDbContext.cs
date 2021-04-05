@@ -12,6 +12,8 @@ namespace ArknightApi.Data
         public ApplicationDbContext(DbContextOptions options) : base(options) { }
         public DbSet<AllSkillCost> AllSkillCosts { get; set; }
         public DbSet<AllSkillUp> AllSkillUps { get; set; }
+        public DbSet<BaseBuff> BaseBuffs { get; set; }
+        public DbSet<CharInfo> CharInfos { get; set; }
         public DbSet<CharWord> CharWords { get; set; }
         public DbSet<Elite> Elites { get; set; }
         public DbSet<EvolveCost> EvolveCosts { get; set; }
@@ -30,6 +32,8 @@ namespace ArknightApi.Data
         {
             modelBuilder.Entity<AllSkillCost>().ToTable("AllSkillCost").HasKey(a => a.LevelCostId);
             modelBuilder.Entity<AllSkillUp>().ToTable("AllSkillUp").HasKey(a => a.AllSkillId);
+            modelBuilder.Entity<BaseBuff>().ToTable("BaseBuff").HasKey(b => b.BaseBuffId);
+            modelBuilder.Entity<CharInfo>().ToTable("CharInfo").HasKey(c => c.CharInfoId);
             modelBuilder.Entity<CharWord>().ToTable("CharWord").HasKey(c => c.CharWordId);
             modelBuilder.Entity<Elite>().ToTable("Elite").HasKey(e => e.EliteId);
             modelBuilder.Entity<EvolveCost>().ToTable("EvolveCost").HasKey(e => e.EvolveCostId);

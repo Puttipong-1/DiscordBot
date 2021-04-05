@@ -7,7 +7,7 @@ using ArknightApi.Data.DTO.ArknightData;
 
 namespace ArknightApi.Service
 {
-    interface IArknightDataServicecs
+    public interface IArknightDataServicecs
     {
         Task AddBuildings(Dictionary<string, Building> dic);
         Task AddWords(Dictionary<string, CharWordJson> dic);

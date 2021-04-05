@@ -19,7 +19,7 @@ namespace ArknightApi.Controllers
     public class ArknightDataController : ControllerBase
     {
         private readonly IArknightDataServicecs arknightDataServicecs;
-        public ArknightDataController(ArknightDataService _arknightDataService)
+        public ArknightDataController(IArknightDataServicecs _arknightDataService)
         {
             arknightDataServicecs = _arknightDataService;
         }
@@ -32,6 +32,7 @@ namespace ArknightApi.Controllers
                 var root = json.GetProperty("workshopFormulas");
                 var dic = JsonSerializer.Deserialize<Dictionary<string, Building>>(root.ToString());
                 await arknightDataServicecs.AddBuildings(dic);
+                await arknightDataServicecs.AddBaseBuff(json);
                 return Ok();
             }
             catch (Exception e)

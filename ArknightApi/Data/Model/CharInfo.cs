@@ -17,6 +17,7 @@ namespace ArknightApi.Data.Model
         public Operator Operator { get; set; }
         public string StoryTitle { get; set; }
         public string StoryText { get; set; }
+        public CharInfo() { }
         public CharInfo(DTO.ArknightData.CharInfo charInfo)
         {
             OperatorId = ArknightUtil.GetId(charInfo.CharID);

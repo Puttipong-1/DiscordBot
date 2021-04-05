@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-
+using ArknightApi.Service;
 namespace ArknightApi
 {
     public class Startup
@@ -35,6 +35,7 @@ namespace ArknightApi
             {
                 options.AllowSynchronousIO = true;
             });
+            services.AddTransient<IArknightDataServicecs, ArknightDataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

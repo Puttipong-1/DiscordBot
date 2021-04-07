@@ -17,9 +17,8 @@ namespace ArknightApi.Data.Model
         public string SkillDescription { get; set; }
         public List<MasteryUpCost> MasteryUpCosts{get;set;}
         public Skill() { }
-        public Skill(DTO.ArknightData.Skill skill,int id)
+        public Skill(DTO.ArknightData.Skill skill)
         {
-            OperatorId = id;
             SkillCode = skill.SkillId;
             MasteryUpCosts = new List<MasteryUpCost>();
             foreach(DTO.ArknightData.LevelUpCostCond lvl in skill.LevelUpCostCond)

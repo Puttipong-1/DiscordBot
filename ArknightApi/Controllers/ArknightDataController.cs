@@ -37,7 +37,7 @@ namespace ArknightApi.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e.ToString());
+                return BadRequest();
             }
         }
         [Route("addcharacter")]
@@ -100,12 +100,12 @@ namespace ArknightApi.Controllers
             try
             {
                 var items = json.GetProperty("items");
-                var dic = JsonSerializer.Deserialize<Dictionary<string, ItemDetail>>(items.ToString());
+                Dictionary<string,ItemDetail> dic = JsonSerializer.Deserialize<Dictionary<string, ItemDetail>>(items.ToString());
                 await arknightDataServicecs.AddItem(dic);
                 return Ok();
             }catch(Exception e)
             {
-                return BadRequest(e);
+                return BadRequest(e.ToString());
             }
         }
         [Route("addskin")]

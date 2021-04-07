@@ -1,6 +1,7 @@
 ﻿using ArknightApi.Data;
 using ArknightApi.Data.DTO.ArknightData;
 using ArknightApi.Data.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,7 +73,14 @@ namespace ArknightApi.Service
                 var info = new List<Data.Model.CharInfo>();
                 foreach(var item in dic)
                 {
-                    info.Add(new Data.Model.CharInfo(item.Value));
+                    var i =new Data.Model.CharInfo(item.Value);
+                    Operator op = await applicationDb.Operators
+                        .Where(o => o.OperatorId == i.OperatorId)
+                        .SingleAsync();
+                    op.Artist = item.Value.DrawName;
+                    op.CV = item.Value.InfoName;
+                    applicationDb.Update(op);
+                    info.Add(i);
                 }
                 await applicationDb.AddRangeAsync(info);
                 await applicationDb.SaveChangesAsync();
@@ -88,9 +96,14 @@ namespace ArknightApi.Service
             try
             {
                 List<Item> itemList = new List<Item>();
-                foreach (var item in dic)
+                foreach (KeyValuePair<string, ItemDetail> item in dic)
                 {
-                    if (int.TryParse(item.Value.ItemId, out _) && item.Value.ItemType == "MATERIAL") itemList.Add(new Item(item.Value));
+                    ItemDetail detail = item.Value;
+                    if (int.TryParse(detail.ItemId, out _) && string.Equals("MATERIAL", detail.ItemType))
+                    {
+                        itemList.Add(new Item(detail));
+                    }
+
                 }
                 await applicationDb.AddRangeAsync(itemList);
                 await applicationDb.SaveChangesAsync();
@@ -105,11 +118,15 @@ namespace ArknightApi.Service
         {
             try
             {
-                var ops = new List<Operator>();
+                List<Operator> ops = new List<Operator>();
                 foreach (var item in dic)
                 {
-                    var op = new Operator(item.Key, item.Value);
-                    ops.Add(op);
+                    if (!item.Key.Contains("token")&&!item.Key.Contains("trap"))
+                    {
+                        var op = new Operator(item.Key, item.Value);
+                        Console.WriteLine(op.OperatorId+" : "+op.Name);
+                        ops.Add(op);
+                    }
                 }
                 await applicationDb.AddRangeAsync(ops);
                 await applicationDb.SaveChangesAsync();
@@ -126,7 +143,10 @@ namespace ArknightApi.Service
                 List<Skin> skins = new List<Skin>();
                 foreach (var item in dic)
                 {
-                    skins.Add(new Skin(item.Value));
+                    if (!item.Key.Contains("token") && !item.Key.Contains("trap"))
+                    {
+                        skins.Add(new Skin(item.Value));
+                    }
                 }
                 await applicationDb.AddRangeAsync(skins);
                 await applicationDb.SaveChangesAsync();
@@ -146,7 +166,7 @@ namespace ArknightApi.Service
                 {
                     tips.Add(new Data.Model.Tip(t));
                 }
-                foreach (Data.DTO.ArknightData.WorldViewTip t in root.WorldViewTips)
+                foreach (WorldViewTip t in root.WorldViewTips)
                 {
                     tips.Add(new Data.Model.Tip(t));
                 }

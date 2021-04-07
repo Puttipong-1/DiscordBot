@@ -21,7 +21,7 @@ namespace ArknightApi.Data.Model
         public int MaxAtk { get; set; }
         public int Def { get; set; }
         public int MaxDef { get; set; }
-        public Double MagicResistance { get; set; }
+        public double MagicResistance { get; set; }
         public int Cost { get; set; }
         public int BlockCnt { get; set; }
         public int RespawnTime { get; set; }
@@ -30,7 +30,7 @@ namespace ArknightApi.Data.Model
         public int OperatorId { get; set; }
         public Operator Operator { get; set; }
         public Elite() { }
-        public Elite(Phase phase,int id)
+        public Elite(Phase phase)
         {
             CharacterPrefabKey = phase.CharacterPrefabKey;
             RangeId = phase.RangeId;
@@ -46,7 +46,6 @@ namespace ArknightApi.Data.Model
             BlockCnt = phase.AttributesKeyFrames[0].Data.BlockCnt;
             RespawnTime = phase.AttributesKeyFrames[0].Data.RespawnTime;
             EvolveCosts = new List<EvolveCost>();
-            OperatorId = id;
             if (phase.EvolveCost != null)
             {
                 foreach (DTO.ArknightData.EvolveCost e in phase.EvolveCost)

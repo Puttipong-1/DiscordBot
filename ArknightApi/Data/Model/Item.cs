@@ -1,10 +1,7 @@
 ﻿using ArknightApi.Utility;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ArknightApi.Data.Model
 {
@@ -20,7 +17,6 @@ namespace ArknightApi.Data.Model
         public string ClassifyType { get; set; }
         public string ItemType { get; set; }
         public int FormulaId { get; set; }
-        public Formula Formula{get;set;}
         public Item() { }
         public Item(DTO.ArknightData.ItemDetail item)
         {
@@ -32,7 +28,7 @@ namespace ArknightApi.Data.Model
             Usage = item.Usage;
             ClassifyType = item.ClassifyType;
             ItemType = item.ItemType;
-            if (item.BuildingProductList!=null&&!item.BuildingProductList.Any())
+            if (item.BuildingProductList != null && item.BuildingProductList.Count>0)
             {
                 FormulaId = int.Parse(item.BuildingProductList[0].FormulaId);
             }

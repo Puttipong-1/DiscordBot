@@ -28,14 +28,16 @@ namespace ArknightApi
                     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
                 }
                 );
-            services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(
-                opt => opt.UseNpgsql(Configuration.GetConnectionString("postgres"))
-                );
+            services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(opt => {
+                    opt.UseNpgsql(Configuration.GetConnectionString("postgres"));
+                    opt.EnableSensitiveDataLogging();
+                });
             services.Configure<IISServerOptions>(options =>
             {
                 options.AllowSynchronousIO = true;
             });
             services.AddTransient<IArknightDataServicecs, ArknightDataService>();
+            services.AddTransient<IOperatorServcie, OperatorService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

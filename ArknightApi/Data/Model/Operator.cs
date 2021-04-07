@@ -8,7 +8,7 @@ namespace ArknightApi.Data.Model
 {
     public class Operator
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int OperatorId { get; set; }
         public string OperatorCode { get; set; }
         public string Description { get; set; }
@@ -56,13 +56,13 @@ namespace ArknightApi.Data.Model
             Elites = new List<Elite>();
             foreach(Phase p in character.Phases)
             {
-                Elite e = new Elite(p,OperatorId);
+                Elite e = new Elite(p);
                 Elites.Add(e);
             }
             Skills = new List<Skill>();
             foreach(DTO.ArknightData.Skill s in character.Skills)
             {
-                var skill = new Skill(s,OperatorId);
+                var skill = new Skill(s);
                 Skills.Add(skill);
             }
             Talents = new List<Talent>();
@@ -72,9 +72,9 @@ namespace ArknightApi.Data.Model
                 {
                     if (t.Candidates != null)
                     {
-                        foreach (DTO.ArknightData.Candidate c in t.Candidates)
+                        foreach (Candidate c in t.Candidates)
                         {
-                            var talent = new Talent(c,OperatorId);
+                            var talent = new Talent(c);
                             Talents.Add(talent);
                         }
                     }
@@ -83,13 +83,13 @@ namespace ArknightApi.Data.Model
             AllSkillUps = new List<AllSkillUp>();
             if (character.AllSkillLvlup != null)
             {
-                foreach (DTO.ArknightData.AllSkillLvlup all in character.AllSkillLvlup)
+                foreach (AllSkillLvlup all in character.AllSkillLvlup)
                 {
-                    var allSkill = new AllSkillUp(OperatorId, all);
+                    var allSkill = new AllSkillUp(all);
                     AllSkillUps.Add(allSkill);
                 }
             }
-
+              
        }
     }
 }

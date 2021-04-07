@@ -15,7 +15,7 @@ namespace ArknightApi.Utility
         }
         public static string RemoveBrackets(string text)
         {
-            if (String.IsNullOrEmpty(text)) return "";
+            if (string.IsNullOrEmpty(text)) return "";
             return Regex.Replace(text, @"\<(@|[A-z]|\.|\/)*\>","");
         }
         public static int CalculateRarity(int rarity)
@@ -28,7 +28,7 @@ namespace ArknightApi.Utility
         {
             var myRegex = new Regex(@"(?<=_)([0-9]*)(?=_)");
             string resultString = myRegex.Match(key).Value;
-            return Int32.Parse(resultString);
+            return int.Parse(resultString);
         }
         public static string GetTeam(int t)
         {

@@ -19,9 +19,8 @@ namespace ArknightApi.Data.Model
         public int OperatorId { get; set; }
         public Operator Operator { get; set; }
         public Talent() { }
-        public Talent(DTO.ArknightData.Candidate c,int id)
+        public Talent(DTO.ArknightData.Candidate c)
         {
-            OperatorId = id;
             Phase = c.UnlockCondition.Phase;
             Name = c.Name;
             Description = ArknightUtil.RemoveBrackets(c.Description);

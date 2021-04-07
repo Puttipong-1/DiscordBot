@@ -12,8 +12,8 @@ namespace ArknightApi.Data.Model
     {
         [Key,ForeignKey("Formula")]
         public int FormulaCostId { get; set; }
-        public int Formula { get; set; }
-        [Key,ForeignKey("item")]
+        public Formula Formula { get; set; }
+        [Key,ForeignKey("Item")]
         public int ItemId { get; set; }
         public Item Item { get; set; }
         public int Count { get; set; }

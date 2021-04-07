@@ -16,9 +16,8 @@ namespace ArknightApi.Data.Model
         public int OperatorId { get; set; }
         public Operator Operator { get; set; }
         public AllSkillUp() { }
-        public AllSkillUp(int id,DTO.ArknightData.AllSkillLvlup allSkill)
+        public AllSkillUp(DTO.ArknightData.AllSkillLvlup allSkill)
         {
-            OperatorId = id;
             AllSkillCosts = new List<AllSkillCost>();
             if(allSkill.LvlUpCost != null)
             {

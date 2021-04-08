@@ -1,6 +1,7 @@
 ﻿using ArknightApi.Data.DTO.ArknightData;
 using ArknightApi.Data.Model;
 using ArknightApi.Service;
+using ArknightApi.Utility;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -56,18 +57,14 @@ namespace ArknightApi.Controllers
         }
         [Route("addinfo")]
         [HttpPost]
-        public ActionResult AddInfo([FromBody] JsonElement json)
+        public async Task<ActionResult> AddInfo([FromBody] JsonElement json)
         {
             try
             {
                 var p = json.GetProperty("handbookDict");
-                var dic = JsonSerializer.Deserialize<Dictionary<string,Data.DTO.ArknightData.CharInfo>>(json.ToString());
-                var info = new List<Data.Model.CharInfo>();
-                foreach (var item in dic)
-                {
-                    info.Add(new Data.Model.CharInfo(item.Value));
-                }
-                return Ok(info);
+                var dic = JsonSerializer.Deserialize<Dictionary<string,Data.DTO.ArknightData.CharInfo>>(p.ToString());
+                await arknightDataServicecs.AddInfo(dic);
+                return Ok();
 
             }catch(Exception e)
             {

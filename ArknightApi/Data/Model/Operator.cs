@@ -31,8 +31,11 @@ namespace ArknightApi.Data.Model
         public List<Skill> Skills { get; set; }
         public List<Talent> Talents { get; set; }
         public List<AllSkillUp> AllSkillUps { get; set; }
+        public List<Potential> Potentials { get; set; }
         public List<CharInfo> CharInfos { get; set; }
         public List<BaseBuff> BaseBuffs { get; set; }
+        public List<Skin> Skins { get; set; }
+        public List<CharWord> CharWords { get; set; }
         public Operator() { }
         public Operator(string key,Character character)
         {
@@ -50,7 +53,7 @@ namespace ArknightApi.Data.Model
             ItemObtainApproach = character.ItemObtainApproach;
             IsNotObtainable = character.IsNotObtainable;
             Rarity = ArknightUtil.CalculateRarity(character.Rarity);
-            Profession = character.Profession;
+            Profession = ArknightUtil.GetClass(character.Profession);
             if(character.Trait!=null)
                 Trait = ArknightUtil.RemoveBrackets(character.Trait.OverrideDescription);
             Elites = new List<Elite>();

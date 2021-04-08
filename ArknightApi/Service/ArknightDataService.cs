@@ -1,6 +1,7 @@
 ﻿using ArknightApi.Data;
 using ArknightApi.Data.DTO.ArknightData;
 using ArknightApi.Data.Model;
+using ArknightApi.Utility;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -73,14 +74,23 @@ namespace ArknightApi.Service
                 var info = new List<Data.Model.CharInfo>();
                 foreach(var item in dic)
                 {
-                    var i =new Data.Model.CharInfo(item.Value);
-                    Operator op = await applicationDb.Operators
-                        .Where(o => o.OperatorId == i.OperatorId)
-                        .SingleAsync();
-                    op.Artist = item.Value.DrawName;
-                    op.CV = item.Value.InfoName;
-                    applicationDb.Update(op);
-                    info.Add(i);
+                    if (item.Key.Contains("char"))
+                    {
+                        int id = ArknightUtil.GetId(item.Value.CharID);
+                        Operator op = await applicationDb.Operators
+                                 .Where(o => o.OperatorId == id)
+                                 .SingleAsync();
+                         op.Artist = item.Value.DrawName;
+                         op.CV = item.Value.InfoName;
+                         applicationDb.Update(op);
+                        if (item.Value.StoryTextAudio.Any())
+                        {
+                            foreach (StoryTextAudio ci in item.Value.StoryTextAudio)
+                            {
+                                info.Add(new Data.Model.CharInfo(id, ci));
+                            }
+                        }
+                    }
                 }
                 await applicationDb.AddRangeAsync(info);
                 await applicationDb.SaveChangesAsync();

@@ -18,15 +18,15 @@ namespace ArknightApi.Data.Model
         public string StoryTitle { get; set; }
         public string StoryText { get; set; }
         public CharInfo() { }
-        public CharInfo(DTO.ArknightData.CharInfo charInfo)
+        public CharInfo(int id,DTO.ArknightData.StoryTextAudio audio)
         {
-            OperatorId = ArknightUtil.GetId(charInfo.CharID);
-            if (charInfo.StoryTextAudio != null&&charInfo.StoryTextAudio.Any())
+            OperatorId = id;
+            if (audio != null)
             {
-                StoryTitle = charInfo.StoryTextAudio[0].StoryTitle;
-                if (charInfo.StoryTextAudio[0].Stories != null&& charInfo.StoryTextAudio.Any())
+                StoryTitle = audio.StoryTitle;
+                if (audio.Stories != null&& audio.Stories.Any())
                 {
-                    StoryText = charInfo.StoryTextAudio[0].Stories[0].StoryText;
+                    StoryText = audio.Stories[0].StoryText;
                 }
             }
         }

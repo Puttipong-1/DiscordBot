@@ -49,7 +49,19 @@ namespace ArknightApi.Utility
                 13 => "Blacksteel",
                 15 => "Abyssal Hunters",
                 19 => "Reserve Op Team A6",
-                _ => "",
+                _ => ""
+            };
+        }
+        public static string GetClass(string prof)
+        {
+            return prof switch
+            {
+                "WARRIOR" => "GUARD",
+                "SPECIAL" => "SPECIALIST",
+                "TANK" => "DEFENDER",
+                "PIONEER" => "VANGUARD",
+                "SUPPORT" => "SUPPORTER",
+                _ => prof
             };
         }
     }

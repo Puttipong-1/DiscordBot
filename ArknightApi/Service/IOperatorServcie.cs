@@ -10,5 +10,9 @@ namespace ArknightApi.Service
     {
         public Task<Operator> GetOperatorByName(string name);
         public Task<List<Operator>> GetOperatorList();
+        public Task<Operator> GetSkin(string name);
+        public Task<Operator> GetWords(string name);
+        public Task<List<Operator>> GetOperatorsByClass(string c);
+        public Task<List<Operator>> GetOperatorsByRarity(int rarity);
     }
 }

@@ -21,7 +21,8 @@ namespace ArknightApi.Service
             {
                 return await applicationDbContext.Operators
                 .Where(o => o.Name.ToLower().Contains(name.ToLower()))
-                .Include(o => o.Elites.Select(e=>e.EvolveCosts))
+                .Include(o => o.Elites)
+                .ThenInclude(e=>e.EvolveCosts)
                 .Include(o=>o.Talents)
                 .Include(o=>o.Potentials)
                 .SingleAsync();

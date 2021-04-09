@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArknightApi.Data.DTO.ArknightData;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -63,6 +64,47 @@ namespace ArknightApi.Utility
                 "SUPPORT" => "SUPPORTER",
                 _ => prof
             };
+        }
+        public static string ReplaceSkillDesc(string desc,List<BB> first,List<BB> last)
+        {
+            string pattern = "\\{(.*?)\\}";
+            string pattern2 = "(?<=\\{).*?((?=\\})|(?=\\:))";
+            Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
+            Match match = regex.Match(desc);
+            while (match.Success)
+            {
+                Regex regex2 = new Regex(pattern2, RegexOptions.IgnoreCase);
+                Match match2 = regex2.Match(match.Value);
+                bool flag = match.Value.Contains("%");
+                string text = "";
+                if (match2.Success)
+                {
+                    foreach (BB b in first)
+                    {
+                        if (b.Key.Equals(match2.Value))
+                        {
+                            if (flag) text +=ConvertToPercent(b.Value) + "%";
+                            else text += b.Value.ToString();
+                        }
+                    }
+                    foreach (BB b in last)
+                    {
+                        if (b.Key.Equals(match2.Value))
+                        {
+                            if (flag) text += String.Format("({0}%)",ConvertToPercent(b.Value));
+                            else text += String.Format("({0})", b.Value);
+                        }
+                    }
+                }
+                desc = desc.Replace(match.Value, text);
+                match = match.NextMatch();
+            }
+            return RemoveBrackets(desc);
+        }
+        public static double ConvertToPercent(double value)
+        {
+            value *= 100;
+            return value;
         }
     }
 }

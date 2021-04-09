@@ -13,6 +13,7 @@ namespace ArknightApi.Data.Model
         [Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TalentId { get; set; }
         public int Phase { get; set; }
+        public int RequirePotential { get;set; }
         public string Name { get; set; }
         public string Description { get; set; }
         [ForeignKey("Operator")]
@@ -22,6 +23,7 @@ namespace ArknightApi.Data.Model
         public Talent(DTO.ArknightData.Candidate c)
         {
             Phase = c.UnlockCondition.Phase;
+            RequirePotential = c.RequiredPotentialRank;
             Name = c.Name;
             Description = ArknightUtil.RemoveBrackets(c.Description);
         }

@@ -12,6 +12,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using Skill = ArknightApi.Data.Model.Skill;
 
 namespace ArknightApi.Controllers
 {
@@ -117,6 +118,21 @@ namespace ArknightApi.Controllers
                 return Ok();
             }
             catch(Exception e)
+            {
+                return BadRequest(e.ToString());
+            }
+        }
+        [Route("addskill")]
+        [HttpPost]
+        public async Task<ActionResult> AddSkill([FromBody] JsonElement json)
+        {
+            try
+            {
+                var dic = JsonSerializer.Deserialize<Dictionary<string, SkillJson>>(json.ToString());
+
+                return Ok();
+            }
+            catch (Exception e)
             {
                 return BadRequest(e.ToString());
             }

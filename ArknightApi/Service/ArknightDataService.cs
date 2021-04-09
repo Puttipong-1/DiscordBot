@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Skill = ArknightApi.Data.Model.Skill;
 
 namespace ArknightApi.Service
 {
@@ -134,7 +135,6 @@ namespace ArknightApi.Service
                     if (!item.Key.Contains("token")&&!item.Key.Contains("trap"))
                     {
                         var op = new Operator(item.Key, item.Value);
-                        Console.WriteLine(op.OperatorId+" : "+op.Name);
                         ops.Add(op);
                     }
                 }
@@ -145,7 +145,28 @@ namespace ArknightApi.Service
                 throw e;
             }
         }
-
+        public async Task AddSkill(Dictionary<string,SkillJson> dic)
+        {
+            try
+            {
+                foreach (var item in dic)
+                {
+                    Skill skill = await applicationDb.Skills
+                    .Where(s => s.SkillCode.Equals(item.Key))
+                    .SingleOrDefaultAsync();
+                    if(skill != null)
+                    {
+                        skill.UpdateSkill(item.Value);
+                        applicationDb.Update(skill);
+                    }
+                }
+                await applicationDb.SaveChangesAsync();
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
         public async Task AddSkin(Dictionary<string, SkinJson> dic)
         {
             try

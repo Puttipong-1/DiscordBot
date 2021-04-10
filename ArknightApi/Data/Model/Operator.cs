@@ -16,12 +16,12 @@ namespace ArknightApi.Data.Model
         public string Team { get; set; }
         public string DisplayNumber { get; set; }
         public string Position { get; set; }
-        public string TagList { get; set; }
         public string DisplayLogo { get; set; }
         public string ItemUsage { get; set; }
         public string ItemDesc { get; set; }
         public string ItemObtainApproach { get; set; }
         public bool IsNotObtainable { get; set; }
+        public bool IsRecruitnable { get; set; }
         public int Rarity { get; set; }
         public string Profession { get; set; }
         public string Trait { get; set; }
@@ -36,6 +36,7 @@ namespace ArknightApi.Data.Model
         public List<BaseBuff> BaseBuffs { get; set; }
         public List<Skin> Skins { get; set; }
         public List<CharWord> CharWords { get; set; }
+        public List<OperatorTag> OperatorTags { get; set; }
         public Operator() { }
         public Operator(string key,Character character)
         {
@@ -45,7 +46,6 @@ namespace ArknightApi.Data.Model
             Description = ArknightUtil.RemoveBrackets(character.Description);
             Team = ArknightUtil.GetTeam(character.Team);
             DisplayNumber = character.DisplayNumber;
-            TagList = ArknightUtil.JoinListTag(character.TagList);
             Position = character.Position;
             DisplayLogo = character.DisplayLogo;
             ItemUsage = character.ItemUsage;
@@ -92,7 +92,14 @@ namespace ArknightApi.Data.Model
                     AllSkillUps.Add(allSkill);
                 }
             }
-              
+            OperatorTags = new List<OperatorTag>();
+            if (character.TagList != null)
+            {
+                foreach(string t in character.TagList)
+                {
+                    OperatorTags.Add(new OperatorTag());
+                }
+            }
        }
     }
 }

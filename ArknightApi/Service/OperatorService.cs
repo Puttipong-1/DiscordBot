@@ -1,4 +1,5 @@
 ﻿using ArknightApi.Data;
+using ArknightApi.Data.DTO.Response;
 using ArknightApi.Data.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,27 +16,29 @@ namespace ArknightApi.Service
         {
             applicationDbContext = _applicationDbContext;
         }
-        public async Task<Operator> GetOperatorByName(string name)
+        public async Task<OperatorResponse> GetOperatorByName(string name)
         {
             try
             {
-                return await applicationDbContext.Operators
+                Operator op= await applicationDbContext.Operators
                 .Where(o => o.Name.ToLower().Contains(name.ToLower()))
                 .Include(o => o.Elites)
                 .ThenInclude(e=>e.EvolveCosts)
                 .Include(o=>o.Talents)
                 .Include(o=>o.Potentials)
                 .SingleAsync();
+                return new OperatorResponse(op);
             }catch(Exception e)
             {
                 throw e;
             }
         }
-        public async Task<List<Operator>> GetOperatorList()
+        public async Task<List<Operators>> GetOperatorList()
         {
             try
             {
-                return await applicationDbContext.Operators
+                List<Operators> operators = new List<Operators>();
+                List<Operator> op=await applicationDbContext.Operators
                     .Select(o => new Operator()
                       {
                         OperatorId = o.OperatorId,
@@ -43,19 +46,26 @@ namespace ArknightApi.Service
                       })
                     .OrderByDescending(o=>o.OperatorId)
                     .ToListAsync();
+                foreach(Operator o in op)
+                {
+                    operators.Add(new Operators(o));
+                }
+                return operators;
             }catch(Exception e)
             {
                 throw e;
             }
         }
-        public async Task<Operator> GetSkin(string name)
+        public async Task<SkinResponse> GetSkin(string name)
         {
             try
             {
-                return await applicationDbContext.Operators
+                Operator op = await applicationDbContext.Operators
                     .Where(o => o.Name.ToLower().Contains(name.ToLower()))
                     .Include(o => o.Skins)
                     .SingleAsync();
+                SkinResponse res = new SkinResponse(op);
+                return res;
             }catch(Exception e)
             {
                 throw e;

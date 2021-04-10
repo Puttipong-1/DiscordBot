@@ -1,4 +1,5 @@
-﻿using ArknightApi.Data.Model;
+﻿using ArknightApi.Data.DTO.Response;
+using ArknightApi.Data.Model;
 using ArknightApi.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -24,7 +25,7 @@ namespace ArknightApi.Controllers
         {
             try
             {
-                Operator op= await operatorServcie.GetOperatorByName(name);
+                OperatorResponse op= await operatorServcie.GetOperatorByName(name);
                 return Ok(op);
             }
             catch (Exception e)
@@ -52,7 +53,7 @@ namespace ArknightApi.Controllers
         {
             try
             {
-                Operator op = await operatorServcie.GetSkin(name);
+                SkinResponse op = await operatorServcie.GetSkin(name);
                 return Ok(op);
             }
             catch (Exception e)

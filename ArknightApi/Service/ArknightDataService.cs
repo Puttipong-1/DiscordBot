@@ -151,13 +151,16 @@ namespace ArknightApi.Service
             {
                 foreach (var item in dic)
                 {
-                    Skill skill = await applicationDb.Skills
+                    List<Skill> skills = await applicationDb.Skills
                     .Where(s => s.SkillCode.Equals(item.Key))
-                    .SingleOrDefaultAsync();
-                    if(skill != null)
+                    .ToListAsync();
+                    if(skills != null && skills.Any())
                     {
-                        skill.UpdateSkill(item.Value);
-                        applicationDb.Update(skill);
+                        foreach(Skill s in skills)
+                        {
+                            s.UpdateSkill(item.Value);
+                            applicationDb.Update(s);
+                        }
                     }
                 }
                 await applicationDb.SaveChangesAsync();
@@ -209,7 +212,6 @@ namespace ArknightApi.Service
                 throw e;
             }
         }
-
         public async Task AddWords(Dictionary<string, CharWordJson> dic)
         {
             try
@@ -220,6 +222,24 @@ namespace ArknightApi.Service
                     chars.Add(new CharWord(item.Value));
                 }
                 await applicationDb.AddRangeAsync(chars);
+                await applicationDb.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public async Task AddTag(Dictionary<string,GachaJson> dic)
+        {
+            try
+            {
+                List<Tag> tags = new List<Tag>();
+                tags.Add(new Tag(0));
+                foreach(var item in dic)
+                {
+                    tags.Add(new Tag(item.Value));
+                }
+                await applicationDb.AddRangeAsync(tags);
                 await applicationDb.SaveChangesAsync();
             }
             catch (Exception e)

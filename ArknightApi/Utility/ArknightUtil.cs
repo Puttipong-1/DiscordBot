@@ -65,6 +65,41 @@ namespace ArknightApi.Utility
                 _ => prof
             };
         }
+        public static int GetTagId(string tag)
+        {
+            switch (tag)
+            {
+                case "Guard":return 1;
+                case "Sniper": return 2;
+                case "Defender": return 3;
+                case "Medic": return 4;
+                case "Supporter": return 5;
+                case "Caster": return 6;
+                case "Specialist": return 7;
+                case "Vanguard": return 8;
+                case "Melee": return 9;
+                case "Ranged": return 10;
+                case "Top Operator":return 11;
+                case "Crowd-Control":return 12;
+                case "Nuker":return 13;
+                case "Senior Operator":return 14;
+                case "Healing":return 15;
+                case "Support":return 16;
+                case "Starter":return 17;
+                case "DP-Recovery":return 18;
+                case "DPS":return 19;
+                case "Survival":return 20;
+                case "AoE":return 21;
+                case "Defense":return 22;
+                case "Slow":return 23;
+                case "Debuff":return 24;
+                case "Fast-Redeploy":return 25;
+                case "shift":return 26;
+                case "Summon":return 27;
+                case "Robot":return 28;
+                default:return 0;
+            }
+        }
         public static string ReplaceSkillDesc(string desc,List<BB> first,List<BB> last)
         {
             string pattern = "\\{(.*?)\\}";
@@ -101,10 +136,10 @@ namespace ArknightApi.Utility
             }
             return RemoveBrackets(desc);
         }
-        public static double ConvertToPercent(double value)
+        public static int ConvertToPercent(double value)
         {
             value *= 100;
-            return value;
+            return Convert.ToInt32(value);
         }
     }
 }

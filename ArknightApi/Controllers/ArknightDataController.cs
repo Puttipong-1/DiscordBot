@@ -129,7 +129,7 @@ namespace ArknightApi.Controllers
             try
             {
                 var dic = JsonSerializer.Deserialize<Dictionary<string, SkillJson>>(json.ToString());
-
+                await arknightDataServicecs.AddSkill(dic);
                 return Ok();
             }
             catch (Exception e)

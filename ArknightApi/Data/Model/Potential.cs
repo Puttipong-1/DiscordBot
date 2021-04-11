@@ -16,9 +16,8 @@ namespace ArknightApi.Data.Model
         public Operator Operator { get; set; }
         public string Desc { get; set; }
         public Potential() { }
-        public Potential(DTO.ArknightData.PotentialRank p,int id)
+        public Potential(DTO.ArknightData.PotentialRank p)
         {
-            OperatorId = id;
             Desc = p.Description;
         } 
     }

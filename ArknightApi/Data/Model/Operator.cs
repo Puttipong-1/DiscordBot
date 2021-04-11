@@ -20,8 +20,8 @@ namespace ArknightApi.Data.Model
         public string ItemUsage { get; set; }
         public string ItemDesc { get; set; }
         public string ItemObtainApproach { get; set; }
+        public string TagList { get; set; }
         public bool IsNotObtainable { get; set; }
-        public bool IsRecruitnable { get; set; }
         public int Rarity { get; set; }
         public string Profession { get; set; }
         public string Trait { get; set; }
@@ -54,6 +54,7 @@ namespace ArknightApi.Data.Model
             IsNotObtainable = character.IsNotObtainable;
             Rarity = ArknightUtil.CalculateRarity(character.Rarity);
             Profession = ArknightUtil.GetClass(character.Profession);
+            TagList = ArknightUtil.JoinListTag(character.TagList);
             if(character.Trait!=null)
                 Trait = ArknightUtil.RemoveBrackets(character.Trait.OverrideDescription);
             Elites = new List<Elite>();
@@ -92,13 +93,14 @@ namespace ArknightApi.Data.Model
                     AllSkillUps.Add(allSkill);
                 }
             }
-            OperatorTags = new List<OperatorTag>();
-            if (character.TagList != null)
+            Potentials = new List<Potential>();
+            if (character.PotentialRanks != null)
             {
-                foreach(string t in character.TagList)
+                foreach(var p in character.PotentialRanks)
                 {
-                    OperatorTags.Add(new OperatorTag());
+                    Potentials.Add(new Potential(p));
                 }
+                
             }
        }
     }

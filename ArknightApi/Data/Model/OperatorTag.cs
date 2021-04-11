@@ -16,9 +16,10 @@ namespace ArknightApi.Data.Model
         public int TagId { get; set; }
         public Tag Tag { get; set; }
         public OperatorTag() { }
-        public OperatorTag(int id)
+        public OperatorTag(int opId,int tagId)
         {
-            TagId = id;
+            OperatorId = opId;
+            TagId = tagId;
         }
     }
 }

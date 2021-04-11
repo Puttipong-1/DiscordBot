@@ -67,38 +67,38 @@ namespace ArknightApi.Utility
         }
         public static int GetTagId(string tag)
         {
-            switch (tag)
+            return tag.ToLower() switch
             {
-                case "Guard":return 1;
-                case "Sniper": return 2;
-                case "Defender": return 3;
-                case "Medic": return 4;
-                case "Supporter": return 5;
-                case "Caster": return 6;
-                case "Specialist": return 7;
-                case "Vanguard": return 8;
-                case "Melee": return 9;
-                case "Ranged": return 10;
-                case "Top Operator":return 11;
-                case "Crowd-Control":return 12;
-                case "Nuker":return 13;
-                case "Senior Operator":return 14;
-                case "Healing":return 15;
-                case "Support":return 16;
-                case "Starter":return 17;
-                case "DP-Recovery":return 18;
-                case "DPS":return 19;
-                case "Survival":return 20;
-                case "AoE":return 21;
-                case "Defense":return 22;
-                case "Slow":return 23;
-                case "Debuff":return 24;
-                case "Fast-Redeploy":return 25;
-                case "shift":return 26;
-                case "Summon":return 27;
-                case "Robot":return 28;
-                default:return 0;
-            }
+                "guard" => 1,
+                "sniper" => 2,
+                "defender" => 3,
+                "medic" => 4,
+                "supporter" => 5,
+                "caster" => 6,
+                "specialist" => 7,
+                "vanguard" => 8,
+                "melee" => 9,
+                "ranged" => 10,
+                "top operator" => 11,
+                "crowd-control" => 12,
+                "nuker" => 13,
+                "senior operator" => 14,
+                "healing" => 15,
+                "support" => 16,
+                "starter" => 17,
+                "dp-recovery" => 18,
+                "dps" => 19,
+                "survival" => 20,
+                "aoe" => 21,
+                "defense" => 22,
+                "slow" => 23,
+                "debuff" => 24,
+                "fast-redeploy" => 25,
+                "shift" => 26,
+                "summon" => 27,
+                "robot" => 28,
+                _ => 0,
+            };
         }
         public static string ReplaceSkillDesc(string desc,List<BB> first,List<BB> last)
         {

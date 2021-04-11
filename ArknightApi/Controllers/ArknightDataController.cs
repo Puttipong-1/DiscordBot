@@ -39,7 +39,7 @@ namespace ArknightApi.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
         }
         [Route("addcharacter")]
@@ -53,7 +53,7 @@ namespace ArknightApi.Controllers
                 return Ok();
             }catch(Exception e)
             {
-                return BadRequest(e.ToString());
+                return BadRequest(e.Message);
             }
         }
         [Route("addinfo")]
@@ -69,7 +69,7 @@ namespace ArknightApi.Controllers
 
             }catch(Exception e)
             {
-                return BadRequest(e.ToString());
+                return BadRequest(e.Message);
             }
         }
         [Route("addword")]
@@ -87,7 +87,7 @@ namespace ArknightApi.Controllers
                 return Ok();
             }catch(Exception e)
             {
-                return BadRequest(e.ToString());
+                return BadRequest(e.Message);
             }
             
         }
@@ -103,7 +103,7 @@ namespace ArknightApi.Controllers
                 return Ok();
             }catch(Exception e)
             {
-                return BadRequest(e.ToString());
+                return BadRequest(e.Message);
             }
         }
         [Route("addskin")]
@@ -119,7 +119,7 @@ namespace ArknightApi.Controllers
             }
             catch(Exception e)
             {
-                return BadRequest(e.ToString());
+                return BadRequest(e.Message);
             }
         }
         [Route("addskill")]
@@ -134,7 +134,23 @@ namespace ArknightApi.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e.ToString());
+                return BadRequest(e.Message);
+            }
+        }
+        [Route("addtag")]
+        [HttpPost]
+        public async Task<ActionResult> AddTag([FromBody]JsonElement json)
+        {
+            try
+            {
+                var element = json.GetProperty("gachaTags");
+                var gacha = JsonSerializer.Deserialize<List<GachaJson>>(element.ToString());
+                await arknightDataServicecs.AddTag(gacha);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
             }
         }
         [Route("addtip")]
@@ -146,6 +162,22 @@ namespace ArknightApi.Controllers
                 await arknightDataServicecs.AddTip(json);
                 return Ok();
             }catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        [Route("addoperatortag")]
+        [HttpPost]
+        public async Task<ActionResult> AddOperatorTag([FromBody] JsonElement json)
+        {
+            try
+            {
+                JsonElement root = json.GetProperty("recruits");
+                List<RecruitJson> recruits = JsonSerializer.Deserialize<List<RecruitJson>>(root.ToString());
+                await arknightDataServicecs.AddOpTag(recruits);
+                return Ok();
+            }
+            catch (Exception e)
             {
                 return BadRequest(e.ToString());
             }

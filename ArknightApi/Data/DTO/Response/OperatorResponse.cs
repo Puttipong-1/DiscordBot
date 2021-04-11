@@ -19,6 +19,7 @@ namespace ArknightApi.Data.DTO.Response
         public string ItemDesc { get; set; }
         public string ItemObtainApproach { get; set; }
         public bool IsNotObtainable { get; set; }
+        public string TagList { get; set; }
         public int Rarity { get; set; }
         public string Profession { get; set; }
         public string Trait { get; set; }
@@ -42,6 +43,7 @@ namespace ArknightApi.Data.DTO.Response
             Rarity = op.Rarity;
             Profession = op.Profession;
             Trait = op.Trait;
+            TagList = op.TagList;
             CV = op.CV;
             Elites = new List<Elites>();
             if (op.Elites != null)

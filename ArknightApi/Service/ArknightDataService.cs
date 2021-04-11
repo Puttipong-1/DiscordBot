@@ -229,20 +229,53 @@ namespace ArknightApi.Service
                 throw e;
             }
         }
-        public async Task AddTag(Dictionary<string,GachaJson> dic)
+        public async Task AddTag(List<GachaJson> gachas)
         {
             try
             {
-                List<Tag> tags = new List<Tag>();
-                tags.Add(new Tag(0));
-                foreach(var item in dic)
+                List<Tag> tags = new List<Tag>
                 {
-                    tags.Add(new Tag(item.Value));
+                    new Tag(0)
+                };
+                foreach (var item in gachas)
+                {
+                    tags.Add(new Tag(item));
                 }
                 await applicationDb.AddRangeAsync(tags);
                 await applicationDb.SaveChangesAsync();
             }
             catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public async Task AddOpTag(List<RecruitJson> recruits)
+        {
+            try
+            {
+                List<OperatorTag> ot = new List<OperatorTag>();
+                foreach(RecruitJson r in recruits)
+                {
+                    Operator op = await applicationDb.Operators
+                    .Where(o => o.Name.ToLower().Equals(r.Name.ToLower()))
+                    .Select(o => new Operator()
+                    {
+                        OperatorId = o.OperatorId
+                    })
+                    .SingleOrDefaultAsync();
+                    if (op != null)
+                    {
+                        foreach(string e in r.TagList)
+                        {
+                            int tagId = ArknightUtil.GetTagId(e);
+                            ot.Add(new OperatorTag(op.OperatorId,tagId));
+                        }
+                    }
+                }
+                await applicationDb.AddRangeAsync(ot);
+                await applicationDb.SaveChangesAsync();
+            }
+            catch(Exception e)
             {
                 throw e;
             }

@@ -43,9 +43,11 @@ namespace ArknightApi.Data
             modelBuilder.Entity<MasteryUpCost>().ToTable("MasteryUpCost").HasKey(m => m.MasteryUpCostId);
             modelBuilder.Entity<Operator>().Property(o => o.OperatorId).ValueGeneratedNever();
             modelBuilder.Entity<Operator>().ToTable("Operator").HasKey(o => o.OperatorId);
+            modelBuilder.Entity<OperatorTag>().ToTable("OperatorTag").HasKey(o => new { o.OperatorId, o.TagId });
             modelBuilder.Entity<Potential>().ToTable("Potential").HasKey(p=>p.PotentialId);
             modelBuilder.Entity<Skill>().ToTable("Skill").HasKey(s=>s.SkillId);
             modelBuilder.Entity<Skin>().ToTable("Skin").HasKey(s => s.SkinId);
+            modelBuilder.Entity<Tag>().ToTable("Tag").HasKey(t => t.TagId);
             modelBuilder.Entity<Talent>().ToTable("Talent").HasKey(t => t.TalentId);
             modelBuilder.Entity<Tip>().ToTable("Tip").HasKey(t => t.TipId);
         }

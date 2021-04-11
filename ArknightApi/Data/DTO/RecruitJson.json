@@ -1,0 +1,747 @@
+{
+  "recruits": [
+    {
+      "name": "Nightmare",
+      "tagList": [
+        "DPS",
+        "Healing",
+        "Slow",
+        "Caster",
+        "Ranged",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Haze",
+      "tagList": [
+        "DPS",
+        "Debuff",
+        "Caster",
+        "Ranged"
+      ]
+    },
+    {
+      "name": "Gitano",
+      "tagList": [
+        "AoE",
+        "Caster",
+        "Ranged"
+      ]
+    },
+    {
+      "name": "Greyy",
+      "tagList": [
+        "AoE",
+        "Slow",
+        "Caster",
+        "Ranged"
+      ]
+    },
+    {
+      "name": "Lava",
+      "tagList": [
+        "AoE",
+        "Caster",
+        "Ranged"
+      ]
+    },
+    {
+      "name": "Steward",
+      "tagList": [
+        "DPS",
+        "Caster",
+        "Ranged"
+      ]
+    },
+    {
+      "name": "Durin",
+      "tagList": [
+        "Starter",
+        "Caster",
+        "Ranged"
+      ]
+    },
+    {
+      "name": "12F",
+      "tagList": [
+        "Starter",
+        "Caster",
+        "Ranged"
+      ]
+    },
+    {
+      "name": "Nearl",
+      "tagList": [
+        "Defense",
+        "Healing",
+        "Defender",
+        "Melee",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Liskarm",
+      "tagList": [
+        "Defense",
+        "DPS",
+        "Defender",
+        "Melee",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Croissant",
+      "tagList": [
+        "Defense",
+        "Shift",
+        "Defender",
+        "Melee",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Vulcan",
+      "tagList": [
+        "Survival",
+        "Defense",
+        "DPS",
+        "Defender",
+        "Melee",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Matterhorn",
+      "tagList": [
+        "Defense",
+        "Defender",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Cuora",
+      "tagList": [
+        "Defense",
+        "Defender",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Gummy",
+      "tagList": [
+        "Defense",
+        "Healing",
+        "Defender",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Beagle",
+      "tagList": [
+        "Defense",
+        "Defender",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Spot",
+      "tagList": [
+        "Defense",
+        "Healing",
+        "Defender",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Noir Corne",
+      "tagList": [
+        "Starter",
+        "Defender",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Indra",
+      "tagList": [
+        "DPS",
+        "Survival",
+        "Guard",
+        "Melee",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Specter",
+      "tagList": [
+        "AoE",
+        "Survival",
+        "Guard",
+        "Melee",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Swire",
+      "tagList": [
+        "DPS",
+        "Support",
+        "Guard",
+        "Melee",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Dobermann",
+      "tagList": [
+        "DPS",
+        "Support",
+        "Guard",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Matoimaru",
+      "tagList": [
+        "Survival",
+        "DPS",
+        "Guard",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Frostleaf",
+      "tagList": [
+        "Slow",
+        "DPS",
+        "Guard",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Estelle",
+      "tagList": [
+        "AoE",
+        "Survival",
+        "Guard",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Mousse",
+      "tagList": [
+        "DPS",
+        "Guard",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Beehunter",
+      "tagList": [
+        "DPS",
+        "Guard",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Melantha",
+      "tagList": [
+        "DPS",
+        "Survival",
+        "Guard",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Midnight",
+      "tagList": [
+        "DPS",
+        "Guard",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Popukar",
+      "tagList": [
+        "AoE",
+        "Survival",
+        "Guard",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Castle-3",
+      "tagList": [
+        "Support",
+        "Robot",
+        "Guard",
+        "Mele"
+      ]
+    },
+    {
+      "name": "Ptilopsis",
+      "tagList": [
+        "Healing",
+        "Support",
+        "Medic",
+        "Ranged",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Silence",
+      "tagList": [
+        "Healing",
+        "Medic",
+        "Ranged",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Warfarin",
+      "tagList": [
+        "Healing",
+        "Support",
+        "Medic",
+        "Ranged",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Myrrh",
+      "tagList": [
+        "Healing",
+        "Medic",
+        "Ranged"
+      ]
+    },
+    {
+      "name": "Perfumer",
+      "tagList": [
+        "Healing",
+        "Medic",
+        "Ranged"
+      ]
+    },
+    {
+      "name": "Hibiscus",
+      "tagList": [
+        "Healing",
+        "Medic",
+        "Ranged"
+      ]
+    },
+    {
+      "name": "Ansel",
+      "tagList": [
+        "Healing",
+        "Medic",
+        "Ranged"
+      ]
+    },
+    {
+      "name": "Lancet-2",
+      "tagList": [
+        "Healing",
+        "Robot",
+        "Medic",
+        "Ranged"
+      ]
+    },
+    {
+      "name": "Blue Poison",
+      "tagList": [
+        "DPS",
+        "Sniper",
+        "Ranged",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Platinum",
+      "tagList": [
+        "DPS",
+        "Sniper",
+        "Ranged",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Meteorite",
+      "tagList": [
+        "AoE",
+        "Debuff",
+        "Sniper",
+        "Ranged",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Provence",
+      "tagList": [
+        "DPS",
+        "Sniper",
+        "Ranged",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Firewatch",
+      "tagList": [
+        "DPS",
+        "Nuker",
+        "Sniper",
+        "Ranged",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Jessica",
+      "tagList": [
+        "DPS",
+        "Survival",
+        "Sniper",
+        "Ranged"
+      ]
+    },
+    {
+      "name": "Meteor",
+      "tagList": [
+        "DPS",
+        "Debuff",
+        "Sniper",
+        "Ranged"
+      ]
+    },
+    {
+      "name": "Shirayuki",
+      "tagList": [
+        "AoE",
+        "Slow",
+        "Sniper",
+        "Ranged"
+      ]
+    },
+    {
+      "name": "Kroos",
+      "tagList": [
+        "DPS",
+        "Sniper",
+        "Range"
+      ]
+    },
+    {
+      "name": "Adnachiel",
+      "tagList": [
+        "DPS",
+        "Sniper",
+        "Ranged"
+      ]
+    },
+    {
+      "name": "Catapult",
+      "tagList": [
+        "AoE",
+        "Sniper",
+        "Ranged"
+      ]
+    },
+    {
+      "name": "Rangers",
+      "tagList": [
+        "Starter",
+        "Sniper",
+        "Ranged"
+      ]
+    },
+    {
+      "name": "Projekt Red",
+      "tagList": [
+        "Fast-Redeploy",
+        "Crowd-Control",
+        "Specialist",
+        "Melee",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Cliffheart",
+      "tagList": [
+        "Shift",
+        "DPS",
+        "Specialist",
+        "Melee",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Manticore",
+      "tagList": [
+        "DPS",
+        "Survival",
+        "Specialist",
+        "Melee",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "FEater",
+      "tagList": [
+        "Shift",
+        "Slow",
+        "Specialist",
+        "Melee",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Gravel",
+      "tagList": [
+        "Fast-Redeploy",
+        "Defense",
+        "Specialist",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Rope",
+      "tagList": [
+        "Shift",
+        "Specialist",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Shaw",
+      "tagList": [
+        "Shift",
+        "Specialist",
+        "Melee"
+      ]
+    },
+    {
+      "name": "THRM-EX",
+      "tagList": [
+        "Nuker",
+        "Robot",
+        "Specialist",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Mayer",
+      "tagList": [
+        "Summon",
+        "Crowd-Control",
+        "Supporter",
+        "Ranged",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Pramanix",
+      "tagList": [
+        "Debuff",
+        "Supporter",
+        "Ranged",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Istina",
+      "tagList": [
+        "Slow",
+        "DPS",
+        "Supporter",
+        "Ranged",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Earthspirit",
+      "tagList": [
+        "Slow",
+        "Supporter",
+        "Ranged"
+      ]
+    },
+    {
+      "name": "Orchid",
+      "tagList": [
+        "Slow",
+        "Supporter",
+        "Ranged"
+      ]
+    },
+    {
+      "name": "Zima",
+      "tagList": [
+        "DP-Recovery",
+        "Support",
+        "Vanguard",
+        "Melee",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Texas",
+      "tagList": [
+        "DP-Recovery",
+        "Crowd-Control",
+        "Vanguard",
+        "Melee",
+        "Senior Operator"
+      ]
+    },
+    {
+      "name": "Scavenger",
+      "tagList": [
+        "DP-Recovery",
+        "DPS",
+        "Vanguard",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Vigna",
+      "tagList": [
+        "DPS",
+        "DP-Recovery",
+        "Vanguard",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Fang",
+      "tagList": [
+        "DP-Recovery",
+        "Vanguard",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Vanilla",
+      "tagList": [
+        "DP-Recovery",
+        "Vanguard",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Plume",
+      "tagList": [
+        "DPS",
+        "DP-Recovery",
+        "Vanguard",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Yato",
+      "tagList": [
+        "Starter",
+        "Vanguard",
+        "Melee"
+      ]
+    },
+    {
+      "name": "Exusiai",
+      "tagList": [
+        "DPS",
+        "Sniper",
+        "Ranged",
+        "Top Operator"
+      ]
+    },
+    {
+      "name": "Siege",
+      "tagList": [
+        "DP-Recovery",
+        "DPS",
+        "Vanguard",
+        "Melee",
+        "Top Operator"
+      ]
+    },
+    {
+      "name": "Ifrit",
+      "tagList": [
+        "AoE",
+        "Debuff",
+        "Caster",
+        "Ranged",
+        "Top Operator"
+      ]
+    },
+    {
+      "name": "Shining",
+      "tagList": [
+        "Healing",
+        "Support",
+        "Medic",
+        "Ranged",
+        "Top Operator"
+      ]
+    },
+    {
+      "name": "Nightingale",
+      "tagList": [
+        "Healing",
+        "Support",
+        "Medic",
+        "Ranged",
+        "Top Operator"
+      ]
+    },
+    {
+      "name": "Hoshiguma",
+      "tagList": [
+        "Defense",
+        "DPS",
+        "Defender",
+        "Melee",
+        "Top Operator"
+      ]
+    },
+    {
+      "name": "Saria",
+      "tagList": [
+        "Defense",
+        "Healing",
+        "Support",
+        "Defender",
+        "Melee",
+        "Top Operator"
+      ]
+    },
+    {
+      "name": "SilverAsh",
+      "tagList": [
+        "DPS",
+        "Support",
+        "Guard",
+        "Melee",
+        "Top Operator"
+      ]
+    },
+    {
+      "name": "Skadi",
+      "tagList": [
+        "DPS",
+        "Survival",
+        "Guard",
+        "Melee",
+        "Top Operator"
+      ]
+    },
+    {
+      "name": "Ch'en",
+      "tagList": [
+        "Nuker",
+        "DPS",
+        "Guard",
+        "Melee",
+        "Top Operator"
+      ]
+    }
+  ]
+}

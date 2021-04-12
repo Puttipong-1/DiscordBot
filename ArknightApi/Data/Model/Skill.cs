@@ -34,14 +34,16 @@ namespace ArknightApi.Data.Model
         {
             SkillCode = skill.SkillId;
             MasteryUpCosts = new List<MasteryUpCost>();
-            foreach(DTO.ArknightData.LevelUpCostCond lvl in skill.LevelUpCostCond)
+            foreach(LevelUpCostCond lvl in skill.LevelUpCostCond)
             {
                 if (lvl.LevelUpCost != null)
                 {
-                    foreach (DTO.ArknightData.LevelUpCost cost in lvl.LevelUpCost)
+                    int index = 1;
+                    foreach (LevelUpCost cost in lvl.LevelUpCost)
                     {
-                        var mas = new MasteryUpCost(cost);
+                        var mas = new MasteryUpCost(cost,index);
                         MasteryUpCosts.Add(mas);
+                        index++;
                     }
                 }           
             }

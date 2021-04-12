@@ -22,10 +22,11 @@ namespace ArknightApi.Service
             {
                 Operator op= await applicationDbContext.Operators
                 .Where(o => o.Name.ToLower().Contains(name.ToLower()))
-                .Include(o => o.Elites)
+                .Include(o => o.Elites.OrderBy(e=>e.MaxLevel))
                 .ThenInclude(e=>e.EvolveCosts)
+                .ThenInclude(e=>e.Item)
                 .Include(o=>o.Talents)
-                .Include(o=>o.Potentials)
+                .Include(o=>o.Potentials.OrderBy(p=>p.Level))
                 .SingleAsync();
                 return new OperatorResponse(op);
             }catch(Exception e)
@@ -38,13 +39,14 @@ namespace ArknightApi.Service
             try
             {
                 List<Operators> operators = new List<Operators>();
-                List<Operator> op=await applicationDbContext.Operators
+                List<Operator> op = await applicationDbContext.Operators
                     .Select(o => new Operator()
-                      {
+                    {
                         OperatorId = o.OperatorId,
+                        Rarity = o.Rarity,
                         Name = o.Name
-                      })
-                    .OrderByDescending(o=>o.OperatorId)
+                    })
+                    .OrderBy(o=>o.OperatorId)
                     .ToListAsync();
                 foreach(Operator o in op)
                 {
@@ -62,7 +64,7 @@ namespace ArknightApi.Service
             {
                 Operator op = await applicationDbContext.Operators
                     .Where(o => o.Name.ToLower().Contains(name.ToLower()))
-                    .Include(o => o.Skins)
+                    .Include(o => o.Skins.OrderBy(s=>s.SkinCode))
                     .SingleAsync();
                 SkinResponse res = new SkinResponse(op);
                 return res;
@@ -71,44 +73,119 @@ namespace ArknightApi.Service
                 throw e;
             }
         }
-        public async Task<Operator> GetWords(string name)
+        public async Task<WordResponse> GetWords(string name)
         {
             try
             {
-                return await applicationDbContext.Operators
+                Operator op=await applicationDbContext.Operators
                     .Where(o => o.Name.ToLower().Contains(name.ToLower()))
+                    .Include(o => o.CharWords.OrderBy(c=>c.Title))
+                    .SingleAsync();
+                return new WordResponse(op);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public async Task<List<Operators>> GetOperatorsByClass(string c){
+            try
+            {
+                List<Operators> operators = new List<Operators>();
+                List<Operator> op=await applicationDbContext.Operators
+                    .Where(o => o.Profession.Equals(c.ToUpper()))
                     .Select(o => new Operator()
                     {
                         OperatorId = o.OperatorId,
-                        Name = o.Name
+                        Name = o.Name,
+                        Rarity = o.Rarity
                     })
-                    .Include(o => o.CharWords)
-                    .SingleAsync();
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-        public async Task<List<Operator>> GetOperatorsByClass(string c){
-            try
-            {
-                return await applicationDbContext.Operators
-                    .Where(o => o.Profession.Equals(c.ToUpper()))
+                    .OrderBy(o => o.OperatorId)
                     .ToListAsync();
+                foreach (Operator o in op)
+                {
+                    operators.Add(new Operators(o));
+                }
+                return operators;
             }
             catch (Exception e)
             {
                 throw e;
             }
         }
-        public async Task<List<Operator>> GetOperatorsByRarity(int rarity)
+        public async Task<List<Operators>> GetOperatorsByRarity(int rarity)
         {
             try
             {
-                return await applicationDbContext.Operators
+                List<Operators> operators = new List<Operators>();
+                List<Operator> op = await applicationDbContext.Operators
                     .Where(o => o.Rarity==rarity)
+                     .Select(o => new Operator()
+                     {
+                         OperatorId = o.OperatorId,
+                         Name = o.Name,
+                         Rarity = o.Rarity
+                     })
+                    .OrderBy(o=>o.OperatorId)
                     .ToListAsync();
+                foreach (Operator o in op)
+                {
+                    operators.Add(new Operators(o));
+                }
+                return operators;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<SkillResponse> GetOperatorSkill(string name)
+        {
+            try
+            {
+                Operator op = await applicationDbContext.Operators
+                    .Where(o => o.Name.ToLower().Equals(name.ToLower()))
+                    .Include(o => o.AllSkillUps.OrderBy(o=>o.Level))
+                    .ThenInclude(a=>a.AllSkillCosts)
+                    .ThenInclude(a=>a.Item)
+                    .Include(o=>o.Skills.OrderBy(s=>s.SkillCode))
+                    .ThenInclude(s=>s.MasteryUpCosts)
+                    .ThenInclude(m=>m.Item)
+                    .SingleAsync();
+                return new SkillResponse();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<ProfileResponse> GetOperatorProfile(string name)
+        {
+            try
+            {
+                Operator op = await applicationDbContext.Operators
+                   .Where(o => o.Name.ToLower().Equals(name.ToLower()))
+                   .Include(o => o.CharInfos.OrderBy(c=>c.StoryTitle))
+                   .SingleAsync();
+                return new ProfileResponse();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<BuffResponse> GetOperatorBuff(string name)
+        {
+            try
+            {
+                Operator op = await applicationDbContext.Operators
+                    .Where(o => o.Name.ToLower().Equals(name.ToLower()))
+                    .Include(o => o.BaseBuffs)
+                    .SingleAsync();
+                return new BuffResponse();
             }
             catch (Exception e)
             {

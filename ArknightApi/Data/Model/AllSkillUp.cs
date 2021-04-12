@@ -14,11 +14,13 @@ namespace ArknightApi.Data.Model
         public List<AllSkillCost> AllSkillCosts { get; set; }
         [ForeignKey("Operator")]
         public int OperatorId { get; set; }
+        public int Level { get; set; }
         public Operator Operator { get; set; }
         public AllSkillUp() { }
-        public AllSkillUp(DTO.ArknightData.AllSkillLvlup allSkill)
+        public AllSkillUp(DTO.ArknightData.AllSkillLvlup allSkill,int l)
         {
             AllSkillCosts = new List<AllSkillCost>();
+            Level = l;
             if(allSkill.LvlUpCost != null)
             {
                 foreach (DTO.ArknightData.LvlUpCost lvl in allSkill.LvlUpCost)

@@ -219,6 +219,7 @@ namespace ArknightApi.Service
                 List<CharWord> chars = new List<CharWord>();
                 foreach (var item in dic)
                 {
+                    Console.WriteLine(item.Key + " " + item.Value);
                     chars.Add(new CharWord(item.Value));
                 }
                 await applicationDb.AddRangeAsync(chars);

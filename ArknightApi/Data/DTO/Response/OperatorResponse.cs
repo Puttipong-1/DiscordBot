@@ -85,6 +85,7 @@ namespace ArknightApi.Data.DTO.Response
         public int Cost { get; set; }
         public int BlockCnt { get; set; }
         public int RespawnTime { get; set; }
+        public List<EliteCost> EliteCosts { get; set; }
         public Elites(Elite e)
         {
             RangeId = e.RangeId;
@@ -97,6 +98,24 @@ namespace ArknightApi.Data.DTO.Response
             Cost = e.Cost;
             BlockCnt = e.BlockCnt;
             RespawnTime = e.RespawnTime;
+            EliteCosts = new List<EliteCost>();
+            if (e.EvolveCosts != null)
+            {
+                foreach(EvolveCost ec in e.EvolveCosts)
+                {
+                    EliteCosts.Add(new EliteCost(ec));
+                }
+            }
+        }
+    }
+    public class EliteCost
+    {
+        public string ItemName { get; set; }
+        public int Count { get; set; }
+        public EliteCost(EvolveCost e)
+        {
+            ItemName = e.Item.Name;
+            Count = e.Count;
         }
     }
     public class Potentials

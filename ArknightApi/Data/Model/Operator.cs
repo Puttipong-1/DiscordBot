@@ -37,6 +37,7 @@ namespace ArknightApi.Data.Model
         public List<Skin> Skins { get; set; }
         public List<CharWord> CharWords { get; set; }
         public List<OperatorTag> OperatorTags { get; set; }
+        public List<MasteryUpCost> MasteryUpCosts { get; set; }
         public Operator() { }
         public Operator(string key,Character character)
         {
@@ -87,18 +88,22 @@ namespace ArknightApi.Data.Model
             AllSkillUps = new List<AllSkillUp>();
             if (character.AllSkillLvlup != null)
             {
+                int index = 1;
                 foreach (AllSkillLvlup all in character.AllSkillLvlup)
                 {
-                    var allSkill = new AllSkillUp(all);
+                    var allSkill = new AllSkillUp(all,index);
                     AllSkillUps.Add(allSkill);
+                    index++;
                 }
             }
             Potentials = new List<Potential>();
             if (character.PotentialRanks != null)
             {
+                int index = 1;
                 foreach(var p in character.PotentialRanks)
                 {
-                    Potentials.Add(new Potential(p));
+                    Potentials.Add(new Potential(p,index));
+                    index ++;
                 }
                 
             }

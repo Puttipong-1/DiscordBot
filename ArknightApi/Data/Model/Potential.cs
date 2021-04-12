@@ -13,12 +13,14 @@ namespace ArknightApi.Data.Model
         public int PotentialId { get; set;}
         [ForeignKey("Operator")]
         public int OperatorId { get; set; }
+        public int Level { get; set; }
         public Operator Operator { get; set; }
         public string Desc { get; set; }
         public Potential() { }
-        public Potential(DTO.ArknightData.PotentialRank p)
+        public Potential(DTO.ArknightData.PotentialRank p,int index)
         {
             Desc = p.Description;
+            Level = index;
         } 
     }
 }

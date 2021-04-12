@@ -74,16 +74,12 @@ namespace ArknightApi.Controllers
         }
         [Route("addword")]
         [HttpPost]
-        public ActionResult<List<CharWordJson>> AddCharWord([FromBody]JsonElement json)
+        public async Task<ActionResult> AddCharWord([FromBody]JsonElement json)
         {
             try
             {
                 var dic = JsonSerializer.Deserialize<Dictionary<string, CharWordJson>>(json.ToString());
-                List<CharWord> chars = new List<CharWord>();
-                foreach (var item in dic)
-                {
-                    chars.Add(new CharWord(item.Value));
-                }
+                await arknightDataServicecs.AddWords(dic);
                 return Ok();
             }catch(Exception e)
             {

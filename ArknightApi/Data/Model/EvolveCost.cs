@@ -8,7 +8,9 @@ namespace ArknightApi.Data.Model
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int EvolveCostId { get; set; }
+        [ForeignKey("Item")]
         public int ItemId { get; set; }
+        public Item Item { get; set; }
         public int Count { get; set; }
         public string Type { get; set; }
         [ForeignKey("Elite")]

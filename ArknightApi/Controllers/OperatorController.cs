@@ -61,13 +61,27 @@ namespace ArknightApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+        [Route("class/{c}")]
+        [HttpPost]
+        public async Task<ActionResult> GetOperatorByClass(string c)
+        {
+            try
+            {
+                List<Operators> op = await operatorServcie.GetOperatorsByClass(c);
+                return Ok(op);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
         [Route("rarity/{r}")]
         [HttpPost]
         public async Task<ActionResult> GetOperatorsByRarity(int r)
         {
             try
             {
-                List<Operator> operators= await operatorServcie.GetOperatorsByRarity(r);
+                List<Operators> operators= await operatorServcie.GetOperatorsByRarity(r);
                 return Ok(operators);
             }
             catch (Exception e)
@@ -81,8 +95,8 @@ namespace ArknightApi.Controllers
         {
             try
             {
-                Operator op = await operatorServcie.GetWords(name);
-                return Ok(op);
+                WordResponse word = await operatorServcie.GetWords(name);
+                return Ok(word);
             }
             catch (Exception e)
             {

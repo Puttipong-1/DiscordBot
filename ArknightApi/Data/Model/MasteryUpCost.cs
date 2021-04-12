@@ -11,17 +11,21 @@ namespace ArknightApi.Data.Model
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MasteryUpCostId { get; set; }
-        public string ItemId { get; set; }
+        [ForeignKey("Item")]
+        public int ItemId { get; set; }
+        public Item Item { get; set; }
         public int Count { get; set; }
+        public int Level { get; set; }
         public string Type { get; set; }
         [ForeignKey("Skill")]
         public int SkillId { get; set; }
         public Skill Skill { get; set; }
         public MasteryUpCost() { }
-        public MasteryUpCost(DTO.ArknightData.LevelUpCost lvl)
+        public MasteryUpCost(DTO.ArknightData.LevelUpCost lvl,int index)
         {
-            ItemId = lvl.Id;
+            ItemId = int.Parse(lvl.Id);
             Count = lvl.Count;
+            Level = index;
         }
     }
 }

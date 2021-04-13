@@ -89,7 +89,7 @@ namespace ArknightApi.Controllers
                 return BadRequest(e.Message);
             }
         }
-        [Route("words/{name}")]
+        [Route("word/{name}")]
         [HttpPost]
         public async Task<ActionResult> GetWord(string name)
         {
@@ -97,6 +97,33 @@ namespace ArknightApi.Controllers
             {
                 WordResponse word = await operatorServcie.GetWords(name);
                 return Ok(word);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        [Route("skill/{name}")]
+        [HttpPost]
+        public async Task<ActionResult> GetSkill(string name)
+        {
+            try
+            {
+                SkillResponse skill = await operatorServcie.GetOperatorSkill(name);
+                return Ok(skill);
+            }catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        [Route("profile/{name}")]
+        [HttpPost]
+        public async Task<ActionResult> GetProfile(string name)
+        {
+            try
+            {
+                ProfileResponse profile = await operatorServcie.GetOperatorProfile(name);
+                return Ok(profile);
             }
             catch (Exception e)
             {

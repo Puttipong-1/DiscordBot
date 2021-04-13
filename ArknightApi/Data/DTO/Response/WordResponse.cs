@@ -9,14 +9,13 @@ namespace ArknightApi.Data.DTO.Response
     public class WordResponse
     {
         public string Name { get; set; }
+        public int Rarity { get; set; }
         public List<Word> Words { get; set; }
-        public WordResponse()
-        {
-
-        }
+        public WordResponse(){}
         public WordResponse(Operator op)
         {
             Name = op.Name;
+            Rarity = op.Rarity;
             Words = new List<Word>();
             foreach (CharWord c in op.CharWords)
             {

@@ -136,6 +136,15 @@ namespace ArknightApi.Utility
             }
             return RemoveBrackets(desc);
         }
+        public static string GetInfoText(string text)
+        {
+            string pattern = "(?<=\\[.*\\]).*";
+            Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
+            Match match = regex.Match(text);
+            Console.WriteLine("getInfo" + "  " + match.Value);
+            if (match.Success) return match.Value.Trim();
+            else return "";
+        }
         public static int ConvertToPercent(double value)
         {
             value *= 100;

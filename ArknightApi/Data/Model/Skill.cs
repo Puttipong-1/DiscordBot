@@ -15,6 +15,7 @@ namespace ArknightApi.Data.Model
         public int SkillId { get; set; }
         public int OperatorId { get; set; }
         public Operator Operator { get; set; }
+        public string SkillName { get; set; }
         public string SkillCode { get; set; }
         public string SkillDescription { get; set; }
         public List<MasteryUpCost> MasteryUpCosts{get;set;}
@@ -52,6 +53,7 @@ namespace ArknightApi.Data.Model
         {
             Level first = skill.Levels.First();
             Level last = skill.Levels.Last();
+            SkillName = first.Name;
             SkillDescription = ArknightUtil.ReplaceSkillDesc(skill.Levels.First().Description, first.Blackboard, last.Blackboard);
             SpType = first.SpData.SpType;
             ChargeTime = first.SpData.MaxChargeTime;

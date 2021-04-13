@@ -79,7 +79,7 @@ namespace ArknightApi.Service
             {
                 Operator op=await applicationDbContext.Operators
                     .Where(o => o.Name.ToLower().Contains(name.ToLower()))
-                    .Include(o => o.CharWords.OrderBy(c=>c.Title))
+                    .Include(o => o.CharWords.OrderBy(c=>c.Index))
                     .SingleAsync();
                 return new WordResponse(op);
             }
@@ -153,7 +153,7 @@ namespace ArknightApi.Service
                     .ThenInclude(s=>s.MasteryUpCosts)
                     .ThenInclude(m=>m.Item)
                     .SingleAsync();
-                return new SkillResponse();
+                return new SkillResponse(op);
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace ArknightApi.Service
                    .Where(o => o.Name.ToLower().Equals(name.ToLower()))
                    .Include(o => o.CharInfos.OrderBy(c=>c.StoryTitle))
                    .SingleAsync();
-                return new ProfileResponse();
+                return new ProfileResponse(op);
             }
             catch (Exception e)
             {

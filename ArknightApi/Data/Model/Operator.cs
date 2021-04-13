@@ -37,7 +37,6 @@ namespace ArknightApi.Data.Model
         public List<Skin> Skins { get; set; }
         public List<CharWord> CharWords { get; set; }
         public List<OperatorTag> OperatorTags { get; set; }
-        public List<MasteryUpCost> MasteryUpCosts { get; set; }
         public Operator() { }
         public Operator(string key,Character character)
         {

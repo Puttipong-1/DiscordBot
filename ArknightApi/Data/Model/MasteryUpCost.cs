@@ -16,7 +16,6 @@ namespace ArknightApi.Data.Model
         public Item Item { get; set; }
         public int Count { get; set; }
         public int Level { get; set; }
-        public string Type { get; set; }
         [ForeignKey("Skill")]
         public int SkillId { get; set; }
         public Skill Skill { get; set; }

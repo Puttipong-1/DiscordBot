@@ -17,12 +17,14 @@ namespace ArknightApi.Data.Model
         public Operator Operator { get; set; }
         public string Title { get; set; }
         public string Text { get; set; }
+        public int Index { get; set; }
         public CharWord() { }
         public CharWord(DTO.ArknightData.CharWordJson word) 
         {
             OperatorId = ArknightUtil.GetId(word.CharId);
             Title = word.VoiceTitle;
             Text = word.VoiceText;
+            Index = word.VoiceIndex;
         }
     }
 }

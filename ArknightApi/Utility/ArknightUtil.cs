@@ -172,19 +172,17 @@ namespace ArknightApi.Utility
             for(int i = 0; i < recruit.Count; i++)
             {
                 dic.Add(tags[i], recruit[i]);
-                Console.WriteLine(i + " :  " + tags[i]);
                 string tempTag = tags[i];
                 List<string> tempList = recruit[i];
                 for(int j=i+1 ; j < recruit.Count; j++)
                 {
-                    Console.WriteLine(j+" "+recruit.Count);
                     tempTag = tempTag + "," + tags[j];
                     tempList = tempList.Intersect(recruit[j]).ToList();
                     dic.Add(tags[i]+","+tags[j], recruit[i].Intersect(recruit[j]).ToList());
-                    if (!dic.ContainsKey(tempTag))
-                    {
-                        dic.Add(tempTag, tempList);
-                    }
+                }
+                if (!dic.ContainsKey(tempTag))
+                {
+                    dic.Add(tempTag, tempList);
                 }
             }
             return dic;

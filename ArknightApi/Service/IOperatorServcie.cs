@@ -18,5 +18,6 @@ namespace ArknightApi.Service
         public Task<SkillResponse> GetOperatorSkill(string name);
         public Task<ProfileResponse> GetOperatorProfile(string name);
         public Task<BuffResponse> GetOperatorBuff(string name);
+        public Task<Dictionary<string, List<string>>> GetOperatorByTag(List<string> tags);
     }
 }

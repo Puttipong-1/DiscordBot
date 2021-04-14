@@ -53,6 +53,22 @@ namespace ArknightApi.Utility
                 _ => ""
             };
         }
+        public static string GetRoom(string room)
+        {
+            return room switch
+            {
+                "control" => "Control Center",
+                "dorm" => "Dormitory",
+                "hire" => "Office",
+                "manufacture"=>"Factory",
+                "meeting"=>"Reception Room",
+                "power" => "Power Plant",
+                "trading"=>"Trading Post",
+                "training"=>"Traning Room",
+                "workshop"=>"Workshop",
+                _ => room
+            };
+        }
         public static string GetClass(string prof)
         {
             return prof switch
@@ -149,6 +165,29 @@ namespace ArknightApi.Utility
         {
             value *= 100;
             return Convert.ToInt32(value);
+        }
+        public static Dictionary<string,List<string>> CreateRecruit(List<List<string>> recruit,List<string> tags)
+        {
+            Dictionary<string, List<string>> dic = new Dictionary<string, List<string>>();
+            for(int i = 0; i < recruit.Count; i++)
+            {
+                dic.Add(tags[i], recruit[i]);
+                Console.WriteLine(i + " :  " + tags[i]);
+                string tempTag = tags[i];
+                List<string> tempList = recruit[i];
+                for(int j=i+1 ; j < recruit.Count; j++)
+                {
+                    Console.WriteLine(j+" "+recruit.Count);
+                    tempTag = tempTag + "," + tags[j];
+                    tempList = tempList.Intersect(recruit[j]).ToList();
+                    dic.Add(tags[i]+","+tags[j], recruit[i].Intersect(recruit[j]).ToList());
+                    if (!dic.ContainsKey(tempTag))
+                    {
+                        dic.Add(tempTag, tempList);
+                    }
+                }
+            }
+            return dic;
         }
     }
 }

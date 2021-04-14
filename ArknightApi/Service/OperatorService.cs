@@ -1,6 +1,7 @@
 ﻿using ArknightApi.Data;
 using ArknightApi.Data.DTO.Response;
 using ArknightApi.Data.Model;
+using ArknightApi.Utility;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -176,7 +177,6 @@ namespace ArknightApi.Service
                 throw e;
             }
         }
-
         public async Task<BuffResponse> GetOperatorBuff(string name)
         {
             try
@@ -185,9 +185,38 @@ namespace ArknightApi.Service
                     .Where(o => o.Name.ToLower().Equals(name.ToLower()))
                     .Include(o => o.BaseBuffs)
                     .SingleAsync();
-                return new BuffResponse();
+                return new BuffResponse(op);
             }
             catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public async Task<Dictionary<string,List<string>>> GetOperatorByTag(List<string> tags)
+        {
+            try
+            {
+                List<List<string>> recruit = new List<List<string>>();
+                foreach(string s in tags)
+                {
+                    Tag res = await applicationDbContext.Tags
+                        .Where(t => t.TagName.ToLower().Contains(s.ToLower()))
+                        .Include(t => t.OperatorTags)
+                        .ThenInclude(o => o.Operator)
+                        .SingleOrDefaultAsync();
+                    List<string> name = new List<string>();
+                    if (res != null&&res.OperatorTags!=null)
+                    {
+                        foreach (OperatorTag t in res.OperatorTags)
+                        {
+                            name.Add(t.Operator.Name);
+                        }
+                        recruit.Add(name);
+                    }
+                }
+                return ArknightUtil.CreateRecruit(recruit,tags);
+            }
+            catch(Exception e)
             {
                 throw e;
             }

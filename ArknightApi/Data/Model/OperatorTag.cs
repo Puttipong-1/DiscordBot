@@ -12,6 +12,7 @@ namespace ArknightApi.Data.Model
         [Key,ForeignKey("Operator")]
         public int OperatorId { get; set; }
         public Operator Operator { get; set; }
+        
         [Key,ForeignKey("Tag")]
         public int TagId { get; set; }
         public Tag Tag { get; set; }

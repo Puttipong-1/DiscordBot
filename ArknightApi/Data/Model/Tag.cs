@@ -13,6 +13,7 @@ namespace ArknightApi.Data.Model
         [Key,DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int TagId { get; set; }
         public string TagName { get; set; }
+        public List<OperatorTag> OperatorTags { get; set; }
         public Tag() { }
         public Tag(int id)
         {

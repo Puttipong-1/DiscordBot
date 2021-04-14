@@ -1,10 +1,12 @@
-﻿using ArknightApi.Data.DTO.Response;
+﻿using ArknightApi.Data.DTO;
+using ArknightApi.Data.DTO.Response;
 using ArknightApi.Data.Model;
 using ArknightApi.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -126,6 +128,37 @@ namespace ArknightApi.Controllers
                 return Ok(profile);
             }
             catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        [Route("buff/{name}")]
+        [HttpPost]
+        public async Task<ActionResult> GetBuff(string name)
+        {
+            try
+            {
+                BuffResponse buff = await operatorServcie.GetOperatorBuff(name);
+                return Ok(buff);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        [Route("recruit")]
+        [HttpPost]
+        public async Task<ActionResult> GetResult([FromBody]TagJson json)
+        {
+            try
+            {
+                if (json.Tags is null) return BadRequest();
+                else
+                {
+                    var dic = await operatorServcie.GetOperatorByTag(json.Tags);
+                    return Ok(dic);
+                }
+            }catch(Exception e)
             {
                 return BadRequest(e.Message);
             }

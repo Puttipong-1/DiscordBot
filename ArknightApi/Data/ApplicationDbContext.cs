@@ -22,9 +22,11 @@ namespace ArknightApi.Data
         public DbSet<Item> Items { get; set; }
         public DbSet<MasteryUpCost> MasteryUpCosts { get;set; }
         public DbSet<Operator> Operators { get; set; }
+        public DbSet<OperatorTag> OperatorTags { get; set; }
         public DbSet<Potential> Potentials { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Skin> Skins { get; set; }
+        public DbSet<Tag> Tags { get; set; }
         public DbSet<Talent> Talents { get; set; }
         public DbSet<Tip> Tips { get; set; }
 

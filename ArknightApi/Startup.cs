@@ -37,7 +37,9 @@ namespace ArknightApi
                 options.AllowSynchronousIO = true;
             });
             services.AddTransient<IArknightDataServicecs, ArknightDataService>();
+            services.AddTransient<IItemService, ItemService>();
             services.AddTransient<IOperatorServcie, OperatorService>();
+            services.AddTransient<ITipService, TipService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

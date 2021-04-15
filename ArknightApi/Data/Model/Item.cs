@@ -16,7 +16,8 @@ namespace ArknightApi.Data.Model
         public string Usage { get; set; }
         public string ClassifyType { get; set; }
         public string ItemType { get; set; }
-        public int FormulaId { get; set; }
+        public List<Formula> Formula { get; set; }
+        public List<DropStage> DropStages {get;set;}
         public Item() { }
         public Item(DTO.ArknightData.ItemDetail item)
         {
@@ -28,10 +29,6 @@ namespace ArknightApi.Data.Model
             Usage = item.Usage;
             ClassifyType = item.ClassifyType;
             ItemType = item.ItemType;
-            if (item.BuildingProductList != null && item.BuildingProductList.Count>0)
-            {
-                FormulaId = int.Parse(item.BuildingProductList[0].FormulaId);
-            }
         }
     }
 }

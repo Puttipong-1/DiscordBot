@@ -39,7 +39,7 @@ namespace ArknightApi.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return BadRequest(e.ToString());
             }
         }
         [Route("addcharacter")]
@@ -175,7 +175,23 @@ namespace ArknightApi.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e.ToString());
+                return BadRequest(e.Message);
+            }
+        }
+        [Route("addstage")]
+        [HttpPost]
+        public async Task<ActionResult> AddStage([FromBody] JsonElement json)
+        {
+            try
+            {
+                JsonElement root = json.GetProperty("stages");
+                Dictionary<string, StageJson> dic = JsonSerializer.Deserialize<Dictionary<string, StageJson>>(root.ToString());
+                await arknightDataServicecs.AddStage(dic);
+                return Ok();
+
+            }catch(Exception e)
+            {
+                return BadRequest(e.Message);
             }
         }
     }

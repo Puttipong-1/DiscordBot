@@ -18,9 +18,8 @@ namespace ArknightApi.Data.Model
         public Item Item { get; set; }
         public int Count { get; set; }
         public FormulaCost() { }
-        public FormulaCost(int id,DTO.ArknightData.Cost cost)
+        public FormulaCost(DTO.ArknightData.Cost cost)
         {
-            FormulaCostId = id;
             ItemId = int.Parse(cost.Id);
             Count = cost.Count;
         }

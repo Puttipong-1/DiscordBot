@@ -56,8 +56,7 @@ namespace ArknightApi.Service
                 var formulas = new List<Formula>();
                 foreach (var item in dic)
                 {
-                    var f = new Formula(item.Value);
-                    formulas.Add(f);
+                    formulas.Add(new Formula(item.Value));
                 }
                 await applicationDb.AddRangeAsync(formulas);
                 await applicationDb.SaveChangesAsync();
@@ -190,7 +189,25 @@ namespace ArknightApi.Service
                 throw e;
             }
         }
-
+        public async Task AddStage(Dictionary<string,StageJson> dic)
+        {
+            try
+            {
+                List<Stage> stages = new List<Stage>();
+                foreach(var item in dic)
+                {
+                    if (!item.Key.Contains("#f#") && !item.Key.Contains("guide") && !item.Value.Code.Contains("Annihilation"))
+                    {
+                        stages.Add(new Stage(item.Key,item.Value));
+                    }
+                }
+                await applicationDb.AddRangeAsync(stages);
+                await applicationDb.SaveChangesAsync();
+            }catch(Exception e)
+            {
+                throw e;
+            }
+        }
         public async Task AddTip(RootTip root)
         {
             try

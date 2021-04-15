@@ -155,7 +155,8 @@ namespace ArknightApi.Controllers
                 if (json.Tags is null) return BadRequest();
                 else
                 {
-                    var dic = await operatorServcie.GetOperatorByTag(json.Tags);
+                    Dictionary<string,List<string>> dic = await operatorServcie.GetOperatorByTag(json.Tags);
+                    if (dic.Count == 0) return NotFound();
                     return Ok(dic);
                 }
             }catch(Exception e)

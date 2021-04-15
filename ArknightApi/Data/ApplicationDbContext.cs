@@ -15,6 +15,7 @@ namespace ArknightApi.Data
         public DbSet<BaseBuff> BaseBuffs { get; set; }
         public DbSet<CharInfo> CharInfos { get; set; }
         public DbSet<CharWord> CharWords { get; set; }
+        public DbSet<DropStage> DropStages { get; set; }
         public DbSet<Elite> Elites { get; set; }
         public DbSet<EvolveCost> EvolveCosts { get; set; }
         public DbSet<Formula> Formulas { get; set; }
@@ -26,6 +27,7 @@ namespace ArknightApi.Data
         public DbSet<Potential> Potentials { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Skin> Skins { get; set; }
+        public DbSet<Stage> Stages { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Talent> Talents { get; set; }
         public DbSet<Tip> Tips { get; set; }
@@ -37,6 +39,7 @@ namespace ArknightApi.Data
             modelBuilder.Entity<BaseBuff>().ToTable("BaseBuff").HasKey(b => b.BaseBuffId);
             modelBuilder.Entity<CharInfo>().ToTable("CharInfo").HasKey(c => c.CharInfoId);
             modelBuilder.Entity<CharWord>().ToTable("CharWord").HasKey(c => c.CharWordId);
+            modelBuilder.Entity<DropStage>().ToTable("DropStage").HasKey(d => new { d.ItemId, d.StageId });
             modelBuilder.Entity<Elite>().ToTable("Elite").HasKey(e => e.EliteId);
             modelBuilder.Entity<EvolveCost>().ToTable("EvolveCost").HasKey(e => e.EvolveCostId);
             modelBuilder.Entity<Formula>().ToTable("Formula").HasKey(f => f.FormulaId); 
@@ -49,6 +52,7 @@ namespace ArknightApi.Data
             modelBuilder.Entity<Potential>().ToTable("Potential").HasKey(p=>p.PotentialId);
             modelBuilder.Entity<Skill>().ToTable("Skill").HasKey(s=>s.SkillId);
             modelBuilder.Entity<Skin>().ToTable("Skin").HasKey(s => s.SkinId);
+            modelBuilder.Entity<Stage>().ToTable("Stage").HasKey(s => s.StageId);
             modelBuilder.Entity<Tag>().ToTable("Tag").HasKey(t => t.TagId);
             modelBuilder.Entity<Talent>().ToTable("Talent").HasKey(t => t.TalentId);
             modelBuilder.Entity<Tip>().ToTable("Tip").HasKey(t => t.TipId);

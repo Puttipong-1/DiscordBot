@@ -197,6 +197,7 @@ namespace ArknightApi.Service
             try
             {
                 List<List<string>> recruit = new List<List<string>>();
+                List<string> tagName = new List<string>();
                 foreach(string s in tags)
                 {
                     Tag res = await applicationDbContext.Tags
@@ -212,9 +213,10 @@ namespace ArknightApi.Service
                             name.Add(t.Operator.Name);
                         }
                         recruit.Add(name);
+                        tagName.Add(res.TagName);
                     }
                 }
-                return ArknightUtil.CreateRecruit(recruit,tags);
+                return ArknightUtil.CreateRecruit(recruit,tagName);
             }
             catch(Exception e)
             {

@@ -18,6 +18,7 @@ namespace ArknightApi.Service
         Task AddInfo(Dictionary<string, CharInfo> dic);
         Task AddBaseBuff(JsonElement json);
         Task AddSkill(Dictionary<string, SkillJson> dic);
+        Task AddStage(Dictionary<string, StageJson> dic);
         Task AddTag(List<GachaJson> gachas);
         Task AddOpTag(List<RecruitJson> recruits);
     }

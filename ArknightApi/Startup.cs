@@ -6,8 +6,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using ArknightApi.Service;
+using System;
+using System.IO;
+
 namespace ArknightApi
 {
     public class Startup
@@ -40,6 +42,14 @@ namespace ArknightApi
             services.AddTransient<IItemService, ItemService>();
             services.AddTransient<IOperatorServcie, OperatorService>();
             services.AddTransient<ITipService, TipService>();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "Arknight API",
+                    Version = "v1"
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,10 +65,14 @@ namespace ArknightApi
                 context.Database.EnsureCreated();
             }
 
-                app.UseHttpsRedirection();
+             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("swagger/arknight.json", "Arknight API");
+            });
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

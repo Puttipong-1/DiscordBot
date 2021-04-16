@@ -33,7 +33,7 @@ namespace ArknightApi.Data.Model
                         if (int.TryParse(d.Id, out int id) && d.Type.Equals("MATERIAL"))
                         {
                             if (!DropStages.Exists(f => f.ItemId == id && f.StageId.Equals(s.Code))){
-                                DropStages.Add(new DropStage(s.Code,id, d.DropType));
+                                DropStages.Add(new DropStage(s.Code,id, d.OccPercent));
                             }
                         }
                     }

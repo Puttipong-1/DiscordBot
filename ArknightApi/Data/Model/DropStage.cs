@@ -16,13 +16,13 @@ namespace ArknightApi.Data.Model
         [Key,ForeignKey("Stage")]
         public string StageId { get; set; }
         public Stage Stage { get; set; }
-        public int DropType { get; set; }
+        public int OccPercent { get; set; }
         public decimal DropPercent { get; set; }
         public DropStage(){}
-        public DropStage(string key,int id,int dropType) {
+        public DropStage(string key,int id,int occPercent) {
             StageId = key;
             ItemId = id;
-            DropType = dropType;
+            OccPercent = occPercent;
         }
         
     }

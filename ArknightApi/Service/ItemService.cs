@@ -25,7 +25,9 @@ namespace ArknightApi.Service
                     .Include(i => i.Formula)
                     .ThenInclude(f => f.FormulaCosts)
                     .ThenInclude(f => f.Item)
-                    .SingleAsync();
+                    .Include(i=>i.DropStages)
+                    .ThenInclude(d=>d.Stage)
+                    .FirstAsync();
                 return new ItemResponse(item);
 
             }catch(Exception e)
@@ -42,8 +44,10 @@ namespace ArknightApi.Service
                     .Select(i => new Item()
                     {
                         ItemId = i.ItemId,
-                        Name = i.Name
+                        Name = i.Name,
+                        Rarity = i.Rarity
                     })
+                    .OrderBy(i=>i.Name)
                     .ToListAsync();
                 List<Items> items = new List<Items>();
                 foreach(Item i in item)

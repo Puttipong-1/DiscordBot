@@ -29,7 +29,6 @@ namespace ArknightApi.Service
                 throw e;
             }
         }
-
         public async Task<List<string>> GetTipCatalog()
         {
             try

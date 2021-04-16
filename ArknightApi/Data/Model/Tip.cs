@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ArknightApi.Data.Model
@@ -22,8 +23,8 @@ namespace ArknightApi.Data.Model
         public Tip(DTO.ArknightData.WorldViewTip tip)
         {
             Title = tip.Title;
-            TipDesc = tip.Description;
-            Category = tip.BackgroundPicId;
+            TipDesc = tip.Description.ToLower();
+            Category = Regex.Replace(tip.BackgroundPicId, @"[\d-]", string.Empty).ToLower();
         }
 }
 }

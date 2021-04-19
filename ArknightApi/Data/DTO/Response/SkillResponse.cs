@@ -1,4 +1,5 @@
 ﻿using ArknightApi.Data.Model;
+using ArknightApi.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,7 +59,9 @@ namespace ArknightApi.Data.DTO.Response
         public string SkillName { get; set; }
         public string SkillCode { get; set; }
         public string SkillDescription { get; set; }
-        public int SpType { get; set; }
+
+        public string SkillType { get; set; }
+        public string SpType { get; set; }
         public int ChargeTime { get; set; }
         public int MaxChargeTime { get; set; }
         public int SpCost { get; set; }
@@ -75,7 +78,8 @@ namespace ArknightApi.Data.DTO.Response
             SkillName = skill.SkillName;
             SkillCode = skill.SkillCode;
             SkillDescription = skill.SkillDescription;
-            SpType = skill.SpType;
+            SkillType = ArknightUtil.GetSkillType(skill.SkillType);
+            SpType = ArknightUtil.GetSPType(skill.SpType);
             ChargeTime = skill.ChargeTime;
             MaxChargeTime = skill.MaxChargeTime;
             SpCost = skill.SpCost;

@@ -24,6 +24,15 @@ namespace ArknightApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSwaggerGen(c=>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Arknight API",
+                    Description = "Arknight API For Discord Bot"
+                }); 
+            });
             services.AddControllers()
                 .AddJsonOptions(options =>
                 {
@@ -42,14 +51,6 @@ namespace ArknightApi
             services.AddTransient<IItemService, ItemService>();
             services.AddTransient<IOperatorServcie, OperatorService>();
             services.AddTransient<ITipService, TipService>();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
-                {
-                    Title = "Arknight API",
-                    Version = "v1"
-                });
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,17 +65,15 @@ namespace ArknightApi
                 var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                 context.Database.EnsureCreated();
             }
-
-             app.UseHttpsRedirection();
-
-            app.UseRouting();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("swagger/arknight.json", "Arknight API");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = string.Empty;
             });
+            app.UseHttpsRedirection();
+            app.UseRouting();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

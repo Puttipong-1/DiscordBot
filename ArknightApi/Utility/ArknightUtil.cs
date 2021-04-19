@@ -199,5 +199,26 @@ namespace ArknightApi.Utility
                 _=>""
             };
         }
+        public static string GetSkillType(int type)
+        {
+            return type switch
+            {
+                0=>"Passive",
+                1=> "Manual Trigger",
+                2 => "Auto Trigger",
+                _=>""
+            };
+        }
+        public static string GetSPType(int type)
+        {
+            return type switch
+            {   
+                1=>"Attacking Enemy",
+                2=>"Per Second",
+                4=>"Getting Hit",
+                8=>"Passive",
+                _ =>""
+            };
+        }
     }
 }

@@ -9,6 +9,7 @@ using System.Text.Json;
 using ArknightApi.Service;
 using System;
 using System.IO;
+using System.Reflection;
 
 namespace ArknightApi
 {
@@ -30,8 +31,17 @@ namespace ArknightApi
                 {
                     Version = "v1",
                     Title = "Arknight API",
-                    Description = "Arknight API For Discord Bot"
-                }); 
+                    Description = "Arknight API For Discord Bot <a href=\"www.google.com\">test</a>",
+                    Contact = new Microsoft.OpenApi.Models.OpenApiContact
+                    {
+                        Name="Puttipong-1",
+                        Email = string.Empty,
+                        Url=new Uri("https://www.google.com")
+                    }
+                });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath,includeControllerXmlComments:true);
             });
             services.AddControllers()
                 .AddJsonOptions(options =>

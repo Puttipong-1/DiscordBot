@@ -21,8 +21,15 @@ namespace ArknightApi.Controllers
         {
             operatorServcie = _operatorService;
         }
+        /// <summary>
+        /// Get a operator by name.
+        /// </summary>
+        /// <param name="name">Operator's name.</param>
+        /// <response code="200">Found operator</response>
+        /// <response code="400">Not found operator</response>
         [Route("name/{name}")]
         [HttpPost]
+        [ProducesResponseType(typeof(OperatorResponse),200)]
         public async Task<ActionResult> GetOperatorByName(string name)
         {
             try
@@ -35,8 +42,14 @@ namespace ArknightApi.Controllers
                return BadRequest(e.Message);
             }
         }
+        /// <summary>
+        /// Get all operators.
+        /// </summary>
+        /// <response code="200">Found all operators</response>
+        /// <response code="400">Not found</response>
         [Route("list")]
         [HttpPost]
+        [ProducesResponseType(typeof(Operators), 200)]
         public async Task<ActionResult> GetOperatorList()
         {
             try

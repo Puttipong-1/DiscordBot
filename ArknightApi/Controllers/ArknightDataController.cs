@@ -16,6 +16,7 @@ using Skill = ArknightApi.Data.Model.Skill;
 
 namespace ArknightApi.Controllers
 {
+    
     [ApiController]
     [Route("api/arknightdata/")]
     public class ArknightDataController : ControllerBase
@@ -25,6 +26,12 @@ namespace ArknightApi.Controllers
         {
             arknightDataServicecs = _arknightDataService;
         }
+        /// <summary>
+        /// Add workshop formula and operator's base buff.
+        /// </summary>
+        /// <remarks>Data from <a href="https://github.com/Aceship/AN-EN-Tags/blob/master/json/gamedata/en_US/gamedata/excel/building_data.json">here</a> or <a href="https://github.com/Kengxxiao/ArknightsGameData/blob/master/en_US/gamedata/excel/building_data.json">here</a> </remarks>
+        /// <param name="json"></param>
+        /// <returns></returns>
         [Route("addbuilding")]
         [HttpPost]
         public async Task<ActionResult> AddBuilding([FromBody] JsonElement json)
@@ -42,6 +49,12 @@ namespace ArknightApi.Controllers
                 return BadRequest(e.ToString());
             }
         }
+        /// <summary>
+        /// Add operator.
+        /// </summary>
+        /// <remarks>Data from <a href="https://github.com/Kengxxiao/ArknightsGameData/blob/master/en_US/gamedata/excel/character_table.json">here</a> or <a href="https://github.com/Aceship/AN-EN-Tags/blob/master/json/gamedata/en_US/gamedata/excel/character_table.json">here</a> </remarks>
+        /// <param name="json"></param>
+        /// <returns></returns>
         [Route("addcharacter")]
         [HttpPost]
         public async Task<ActionResult> AddCharacter([FromBody]JsonElement json)
@@ -56,6 +69,12 @@ namespace ArknightApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+        /// <summary>
+        /// Add operator's info.
+        /// </summary>
+        /// <remarks>Data from <a href="https://github.com/Kengxxiao/ArknightsGameData/blob/master/en_US/gamedata/excel/handbook_info_table.json">here</a> or <a href="https://github.com/Aceship/AN-EN-Tags/blob/master/json/gamedata/en_US/gamedata/excel/handbook_info_table.json">here</a> </remarks>
+        /// <param name="json"></param>
+        /// <returns></returns>
         [Route("addinfo")]
         [HttpPost]
         public async Task<ActionResult> AddInfo([FromBody] JsonElement json)
@@ -72,6 +91,12 @@ namespace ArknightApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+        /// <summary>
+        /// Add operator's words.
+        /// </summary>
+        /// <remarks>Data from <a href="https://github.com/Kengxxiao/ArknightsGameData/blob/master/en_US/gamedata/excel/charword_table.json">here</a> or <a href="https://github.com/Aceship/AN-EN-Tags/blob/master/json/gamedata/en_US/gamedata/excel/charword_table.json">here</a> </remarks>
+        /// <param name="json"></param>
+        /// <returns></returns>
         [Route("addword")]
         [HttpPost]
         public async Task<ActionResult> AddCharWord([FromBody]JsonElement json)
@@ -87,6 +112,12 @@ namespace ArknightApi.Controllers
             }
             
         }
+        /// <summary>
+        /// Add items.
+        /// </summary>
+        /// <remarks>Data from <a href="https://github.com/Kengxxiao/ArknightsGameData/blob/master/en_US/gamedata/excel/item_table.json">here</a> or <a href="https://github.com/Aceship/AN-EN-Tags/blob/master/json/gamedata/en_US/gamedata/excel/item_table.json">here</a> </remarks>
+        /// <param name="json"></param>
+        /// <returns></returns>
         [Route("additem")]
         [HttpPost]
         public async Task<ActionResult> AddItem([FromBody] JsonElement json)
@@ -102,6 +133,12 @@ namespace ArknightApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+        /// <summary>
+        /// Add operator's skins.
+        /// </summary>
+        /// <remarks>Data from <a href="https://github.com/Kengxxiao/ArknightsGameData/blob/master/en_US/gamedata/excel/skin_table.json">here</a> or <a href="https://github.com/Aceship/AN-EN-Tags/blob/master/json/gamedata/en_US/gamedata/excel/skin_table.json">here</a> </remarks>
+        /// <param name="json"></param>
+        /// <returns></returns>
         [Route("addskin")]
         [HttpPost]
         public async Task<ActionResult> AddSkin([FromBody] JsonElement json)
@@ -118,6 +155,12 @@ namespace ArknightApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+        /// <summary>
+        /// Add operator's skill.
+        /// </summary>
+        /// <remarks>Data from <a href="https://github.com/Kengxxiao/ArknightsGameData/blob/master/en_US/gamedata/excel/skill_table.json">here</a> or <a href="https://github.com/Aceship/AN-EN-Tags/blob/master/json/gamedata/en_US/gamedata/excel/skill_table.json">here</a> </remarks>
+        /// <param name="json"></param>
+        /// <returns></returns>
         [Route("addskill")]
         [HttpPost]
         public async Task<ActionResult> AddSkill([FromBody] JsonElement json)
@@ -133,6 +176,12 @@ namespace ArknightApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+        /// <summary>
+        /// Add recruit tags.
+        /// </summary>
+        /// <remarks>Data from <a href="https://github.com/Kengxxiao/ArknightsGameData/blob/master/en_US/gamedata/excel/gacha_table.json">here</a> or <a href="https://github.com/Aceship/AN-EN-Tags/blob/master/json/gamedata/en_US/gamedata/excel/gacha_table.json">here</a> </remarks>
+        /// <param name="json"></param>
+        /// <returns></returns>
         [Route("addtag")]
         [HttpPost]
         public async Task<ActionResult> AddTag([FromBody]JsonElement json)
@@ -149,6 +198,12 @@ namespace ArknightApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+        /// <summary>
+        /// Add game's tip.
+        /// </summary>
+        /// <remarks>Data from <a href="https://github.com/Kengxxiao/ArknightsGameData/blob/master/en_US/gamedata/excel/tip_table.json">here</a> or <a href="https://github.com/Aceship/AN-EN-Tags/blob/master/json/gamedata/en_US/gamedata/excel/tip_table.json">here</a> </remarks>
+        /// <param name="json"></param>
+        /// <returns></returns>
         [Route("addtip")]
         [HttpPost]
         public async Task<ActionResult> Addtip([FromBody]RootTip json)
@@ -162,6 +217,11 @@ namespace ArknightApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+        /// <summary>
+        /// Add operator's tags.
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
         [Route("addoperatortag")]
         [HttpPost]
         public async Task<ActionResult> AddOperatorTag([FromBody] JsonElement json)
@@ -178,6 +238,12 @@ namespace ArknightApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+        /// <summary>
+        /// Add stage.
+        /// </summary>
+        /// <remarks>Data from <a href="https://github.com/Kengxxiao/ArknightsGameData/blob/master/en_US/gamedata/excel/stage_table.json">here</a> or <a href="https://github.com/Aceship/AN-EN-Tags/blob/master/json/gamedata/en_US/gamedata/excel/stage_table.json">here</a> </remarks>
+        /// <param name="json"></param>
+        /// <returns></returns>
         [Route("addstage")]
         [HttpPost]
         public async Task<ActionResult> AddStage([FromBody] JsonElement json)

@@ -159,23 +159,5 @@ namespace ArknightApi.Controllers
                 return BadRequest(e.Message);
             }
         }
-        [Route("recruit")]
-        [HttpPost]
-        public async Task<ActionResult> GetResult([FromBody]TagJson json)
-        {
-            try
-            {
-                if (json.Tags is null) return BadRequest();
-                else
-                {
-                    Dictionary<string,List<string>> dic = await operatorServcie.GetOperatorByTag(json.Tags);
-                    if (dic.Count == 0) return NotFound();
-                    return Ok(dic);
-                }
-            }catch(Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
     }
 }

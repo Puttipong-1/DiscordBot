@@ -373,5 +373,4 @@ namespace ArknightApi.Data.DTO.ArknightData
         [JsonPropertyName("allSkillLvlup")]
         public List<AllSkillLvlup> AllSkillLvlup { get; set; }
     }
-
 }

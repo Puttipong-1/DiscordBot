@@ -60,6 +60,7 @@ namespace ArknightApi
             services.AddTransient<IArknightDataServicecs, ArknightDataService>();
             services.AddTransient<IItemService, ItemService>();
             services.AddTransient<IOperatorServcie, OperatorService>();
+            services.AddTransient<IRecruitService, RecruitService>();
             services.AddTransient<ITipService, TipService>();
         }
 

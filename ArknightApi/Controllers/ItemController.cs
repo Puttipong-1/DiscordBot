@@ -17,8 +17,14 @@ namespace ArknightApi.Controllers
         {
             itemService = _itemService;
         }
+        /// <summary>
+        /// Get all item in db.
+        /// </summary>
+        /// <response code="200">Found items</response>
+        /// <response code="400">Not found items</response>
         [Route("list")]
         [HttpPost]
+        [ProducesResponseType(typeof(List<string>),200)]
         public async Task<ActionResult> GetItemList()
         {
             try
@@ -31,8 +37,15 @@ namespace ArknightApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+        /// <summary>
+        /// Get a item by name;
+        /// </summary>
+        /// <param name="name">Item's name</param>
+        /// <response code="200">Found item</response>
+        /// <response code="400">Not found item</response>
         [Route("name/{name}")]
         [HttpPost]
+        [ProducesResponseType(typeof(ItemResponse),200)]
         public async Task<ActionResult> GetItemDetail(string name)
         {
             try

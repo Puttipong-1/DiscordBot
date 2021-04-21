@@ -62,8 +62,14 @@ namespace ArknightApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+        /// <summary>
+        /// Get all operator's skins.
+        /// </summary>
+        /// <param name="name">Operator's name</param>
+        /// <returns></returns>
         [Route("skin/{name}")]
         [HttpPost]
+        [ProducesResponseType(typeof(SkinResponse),200)]
         public async Task<ActionResult> GetSkinByName(string name)
         {
             try
@@ -75,9 +81,14 @@ namespace ArknightApi.Controllers
             {
                 return BadRequest(e.Message);
             }
-        }
+        }/// <summary>
+        /// Get operators by class
+        /// </summary>
+        /// <param name="c">Class's name</param>
+        /// <returns></returns>
         [Route("class/{c}")]
         [HttpPost]
+        [ProducesResponseType(typeof(List<Operators>),200)]
         public async Task<ActionResult> GetOperatorByClass(string c)
         {
             try
@@ -90,8 +101,14 @@ namespace ArknightApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+        /// <summary>
+        /// Get operators by rarity
+        /// </summary>
+        /// <param name="r">Rarity</param>
+        /// <returns></returns>
         [Route("rarity/{r}")]
         [HttpPost]
+        [ProducesResponseType(typeof(List<Operators>), 200)]
         public async Task<ActionResult> GetOperatorsByRarity(int r)
         {
             try
@@ -104,8 +121,14 @@ namespace ArknightApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+        /// <summary>
+        /// Get operator's voice lines.
+        /// </summary>
+        /// <param name="name">Operator's name</param>
+        /// <returns></returns>
         [Route("word/{name}")]
         [HttpPost]
+        [ProducesResponseType(typeof(WordResponse),200)]
         public async Task<ActionResult> GetWord(string name)
         {
             try
@@ -118,8 +141,14 @@ namespace ArknightApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+        /// <summary>
+        /// Get operator's skills.
+        /// </summary>
+        /// <param name="name">Operator's name</param>
+        /// <returns></returns>
         [Route("skill/{name}")]
         [HttpPost]
+        [ProducesResponseType(typeof(SkillResponse),200)]
         public async Task<ActionResult> GetSkill(string name)
         {
             try
@@ -131,8 +160,14 @@ namespace ArknightApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+        /// <summary>
+        /// Get operator's profile.
+        /// </summary>
+        /// <param name="name">Operator's name</param>
+        /// <returns></returns>
         [Route("profile/{name}")]
         [HttpPost]
+        [ProducesResponseType(typeof(ProfileResponse),200)]
         public async Task<ActionResult> GetProfile(string name)
         {
             try
@@ -145,8 +180,14 @@ namespace ArknightApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+        /// <summary>
+        /// Get operator's base buff.
+        /// </summary>
+        /// <param name="name">Operator's name</param>
+        /// <returns></returns>
         [Route("buff/{name}")]
         [HttpPost]
+        [ProducesResponseType(typeof(BuffResponse),200)]
         public async Task<ActionResult> GetBuff(string name)
         {
             try

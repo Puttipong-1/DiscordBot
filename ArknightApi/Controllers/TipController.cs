@@ -17,8 +17,13 @@ namespace ArknightApi.Controllers
         {
             tipService = _tipService;
         }
+        /// <summary>
+        /// Get all tip category
+        /// </summary>
+        /// <returns></returns>
         [Route("list")]
         [HttpPost]
+        [ProducesResponseType(typeof(List<string>),200)]
         public async Task<ActionResult> GetTipCategory()
         {
             try
@@ -31,8 +36,14 @@ namespace ArknightApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+        /// <summary>
+        /// Get all tip by category
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
         [Route("category/{category}")]
         [HttpPost]
+        [ProducesResponseType(typeof(TipResponse),200)]
         public async Task<ActionResult> GetTipByCategory(string category)
         {
             try

@@ -10,6 +10,7 @@ namespace ArknightApi.Data
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions options) : base(options) { }
+        public DbSet<Admin> Admins { get; set; }
         public DbSet<AllSkillCost> AllSkillCosts { get; set; }
         public DbSet<AllSkillUp> AllSkillUps { get; set; }
         public DbSet<BaseBuff> BaseBuffs { get; set; }
@@ -34,6 +35,7 @@ namespace ArknightApi.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Admin>().ToTable("Admin").HasKey(a => a.AdminId);
             modelBuilder.Entity<AllSkillCost>().ToTable("AllSkillCost").HasKey(a => a.LevelCostId);
             modelBuilder.Entity<AllSkillUp>().ToTable("AllSkillUp").HasKey(a => a.AllSkillId);
             modelBuilder.Entity<BaseBuff>().ToTable("BaseBuff").HasKey(b => b.BaseBuffId);

@@ -2,6 +2,7 @@
 using ArknightApi.Data.DTO;
 using ArknightApi.Data.Model;
 using ArknightApi.Helper;
+using Isopoh.Cryptography.Argon2;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -45,9 +46,21 @@ namespace ArknightApi.Service
             }
         }
 
-        public Task<AuthenticateResponse> Authenticate(AuthenticateRequest authenticate)
+        public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest authenticate)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Admin admin = await applicationDb.Admins.FirstOrDefaultAsync(a => a.Email.Equals(authenticate.Email));
+                if (admin is null) return null;
+                if (!Argon2.Verify(admin.Password, authenticate.Password)) return null;
+                string token = GenerateJwtToken(admin);
+                return new AuthenticateResponse(admin,token);
+                
+
+            }catch(Exception e)
+            {
+                throw e;
+            }
         }
 
         public string GenerateJwtToken(Admin admin)

@@ -15,7 +15,7 @@ namespace ArknightApi.Helper
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             Admin admin = (Admin)context.HttpContext.Items["Admin"];
-            if(admin is null)
+            if(admin == null)
             {
                 context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
             }

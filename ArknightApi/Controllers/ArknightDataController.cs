@@ -1,5 +1,6 @@
 ﻿using ArknightApi.Data.DTO.ArknightData;
 using ArknightApi.Data.Model;
+using ArknightApi.Helper;
 using ArknightApi.Service;
 using ArknightApi.Utility;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ using Skill = ArknightApi.Data.Model.Skill;
 
 namespace ArknightApi.Controllers
 {
-    
+    [ApiExplorerSettings(IgnoreApi = true)]
     [ApiController]
     [Route("api/arknightdata/")]
     public class ArknightDataController : ControllerBase
@@ -34,6 +35,7 @@ namespace ArknightApi.Controllers
         /// <returns></returns>
         [Route("addbuilding")]
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> AddBuilding([FromBody] JsonElement json)
         {
             try
@@ -57,6 +59,7 @@ namespace ArknightApi.Controllers
         /// <returns></returns>
         [Route("addcharacter")]
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> AddCharacter([FromBody]JsonElement json)
         {
             try
@@ -77,6 +80,7 @@ namespace ArknightApi.Controllers
         /// <returns></returns>
         [Route("addinfo")]
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> AddInfo([FromBody] JsonElement json)
         {
             try
@@ -99,6 +103,7 @@ namespace ArknightApi.Controllers
         /// <returns></returns>
         [Route("addword")]
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> AddCharWord([FromBody]JsonElement json)
         {
             try
@@ -120,6 +125,7 @@ namespace ArknightApi.Controllers
         /// <returns></returns>
         [Route("additem")]
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> AddItem([FromBody] JsonElement json)
         {
             try
@@ -141,6 +147,7 @@ namespace ArknightApi.Controllers
         /// <returns></returns>
         [Route("addskin")]
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> AddSkin([FromBody] JsonElement json)
         {
             try
@@ -163,6 +170,7 @@ namespace ArknightApi.Controllers
         /// <returns></returns>
         [Route("addskill")]
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> AddSkill([FromBody] JsonElement json)
         {
             try
@@ -184,6 +192,7 @@ namespace ArknightApi.Controllers
         /// <returns></returns>
         [Route("addtag")]
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> AddTag([FromBody]JsonElement json)
         {
             try
@@ -206,6 +215,7 @@ namespace ArknightApi.Controllers
         /// <returns></returns>
         [Route("addtip")]
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> Addtip([FromBody]RootTip json)
         {
             try
@@ -224,6 +234,7 @@ namespace ArknightApi.Controllers
         /// <returns></returns>
         [Route("addoperatortag")]
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> AddOperatorTag([FromBody] JsonElement json)
         {
             try
@@ -246,6 +257,7 @@ namespace ArknightApi.Controllers
         /// <returns></returns>
         [Route("addstage")]
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> AddStage([FromBody] JsonElement json)
         {
             try

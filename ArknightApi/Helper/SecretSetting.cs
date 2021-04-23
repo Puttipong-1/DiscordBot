@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ArknightApi.Helper
 {
-    public class AppSetting
+    public class SecretSetting
     {
         public string JWTSecret { get; set; }
         public string SecretKey { get; set; }

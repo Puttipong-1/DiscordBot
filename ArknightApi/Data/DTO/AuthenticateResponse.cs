@@ -16,7 +16,7 @@ namespace ArknightApi.Data.DTO
         {
             Id  = admin.AdminId;
             Name = admin.Name;
-            token = token;
+            Token = token;
         }
     }
 }

@@ -19,23 +19,24 @@ namespace ArknightApi.Service
     public class AdminService : IAdminService
     {
         private readonly ApplicationDbContext applicationDb;
-        private readonly AppSetting appSetting;
-        public AdminService(ApplicationDbContext _applicationDb, IOptions<AppSetting> _appSetting)
+        private readonly SecretSetting secretSetting;
+        public AdminService(ApplicationDbContext _applicationDb,IOptions<SecretSetting> _secretSetting)
         {
             applicationDb = _applicationDb;
-            appSetting = _appSetting.Value;
+            secretSetting = _secretSetting.Value;
         }
         public async Task<string> AddAdmin(Admin admin)
         {
             try
-            {
+            { 
                 Admin a = await applicationDb.Admins
                     .Where(a => a.Email.Equals(admin.Email))
                     .FirstOrDefaultAsync();
-                if (a is null)
+                if (a!=null)
                 {
                     return "Email already exist";
                 }
+                admin.Password = Argon2.Hash(admin.Password);
                 await applicationDb.AddAsync(admin);
                 await applicationDb.SaveChangesAsync();
                 return "Add admin success";
@@ -45,7 +46,6 @@ namespace ArknightApi.Service
                 throw e;
             }
         }
-
         public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest authenticate)
         {
             try
@@ -66,7 +66,9 @@ namespace ArknightApi.Service
         public string GenerateJwtToken(Admin admin)
         {
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-            byte[] key = Encoding.ASCII.GetBytes(appSetting.JWTSecret);
+            Console.WriteLine("JWT: " + secretSetting.JWTSecret);
+            byte[] key = Encoding.ASCII.GetBytes(secretSetting.JWTSecret);
+            Console.WriteLine("Key: " + Encoding.Default.GetString(key));
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] { new Claim("adminId", admin.AdminId.ToString()) }),
@@ -77,9 +79,9 @@ namespace ArknightApi.Service
             return tokenHandler.WriteToken(token);
         }
 
-        public async Task<Admin> GetById(int id)
+        public Admin GetById(int id)
         {
-            return await applicationDb.Admins.FirstOrDefaultAsync(x => x.AdminId == id);
+            return applicationDb.Admins.FirstOrDefault(x => x.AdminId == id);
         }
 
     }

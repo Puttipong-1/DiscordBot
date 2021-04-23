@@ -10,6 +10,7 @@ using ArknightApi.Service;
 using System;
 using System.IO;
 using System.Reflection;
+using ArknightApi.Helper;
 
 namespace ArknightApi
 {
@@ -57,6 +58,8 @@ namespace ArknightApi
             {
                 options.AllowSynchronousIO = true;
             });
+            services.Configure<SecretSetting>(Configuration.GetSection("SecretSetting"));
+            services.AddTransient<IAdminService, AdminService>();
             services.AddTransient<IArknightDataServicecs, ArknightDataService>();
             services.AddTransient<IItemService, ItemService>();
             services.AddTransient<IOperatorServcie, OperatorService>();
@@ -82,9 +85,14 @@ namespace ArknightApi
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
                 c.RoutePrefix = string.Empty;
             });
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
+            app.UseMiddleware<JwtMiddleware>();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

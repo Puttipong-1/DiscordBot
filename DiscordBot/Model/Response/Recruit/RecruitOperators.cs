@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace DiscordBot.Model.Response.Recruit
 {
-    class RecruitOperators
+    public class RecruitOperators
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }

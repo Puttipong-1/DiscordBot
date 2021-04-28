@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace DiscordBot.Model.Request
 {
-    class Tag
+    public class Tag
     {
         [JsonPropertyName("tags")]
         public List<string> Tags { get; set; }

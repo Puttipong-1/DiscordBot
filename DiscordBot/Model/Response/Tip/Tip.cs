@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace DiscordBot.Model.Response.Tip
 {
-    class Tip
+    public class Tip
     {
         [JsonPropertyName("tips")]
         public List<Tips> Tips { get; set; }

@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace DiscordBot.Model.Response.Item
 {
-    class ItemDetail
+    public class ItemDetail
     {
 
         [JsonPropertyName("rarity")]

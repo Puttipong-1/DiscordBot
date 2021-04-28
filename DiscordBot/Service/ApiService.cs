@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DiscordBot.Service
 {
-    class ApiService
+    public class ApiService
     {
         private readonly HttpClient http;
         private const string url="";
@@ -52,7 +52,7 @@ namespace DiscordBot.Service
                 {
                     string query = $"{key}={queryParam[key]}";
                     if (baseUri.Query != null && baseUri.Query.Length > 1)
-                        baseUri.Query = baseUri.Query.Substring(1) + "&" + query;
+                        baseUri.Query = baseUri.Query[1..] + "&" + query;
                     else baseUri.Query = query;
                 }
             }

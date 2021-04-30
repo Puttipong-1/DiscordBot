@@ -11,7 +11,7 @@ namespace DiscordBot.Service
     public class ApiService
     {
         private readonly HttpClient http;
-        private const string url="";
+        private const string url= "https://localhost:44354/api/";
         public ApiService(HttpClient _http)
         {
             http = _http;

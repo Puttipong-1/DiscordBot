@@ -39,7 +39,7 @@ namespace ArknightApi.Service
                             foreach (BuffData buffData in buffChar.BuffData)
                             {
                                 Data.DTO.ArknightData.BaseBuff bb = buffs[buffData.BuffId];
-                                baseBuffs.Add(new Data.Model.BaseBuff(bb, charBuff));
+                                baseBuffs.Add(new Data.Model.BaseBuff(bb, charBuff,buffData.Cond));
                             }
                         }
                     }

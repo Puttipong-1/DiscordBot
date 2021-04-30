@@ -1,4 +1,5 @@
-﻿using ArknightApi.Utility;
+﻿using ArknightApi.Data.DTO.ArknightData;
+using ArknightApi.Utility;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -21,8 +22,10 @@ namespace ArknightApi.Data.Model
         public string SkillIcon { get; set; }
         public string BuffCategory { get; set; }
         public string Description { get; set; }
+        public int Phase { get; set; }
+        public int Lvl { get; set; }
         public BaseBuff() {}
-        public BaseBuff(DTO.ArknightData.BaseBuff baseBuff,DTO.ArknightData.CharBuff charBuff)
+        public BaseBuff(DTO.ArknightData.BaseBuff baseBuff,DTO.ArknightData.CharBuff charBuff,Cond cond)
         {
             OperatorId = ArknightUtil.GetId(charBuff.CharId);
             BuffCode = baseBuff.BuffId;
@@ -31,6 +34,9 @@ namespace ArknightApi.Data.Model
             SkillIcon = baseBuff.SkillIcon;
             BuffCategory = baseBuff.BuffCategory;
             Description = ArknightUtil.RemoveBrackets(baseBuff.Description);
+            Phase = cond.Phase;
+            Lvl = cond.Phase;
+
         }
     }
 }

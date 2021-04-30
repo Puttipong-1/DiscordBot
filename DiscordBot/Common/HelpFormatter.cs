@@ -24,23 +24,34 @@ namespace DiscordBot.Common
         public override BaseHelpFormatter WithCommand(DSharpPlus.CommandsNext.Command command)
         {
             MessageBuilder.Append("Command: ")
-                .AppendLine(Formatter.Bold(command.Name))
-                .AppendLine();
+              .AppendLine(Formatter.Bold(command.Name))
+              .AppendLine();
+
+
             MessageBuilder.Append("Description: ")
                 .AppendLine(command.Description)
                 .AppendLine();
+
             if (command is CommandGroup)
                 MessageBuilder.AppendLine("This group has a standalone command.").AppendLine();
-            MessageBuilder.Append("Aliase: ")
-                .AppendLine(string.Join(",", command.Aliases))
-                .AppendLine();
-            foreach(var overload in command.Overloads)
+            if (command.Aliases != null && command.Aliases.Any())
             {
-                if (overload.Arguments.Count == 0) continue;
-                MessageBuilder.Append($"[Overload {overload.Priority}] Arguments: ")
-                    .AppendLine(string.Join(",",overload.Arguments.Select(x=>$"{x.Name} ({x.Type.Name})")))
+                Console.WriteLine("Aaa" + command.Aliases.Count);
+                MessageBuilder.Append("Aliases: ")
+                    .AppendLine(string.Join(", ", command.Aliases))
                     .AppendLine();
             }
+            foreach (var overload in command.Overloads)
+            {
+                if (overload.Arguments.Count == 0)
+                {
+                    continue;
+                }
+
+                MessageBuilder.Append($"[Overload {overload.Priority}] Arguments: ")
+                .AppendLine(string.Join(", ", overload.Arguments.Select(xarg => $"{xarg.Name} ({xarg.Type.Name})")))
+                .AppendLine();
+            }   
             return this;
         }
 

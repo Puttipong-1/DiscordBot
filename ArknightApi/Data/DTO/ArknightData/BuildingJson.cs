@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace ArknightApi.Data.DTO.ArknightData
 {
+    public class Cond{
+        public int Phase { get; set; }
+        public int lvl { get; set; }
+    }
     public class BuffData
     {
         [JsonPropertyName("buffId")]
         public string BuffId { get; set; }
+        [JsonPropertyName("cond")]
+        public Cond Cond { get; set; }
     }
     public class BuffChar
     {

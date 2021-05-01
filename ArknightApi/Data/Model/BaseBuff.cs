@@ -16,6 +16,7 @@ namespace ArknightApi.Data.Model
         public string BuffCode { get; set; }
         [ForeignKey("Operator")]
         public int OperatorId { get; set; }
+        public int Order { get; set; }
         public Operator Operator { get; set; }
         public string BuffName { get; set; }
         public string BuffIcon { get; set; }
@@ -25,7 +26,7 @@ namespace ArknightApi.Data.Model
         public int Phase { get; set; }
         public int Lvl { get; set; }
         public BaseBuff() {}
-        public BaseBuff(DTO.ArknightData.BaseBuff baseBuff,DTO.ArknightData.CharBuff charBuff,Cond cond)
+        public BaseBuff(DTO.ArknightData.BaseBuff baseBuff,DTO.ArknightData.CharBuff charBuff,Cond cond,int i)
         {
             OperatorId = ArknightUtil.GetId(charBuff.CharId);
             BuffCode = baseBuff.BuffId;
@@ -35,8 +36,8 @@ namespace ArknightApi.Data.Model
             BuffCategory = baseBuff.BuffCategory;
             Description = ArknightUtil.RemoveBrackets(baseBuff.Description);
             Phase = cond.Phase;
-            Lvl = cond.Phase;
-
+            Lvl = cond.Lvl;
+            Order = i;
         }
     }
 }

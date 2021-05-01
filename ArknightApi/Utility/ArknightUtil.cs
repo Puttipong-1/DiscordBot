@@ -113,7 +113,7 @@ namespace ArknightApi.Utility
                 "shift" => 26,
                 "summon" => 27,
                 "robot" => 28,
-                _ => 0,
+                _ => 0
             };
         }
         public static string ReplaceSkillDesc(string desc,List<BB> first,List<BB> last)

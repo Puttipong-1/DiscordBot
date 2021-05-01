@@ -35,5 +35,9 @@ namespace DiscordBot.Model.Response.Operator
 
         [JsonPropertyName("roomType")]
         public string RoomType { get; set; }
+        [JsonPropertyName("phase")]
+        public int Phase { get; set; }
+        [JsonPropertyName("lvl")]
+        public int Lvl { get; set; }
     }
 }

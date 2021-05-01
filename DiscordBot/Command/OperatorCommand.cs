@@ -3,6 +3,7 @@ using DiscordBot.Service;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
+using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Enums;
 using DSharpPlus.Interactivity.Extensions;
 using System;
@@ -58,7 +59,8 @@ namespace DiscordBot.Command
                 {
                     await ctx.RespondAsync("Operator not found.");
                 }
-                List<DiscordEmbed> embeds = new List<DiscordEmbed>();
+                var itr = ctx.Client.GetInteractivity();
+                List<Page> pages = new List<Page>();
                 if(bb.Buffs!=null && bb.Buffs.Count>0)
                 {
                     foreach(Buff b in bb.Buffs)
@@ -66,9 +68,17 @@ namespace DiscordBot.Command
                         var e = new DiscordEmbedBuilder()
                             .WithTitle($"[{bb.Rarity}⭐] {bb.Name}")
                             .WithDescription($"{b.BuffName}")
-                            .WithThumbnail($"{b.BuffIcon}", 100, 100);
+                            .WithThumbnail($"https://gamepress.gg/arknights/sites/arknights/files/2020-09/Bskill_train_guard3.png", 100, 100);
+                        e.AddField("Room", b.RoomType);
+                        e.AddField("Unlock", $"Elite {b.Phase} , Level {b.Lvl}");
+                        e.AddField("Description", b.Description);
+                        pages.Add(new Page
+                        {
+                            Embed = e.Build()
+                        });   
                     }
                 }
+                await itr.SendPaginatedMessageAsync(ctx.Channel, ctx.User, pages, timeoutoverride: TimeSpan.FromMinutes(5));
             }catch(Exception e)
             {
                 await ctx.RespondAsync($"An error occurred:{e.Message}");

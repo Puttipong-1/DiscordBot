@@ -183,7 +183,7 @@ namespace ArknightApi.Service
             {
                 Operator op = await applicationDbContext.Operators
                     .Where(o => o.Name.ToLower().Equals(name.ToLower()))
-                    .Include(o => o.BaseBuffs)
+                    .Include(o => o.BaseBuffs.OrderBy(b=>b.Order))
                     .SingleAsync();
                 return new BuffResponse(op);
             }

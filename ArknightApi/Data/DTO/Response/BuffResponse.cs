@@ -34,6 +34,8 @@ namespace ArknightApi.Data.DTO.Response
         public string BuffCategory { get; set; }
         public string Description { get; set; }
         public string RoomType { get; set; }
+        public int Phase { get; set; }
+        public int Lvl { get; set; }
         public Buff() { }
         public Buff(BaseBuff b)
         {
@@ -43,6 +45,8 @@ namespace ArknightApi.Data.DTO.Response
             BuffCategory = b.BuffCategory;
             Description = b.Description;
             RoomType = ArknightUtil.GetRoom(b.BuffIcon);
+            Phase = b.Phase;
+            Lvl = b.Lvl;
         }
     }
 

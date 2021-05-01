@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 namespace ArknightApi.Data.DTO.ArknightData
 {
     public class Cond{
+        [JsonPropertyName("phase")]
         public int Phase { get; set; }
-        public int lvl { get; set; }
+        [JsonPropertyName("level")]
+        public int Lvl { get; set; }
     }
     public class BuffData
     {

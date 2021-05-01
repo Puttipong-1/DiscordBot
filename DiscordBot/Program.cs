@@ -18,6 +18,7 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using DiscordBot.Command;
 using Microsoft.Extensions.Hosting;
+using System.Reflection;
 
 namespace DiscordBot
 {
@@ -33,10 +34,15 @@ namespace DiscordBot
         }
         public async Task RunBotAsync()
         {
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", false,true)
+                .Build();
+            Discord discord = new Discord();
+            config.GetSection("Discord").Bind(discord);
             var services = ConfigureService();
             var cfg = new DiscordConfiguration
             {
-                Token = "ODI0NTA4NTgxMjEwMzU3Nzkw.YFwZdA.6i_A0cM-Xpyo1v4lGAHqUUFsrJI",
+                Token = discord.DiscordToken,
                 TokenType = TokenType.Bot,
                 AutoReconnect = true,
                 MinimumLogLevel = LogLevel.Debug
@@ -45,6 +51,7 @@ namespace DiscordBot
             Client.Ready += ClientReady;
             Client.GuildAvailable += ClientGuildAvailable;
             Client.ClientErrored += ClientErrored;
+            Client.Logger.LogInformation(BotEventId,$" test   test  {discord.DiscordToken}    {discord.Prefix}    ");
             Client.UseInteractivity(new InteractivityConfiguration
             {
                 PaginationBehaviour = PaginationBehaviour.Ignore,
@@ -52,7 +59,7 @@ namespace DiscordBot
             });
                 var ccfg = new CommandsNextConfiguration
                 {
-                    StringPrefixes = new[] { "a!" },
+                    StringPrefixes = new[] { discord.Prefix },
                     EnableDms = true,
                     EnableMentionPrefix = true,
                     Services = services

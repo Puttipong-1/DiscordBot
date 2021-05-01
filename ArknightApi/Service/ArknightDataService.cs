@@ -36,10 +36,12 @@ namespace ArknightApi.Service
                     {
                         if (buffChar.BuffData != null)
                         {
+                            int i = 1;
                             foreach (BuffData buffData in buffChar.BuffData)
                             {
                                 Data.DTO.ArknightData.BaseBuff bb = buffs[buffData.BuffId];
-                                baseBuffs.Add(new Data.Model.BaseBuff(bb, charBuff,buffData.Cond));
+                                baseBuffs.Add(new Data.Model.BaseBuff(bb, charBuff,buffData.Cond,i));
+                                i++;
                             }
                         }
                     }
@@ -196,7 +198,12 @@ namespace ArknightApi.Service
                 List<Stage> stages = new List<Stage>();
                 foreach(var item in dic)
                 {
-                    if (!item.Key.Contains("#f#") && !item.Key.Contains("guide") && !item.Value.Code.Contains("Annihilation"))
+                    if (!item.Key.Contains("#f#") && 
+                        !item.Key.Contains("guide") && 
+                        !item.Value.Code.Contains("Annihilation")&&
+                        !item.Value.Code.Contains("Ursus")&&
+                        !item.Value.Code.Contains("Kazimierz")&&
+                        !item.Value.Code.Contains("Yen"))
                     {
                         stages.Add(new Stage(item.Key,item.Value));
                     }
@@ -286,7 +293,7 @@ namespace ArknightApi.Service
                         foreach(string e in r.TagList)
                         {
                             int tagId = ArknightUtil.GetTagId(e);
-                            ot.Add(new OperatorTag(op.OperatorId,tagId));
+                            if(tagId!=0) ot.Add(new OperatorTag(op.OperatorId,tagId));
                         }
                     }
                 }

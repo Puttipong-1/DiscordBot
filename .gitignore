@@ -338,3 +338,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+#Exclude
+/ArknightApi/appsettings.json
+/DiscordBot/appsettings.json

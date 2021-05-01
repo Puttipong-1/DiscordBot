@@ -742,6 +742,62 @@
         "Melee",
         "Top Operator"
       ]
+    },
+    {
+      "name": "Schwarz",
+      "tagList": [
+        "DPS",
+        "Sniper",
+        "Ranged",
+        "Top Operator"
+      ]
+    },
+    {
+      "name": "Hellagur",
+      "tagList": [
+        "DPS",
+        "Survival",
+        "Guard",
+        "Melee",
+        "Top Operator"
+      ]
+    },
+    {
+      "name": "Glaucus",
+      "tagList": [
+        "Senior Operator",
+        "Ranged",
+        "Supporter",
+        "Slow",
+        "Crowd-Control"
+      ]
+    },
+    {
+      "name": "Astesia",
+      "tagList": [
+        "Senior Operator",
+        "Melee",
+        "Guard",
+        "DPS",
+        "Defense"
+      ]
+    },
+    {
+      "name": "Myrtle",
+      "tagList": [
+        "Vanguard",
+        "Melee",
+        "DP-Recovery",
+        "Healing"
+      ]
+    },
+    {
+      "name": "Sussurro",
+      "tagList": [
+        "Ranged",
+        "Medic",
+        "Healing"
+      ]
     }
   ]
 }

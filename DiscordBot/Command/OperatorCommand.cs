@@ -65,7 +65,7 @@ namespace DiscordBot.Command
                     await ctx.RespondAsync("Operator not found.");
                 }
                 var itr = ctx.Client.GetInteractivity();
-                List<Page> pages = embedService.CreateBaseBuffPage(bb);
+                List<Page> pages = embedService.CreateBaseBuffPages(bb);
                 await itr.SendPaginatedMessageAsync(ctx.Channel, ctx.User, pages, timeoutoverride: TimeSpan.FromMinutes(5));
             }catch(Exception e)
             { 
@@ -80,12 +80,9 @@ namespace DiscordBot.Command
             {
                 OpDetail op = await operatorService.GetOperatorDetail(name);
                 if(op is null) await ctx.RespondAsync("Operator not found.");
-                /*var itr = ctx.Client.GetInteractivity();
-                List<Page> pages = new List<Page>();
-                await itr.SendPaginatedMessageAsync(ctx.Channel, ctx.User, pages, timeoutoverride: TimeSpan.FromMinutes(5));*/
-                var org = DiscordEmoji.FromName(ctx.Client, ":orange_square:");
-                await ctx.RespondAsync($"{org}{org}\n    {org}");
-
+                var itr = ctx.Client.GetInteractivity();
+                List<Page> pages = embedService.CreateOpDetailPages(op);
+                await itr.SendPaginatedMessageAsync(ctx.Channel, ctx.User, pages, timeoutoverride: TimeSpan.FromMinutes(5));
             }
             catch(Exception e)
             {

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DiscordBot.Common
+namespace DiscordBot.Helper
 {
     class HelpFormatter:BaseHelpFormatter
     {

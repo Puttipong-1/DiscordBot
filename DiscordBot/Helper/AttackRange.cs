@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DiscordBot.Command
+namespace DiscordBot.Helper
 {
     class AttackRange
     {

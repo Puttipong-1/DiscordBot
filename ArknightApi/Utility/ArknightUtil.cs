@@ -35,7 +35,7 @@ namespace ArknightApi.Utility
         {
             return t switch
             {
-                -1 => "No Team",
+                -1 => "Rhode Island",
                 1 => "Op Team A4",
                 2 => "Reserve Op Team A1",
                 3 => "Reserve Op Team A4",

@@ -19,6 +19,7 @@ using System.IO;
 using DiscordBot.Command;
 using Microsoft.Extensions.Hosting;
 using System.Reflection;
+using DiscordBot.Service.Embed;
 
 namespace DiscordBot
 {
@@ -51,7 +52,6 @@ namespace DiscordBot
             Client.Ready += ClientReady;
             Client.GuildAvailable += ClientGuildAvailable;
             Client.ClientErrored += ClientErrored;
-            Client.Logger.LogInformation(BotEventId,$" test   test  {discord.DiscordToken}    {discord.Prefix}    ");
             Client.UseInteractivity(new InteractivityConfiguration
             {
                 PaginationBehaviour = PaginationBehaviour.Ignore,
@@ -116,6 +116,7 @@ namespace DiscordBot
             .AddSingleton<OperatorService>()
             .AddSingleton<PictureService>()
             .AddSingleton<RecruitService>()
+            .AddSingleton<OperatorEmbedService>()
             .BuildServiceProvider();
         }
     }

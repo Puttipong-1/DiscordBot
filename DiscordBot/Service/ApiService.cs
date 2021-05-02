@@ -40,6 +40,7 @@ namespace DiscordBot.Service
             }
             catch(Exception e)
             {
+                Console.WriteLine("Api    " + e.Message);
                 throw e;
             }
         }

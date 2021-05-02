@@ -20,6 +20,7 @@ namespace DiscordBot.Service
                 return await api.PostAsync<BaseBuff>("operator/buff/"+name,null,null);
             }catch(Exception e)
             {
+                Console.WriteLine("op service " + e.Message);
                 throw e;
             }
         }
@@ -27,7 +28,7 @@ namespace DiscordBot.Service
         {
             try
             {
-                return await api.PostAsync<OpDetail>("operator/profile/" + name, null, null);
+                return await api.PostAsync<OpDetail>("operator/name/" + name, null, null);
             }catch(Exception e)
             {
                 throw e;

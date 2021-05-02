@@ -30,11 +30,9 @@ namespace ArknightApi.Controllers
             try
             {
                 string token = Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
-                Console.WriteLine($"{token}    {secretSetting.SecretKey}");
                 if (string.IsNullOrEmpty(token)) return new UnauthorizedResult();
                 if (!token.Equals(secretSetting.SecretKey)) return new UnauthorizedResult();
                 string res = await adminService.AddAdmin(admin);
-                Console.WriteLine("res:"+res);
                 return Ok(res);
             }
             catch(Exception e)

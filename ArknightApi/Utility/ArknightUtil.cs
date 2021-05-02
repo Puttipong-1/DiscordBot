@@ -157,7 +157,6 @@ namespace ArknightApi.Utility
             string pattern = "(?<=\\[.*\\]).*";
             Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
             Match match = regex.Match(text);
-            Console.WriteLine("getInfo" + "  " + match.Value);
             if (match.Success) return match.Value.Trim();
             else return "";
         }

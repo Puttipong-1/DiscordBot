@@ -66,9 +66,7 @@ namespace ArknightApi.Service
         public string GenerateJwtToken(Admin admin)
         {
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-            Console.WriteLine("JWT: " + secretSetting.JWTSecret);
             byte[] key = Encoding.ASCII.GetBytes(secretSetting.JWTSecret);
-            Console.WriteLine("Key: " + Encoding.Default.GetString(key));
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] { new Claim("adminId", admin.AdminId.ToString()) }),

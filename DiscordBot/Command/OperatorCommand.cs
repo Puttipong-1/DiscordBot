@@ -89,5 +89,57 @@ namespace DiscordBot.Command
                 await ctx.RespondAsync($"An error occurred:{e.Message}");
             }
         }
+        [Command("quote"), Description("Get Operator's quote by name")]
+        public async Task GetOperatorQuote(CommandContext ctx,
+             [Description("Operator's name")] string name)
+        {
+            try
+            {
+                OpWord op = await operatorService.GetOperatorQuote(name);
+                if (op is null) await ctx.RespondAsync("Operator not found.");
+                Console.WriteLine($"quote {op.Name}  {op.Rarity}");
+                var itr = ctx.Client.GetInteractivity();
+                List<Page> pages = embedService.CreateOpWordPages(op);
+                await itr.SendPaginatedMessageAsync(ctx.Channel, ctx.User, pages, timeoutoverride: TimeSpan.FromMinutes(5));
+            }
+            catch (Exception e)
+            {
+                await ctx.RespondAsync($"An error occurred:{e.Message}");
+            }
+        }
+        [Command("skill"), Description("Get Operator's skill by name")]
+        public async Task GetOpeatorSkill(CommandContext ctx,[Description("Operator's name")] string name)
+        {
+            try
+            {
+                OpSkill op = await operatorService.GetOperatorSkill(name);
+                if (op is null) await ctx.RespondAsync("Operator not found.");
+                Console.WriteLine($"quote {op.Name}  {op.Rarity}");
+                var itr = ctx.Client.GetInteractivity();
+                List<Page> pages = embedService.CreateOpSkillPages(op);
+                await itr.SendPaginatedMessageAsync(ctx.Channel, ctx.User, pages, timeoutoverride: TimeSpan.FromMinutes(5));
+            }
+            catch (Exception e)
+            {
+                await ctx.RespondAsync($"An error occurred:{e.Message}");
+            }
+        }
+        [Command("files"), Description("Get Operator's lore by name")]
+        public async Task GetOpeatorFiles(CommandContext ctx, [Description("Operator's name")] string name)
+        {
+            try
+            {
+                OpProfile op = await operatorService.GetOperatorProfile(name);
+                if (op is null) await ctx.RespondAsync("Operator not found.");
+                Console.WriteLine($"quote {op.Name}  {op.Rarity}");
+                var itr = ctx.Client.GetInteractivity();
+                List<Page> pages = embedService.CreateOpProfilePages(op);
+                await itr.SendPaginatedMessageAsync(ctx.Channel, ctx.User, pages, timeoutoverride: TimeSpan.FromMinutes(5));
+            }
+            catch (Exception e)
+            {
+                await ctx.RespondAsync($"An error occurred:{e.Message}");
+            }
+        }
     }
 }

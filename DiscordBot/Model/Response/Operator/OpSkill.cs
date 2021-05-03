@@ -57,8 +57,11 @@ namespace DiscordBot.Model.Response.Operator
         [JsonPropertyName("skillDescription")]
         public string SkillDescription { get; set; }
 
+        [JsonPropertyName("skillType")]
+        public string SkillType { get; set; }
+
         [JsonPropertyName("spType")]
-        public int SpType { get; set; }
+        public string SpType { get; set; }
 
         [JsonPropertyName("chargeTime")]
         public int ChargeTime { get; set; }

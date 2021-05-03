@@ -21,12 +21,12 @@ namespace ArknightApi.Service
         {
             try
             {
-                Operator op= await applicationDbContext.Operators
+                Operator op = await applicationDbContext.Operators
                 .Where(o => o.Name.ToLower().Contains(name.ToLower()))
-                .Include(o => o.Elites.OrderBy(e=>e.MaxLevel))
-                .ThenInclude(e=>e.EvolveCosts)
-                .ThenInclude(e=>e.Item)
-                .Include(o=>o.Talents)
+                .Include(o => o.Elites.OrderBy(e => e.MaxLevel))
+                .ThenInclude(e => e.EvolveCosts)
+                .ThenInclude(e => e.Item)
+                .Include(o => o.Talents.OrderBy(o => o.Phase).ThenBy(o => o.RequirePotential))
                 .Include(o=>o.Potentials.OrderBy(p=>p.Level))
                 .SingleAsync();
                 return new OperatorResponse(op);

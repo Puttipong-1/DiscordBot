@@ -37,6 +37,9 @@ namespace ArknightApi.Data.DTO.Response
         public string ObtainApproach { get; set; }
         public string Usage { get; set; }
         public string Desc { get; set; }
+        public string Content { get; set; }
+        public string DisplayName { get; set; }
+        public string Dialog { get; set; }
         public Skins(Skin s)
         {
             IllustId = s.IllustId;
@@ -48,6 +51,9 @@ namespace ArknightApi.Data.DTO.Response
             ObtainApproach = s.ObtainApproach;
             Usage = s.Usage;
             Desc = s.Desc;
+            Content = s.Content;
+            DisplayName = s.DisplayName;
+            Dialog = s.Dialog;
         }
     }
 

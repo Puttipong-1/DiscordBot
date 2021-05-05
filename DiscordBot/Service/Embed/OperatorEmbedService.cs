@@ -51,14 +51,14 @@ namespace DiscordBot.Service.Embed
                 $"{Formatter.Bold("Class:")} {TextUtil.ToTitleCase(op.Profession)}", true)
                 .AddField("Range", AttackRange.GetAttackRange(op.Elites[0].RangeId), true)
                 .AddField("Effect", op.Description)
-                .AddField($"Level 1 → {op.Elites[0].MaxLevel}", $"Health:{op.Elites[0].Hp} → {op.Elites[0].MaxHp}\n" +
-                $"{Formatter.Bold("Attack:")}{op.Elites[0].Atk} → {op.Elites[0].MaxAtk}\n" +
-                $"{Formatter.Bold("Defense:")}{op.Elites[0].Def} → {op.Elites[0].MaxDef}\n" +
-                $"{Formatter.Bold("Resistance:")}{op.Elites[0].MagicResistance}\n" +
-                $"{Formatter.Bold("Cost:")}{op.Elites[0].Cost}\n" +
-                $"{Formatter.Bold("AttackTime:")}100\n" +
-                $"{Formatter.Bold("Block:")}{op.Elites[0].BlockCnt}\n" +
-                $"{Formatter.Bold("RespawnTime:")}{op.Elites[0].RespawnTime}\n", true);
+                .AddField($"Level 1 → {op.Elites[0].MaxLevel}", $"{Formatter.Bold("Health:")} {op.Elites[0].Hp} → {op.Elites[0].MaxHp}\n" +
+                $"{Formatter.Bold("Attack:")} {op.Elites[0].Atk} → {op.Elites[0].MaxAtk}\n" +
+                $"{Formatter.Bold("Defense:")} {op.Elites[0].Def} → {op.Elites[0].MaxDef}\n" +
+                $"{Formatter.Bold("Resistance:")} {op.Elites[0].MagicResistance}\n" +
+                $"{Formatter.Bold("Cost:")} {op.Elites[0].Cost}\n" +
+                $"{Formatter.Bold("AttackTime:")} 100\n" +
+                $"{Formatter.Bold("Block:")} {op.Elites[0].BlockCnt}\n" +
+                $"{Formatter.Bold("RespawnTime:")} {op.Elites[0].RespawnTime}\n", true);
            if (op.Talents != null && op.Talents.Count > 0)
             {
                 string talent = string.Empty;
@@ -89,14 +89,14 @@ namespace DiscordBot.Service.Embed
             DiscordEmbedBuilder embed = new DiscordEmbedBuilder()
                 .WithTitle($"[{op.Rarity}★] {op.Name}")
                 .AddField($"Level 1 → {e.MaxLevel}",
-                $"{Formatter.Bold("Health:")}{e.Hp} → {e.MaxHp}\n" +
-                $"{Formatter.Bold("Attack:")}{e.Atk} → {e.MaxAtk}\n" +
-                $"{Formatter.Bold("Defense:")}{e.Def} → {e.MaxDef}\n" +
-                $"{Formatter.Bold("Resistance:")}{e.MagicResistance}", true)
+                $"{Formatter.Bold("Health:")} {e.Hp} → {e.MaxHp}\n" +
+                $"{Formatter.Bold("Attack:")} {e.Atk} → {e.MaxAtk}\n" +
+                $"{Formatter.Bold("Defense:")} {e.Def} → {e.MaxDef}\n" +
+                $"{Formatter.Bold("Resistance:")} {e.MagicResistance}", true)
                 .AddField("\u200b", $"{Formatter.Bold("Cost:")}{e.Cost}\n" +
-                $"{Formatter.Bold("Block:")}{e.BlockCnt}\n" +
-                $"{Formatter.Bold("Attack Time:")}100\n" +
-                $"{Formatter.Bold("Respawn Time:")}{e.RespawnTime}\n", true)
+                $"{Formatter.Bold("Block:")} {e.BlockCnt}\n" +
+                $"{Formatter.Bold("Attack Time:")} 100\n" +
+                $"{Formatter.Bold("Respawn Time:")} {e.RespawnTime}\n", true)
                 .AddField("Range", AttackRange.GetAttackRange(op.Elites[index].RangeId), true);
             if (op.Talents != null && op.Talents.Count > 0)
             {
@@ -247,6 +247,34 @@ namespace DiscordBot.Service.Embed
                         }
                     }
                     i++;
+                    pages.Add(new Page { Embed = embed.Build() });
+                }
+            }
+            return pages;
+        }
+        public List<Page> CreateOpSkinPages(OpSkin op)
+        {
+            List<Page> pages = new List<Page>();
+            if (op.Skins != null && op.Skins.Any())
+            {
+                foreach (Skin s in op.Skins)
+                {
+                    string title = $"[{op.Rarity}★] {op.Name}";
+                    string f1 = $"{Formatter.Bold("Model:")} {op.Name}\n" +
+                        $"{Formatter.Bold("Artist:")} {s.Artist}";
+                    string f2 = $"{Formatter.Bold("Series:")} {s.SkinGroupName}";
+                    string desc = "\u200b";
+                    if (!string.IsNullOrWhiteSpace(s.DisplayName)) title += $" - {s.DisplayName}";
+                    if (!string.IsNullOrWhiteSpace(s.ObtainApproach)) f2 +=$"\n{Formatter.Bold("Obtain Approach:")} {s.ObtainApproach}";
+                    if (!string.IsNullOrWhiteSpace(s.Content)) desc = s.Content;
+                    DiscordEmbedBuilder embed = new DiscordEmbedBuilder()
+                        .WithTitle(title)
+                        .WithDescription(desc)
+                        .AddField("Detail", f1, true)
+                        .AddField("\u200b", f2, true);
+                    if (!string.IsNullOrWhiteSpace(s.Usage)) embed.AddField("Usage", s.Usage);
+                    if (!string.IsNullOrWhiteSpace(s.Desc)) embed.AddField("Quote", s.Desc);
+                    if (!string.IsNullOrWhiteSpace(s.Dialog)) embed.AddField("Information", s.Dialog);
                     pages.Add(new Page { Embed = embed.Build() });
                 }
             }

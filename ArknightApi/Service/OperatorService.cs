@@ -192,36 +192,5 @@ namespace ArknightApi.Service
                 throw e;
             }
         }
-        public async Task<Dictionary<string,List<string>>> GetOperatorByTag(List<string> tags)
-        {
-            try
-            {
-                List<List<string>> recruit = new List<List<string>>();
-                List<string> tagName = new List<string>();
-                foreach(string s in tags)
-                {
-                    Tag res = await applicationDbContext.Tags
-                        .Where(t => t.TagName.ToLower().Contains(s.ToLower()))
-                        .Include(t => t.OperatorTags)
-                        .ThenInclude(o => o.Operator)
-                        .SingleOrDefaultAsync();
-                    List<string> name = new List<string>();
-                    if (res != null&&res.OperatorTags!=null)
-                    {
-                        foreach (OperatorTag t in res.OperatorTags)
-                        {
-                            name.Add(t.Operator.Name);
-                        }
-                        recruit.Add(name);
-                        tagName.Add(res.TagName);
-                    }
-                }
-                return ArknightUtil.CreateRecruit(recruit,tagName);
-            }
-            catch(Exception e)
-            {
-                throw e;
-            }
-        }
     }
 }

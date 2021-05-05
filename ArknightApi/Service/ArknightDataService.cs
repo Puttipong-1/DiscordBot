@@ -180,6 +180,7 @@ namespace ArknightApi.Service
                 {
                     if (!item.Key.Contains("token") && !item.Key.Contains("trap"))
                     {
+                        Console.WriteLine(item.Value.CharId);
                         skins.Add(new Skin(item.Value));
                     }
                 }

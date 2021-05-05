@@ -12,6 +12,7 @@ namespace ArknightApi.Data.DTO.Response
         public int Id { get; set; }
         public int Rarity { get; set; }
         public string Name { get; set; }
+        public string OperatorCode { get; set; }
         public List<string> Tags { get; set; }
         public RecruitResponse() { }
         public RecruitResponse(Operator op)
@@ -19,6 +20,7 @@ namespace ArknightApi.Data.DTO.Response
             Id = op.OperatorId;
             Rarity = op.Rarity;
             Name = op.Name;
+            OperatorCode = op.OperatorCode;
             Tags = new List<string>();
             if (op.OperatorTags != null)
             {

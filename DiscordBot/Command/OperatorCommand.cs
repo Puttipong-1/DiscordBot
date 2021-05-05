@@ -53,7 +53,7 @@ namespace DiscordBot.Command
                 await ctx.RespondAsync($"An error occurred:{e.Message}");
             }
         }
-        [Command("buff"),Description("Display operator's basebuff.")]
+        [Command("buffs"),Description("Display operator's basebuff.")]
         public async Task GetOperatorBaseBuff(CommandContext ctx,
             [Description("Operator's name")]string name)
         {
@@ -72,7 +72,7 @@ namespace DiscordBot.Command
                 await ctx.RespondAsync($"An error occurred:{e.Message}");
             }
         }
-        [Command("name"),Description("Get Operator's detail by name")]
+        [GroupCommand,Description("Get Operator's detail by name")]
         public async Task GetOperatorByName(CommandContext ctx,
             [Description("Operator's name")]string name)
         {
@@ -97,7 +97,6 @@ namespace DiscordBot.Command
             {
                 OpWord op = await operatorService.GetOperatorQuote(name);
                 if (op is null) await ctx.RespondAsync("Operator not found.");
-                Console.WriteLine($"quote {op.Name}  {op.Rarity}");
                 var itr = ctx.Client.GetInteractivity();
                 List<Page> pages = embedService.CreateOpWordPages(op);
                 await itr.SendPaginatedMessageAsync(ctx.Channel, ctx.User, pages, timeoutoverride: TimeSpan.FromMinutes(5));
@@ -107,14 +106,13 @@ namespace DiscordBot.Command
                 await ctx.RespondAsync($"An error occurred:{e.Message}");
             }
         }
-        [Command("skill"), Description("Get Operator's skill by name")]
+        [Command("skills"), Description("Get Operator's skill by name")]
         public async Task GetOpeatorSkill(CommandContext ctx,[Description("Operator's name")] string name)
         {
             try
             {
                 OpSkill op = await operatorService.GetOperatorSkill(name);
                 if (op is null) await ctx.RespondAsync("Operator not found.");
-                Console.WriteLine($"quote {op.Name}  {op.Rarity}");
                 var itr = ctx.Client.GetInteractivity();
                 List<Page> pages = embedService.CreateOpSkillPages(op);
                 await itr.SendPaginatedMessageAsync(ctx.Channel, ctx.User, pages, timeoutoverride: TimeSpan.FromMinutes(5));
@@ -131,7 +129,6 @@ namespace DiscordBot.Command
             {
                 OpProfile op = await operatorService.GetOperatorProfile(name);
                 if (op is null) await ctx.RespondAsync("Operator not found.");
-                Console.WriteLine($"quote {op.Name}  {op.Rarity}");
                 var itr = ctx.Client.GetInteractivity();
                 List<Page> pages = embedService.CreateOpProfilePages(op);
                 await itr.SendPaginatedMessageAsync(ctx.Channel, ctx.User, pages, timeoutoverride: TimeSpan.FromMinutes(5));
@@ -141,5 +138,23 @@ namespace DiscordBot.Command
                 await ctx.RespondAsync($"An error occurred:{e.Message}");
             }
         }
+        [Command("skins"),Description("Get operator's skin by name")]
+        public async Task GetOperatorSkins(CommandContext ctx,
+            [Description("Operator's name")] string name)
+        {
+            try
+            {
+                OpSkin op = await operatorService.GetOperatorSkin(name);
+                if (op is null) await ctx.RespondAsync("Operator not found.");
+                var itr = ctx.Client.GetInteractivity();
+                List<Page> pages = embedService.CreateOpSkinPages(op);
+                await itr.SendPaginatedMessageAsync(ctx.Channel, ctx.User, pages, timeoutoverride: TimeSpan.FromMinutes(5));
+            }
+            catch (Exception e)
+            {
+                await ctx.RespondAsync($"An error occurred:{e.Message}");
+            }
+        }
+
     }
 }

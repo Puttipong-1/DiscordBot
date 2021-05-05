@@ -17,6 +17,7 @@ namespace ArknightApi.Utility
         public static string RemoveBrackets(string text)
         {
             if (string.IsNullOrEmpty(text)) return "";
+            var test=Regex.Replace(text, @"(?=\>)(.*)(?= \<(.*)\>)","");
             return Regex.Replace(text, @"\<(@|[A-z]|\.|\/)*\>","");
         }
         public static int CalculateRarity(int rarity)
@@ -218,6 +219,15 @@ namespace ArknightApi.Utility
                 8=>"Passive",
                 _ =>""
             };
+        }
+        public static string RemoveSkinTag(string text)
+        {
+            if (string.IsNullOrEmpty(text)) return text;
+            string pattern = "(?=\\>)(.*)(?=\\<(.*)\\>)";
+            Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
+            Match match = regex.Match(text);
+            if (match.Success) return match.Value.Substring(1).Trim();
+            else return text;
         }
     }
 }

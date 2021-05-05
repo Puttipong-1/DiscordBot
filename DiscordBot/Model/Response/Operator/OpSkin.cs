@@ -37,12 +37,21 @@ namespace DiscordBot.Model.Response.Operator
         public string SkinGroupName { get; set; }
 
         [JsonPropertyName("obtainApproach")]
-        public object ObtainApproach { get; set; }
+        public string ObtainApproach { get; set; }
 
         [JsonPropertyName("usage")]
-        public object Usage { get; set; }
+        public string Usage { get; set; }
 
         [JsonPropertyName("desc")]
-        public object Desc { get; set; }
+        public string Desc { get; set; }
+
+        [JsonPropertyName("content")]
+        public string Content { get; set; }
+
+        [JsonPropertyName("displayName")]
+        public string DisplayName { get; set; }
+
+        [JsonPropertyName("dialog")]
+        public string Dialog { get; set; }
     }
 }

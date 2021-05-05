@@ -16,6 +16,7 @@ namespace ArknightApi.Data.Model
         [ForeignKey("Operator")]
         public int OperatorId { get; set; }
         public Operator Operator { get; set; }
+        public string DisplayName { get; set; }
         public string IllustId { get; set; }
         public string AvatarId { get; set; }
         public string PortraitId { get; set; }
@@ -24,6 +25,7 @@ namespace ArknightApi.Data.Model
         public string Content { get; set; }
         public string Usage { get; set; }
         public string Desc { get; set; }
+        public string Dialog { get; set; }
         public string SkinGroupName { get; set; }
         public string ObtainApproach { get; set; }
         public Skin() { }
@@ -36,10 +38,13 @@ namespace ArknightApi.Data.Model
             PortraitId = sk.PortraitId;
             Artist = sk.DisplaySkin.DrawerName;
             SkinGroupName = sk.DisplaySkin.SkinGroupName;
-            Content = sk.DisplaySkin.Content;
+            Content = ArknightUtil.RemoveSkinTag(sk.DisplaySkin.Content);
             Usage = sk.DisplaySkin.Usage;
             Desc = sk.DisplaySkin.Description;
+            Dialog = sk.DisplaySkin.Dialog;
+            DisplayName = sk.DisplaySkin.SkinName;
             ObtainApproach = sk.DisplaySkin.ObtainApproach;
+            Console.WriteLine("content: " + Content);
         }
     }
 }

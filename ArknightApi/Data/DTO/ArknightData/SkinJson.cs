@@ -18,7 +18,7 @@ namespace ArknightApi.Data.DTO.ArknightData
     public class DisplaySkin
     {
         [JsonPropertyName("skinName")]
-        public object SkinName { get; set; }
+        public string SkinName { get; set; }
 
         [JsonPropertyName("colorList")]
         public List<string> ColorList { get; set; }
@@ -45,7 +45,7 @@ namespace ArknightApi.Data.DTO.ArknightData
         public string Content { get; set; }
 
         [JsonPropertyName("dialog")]
-        public object Dialog { get; set; }
+        public string Dialog { get; set; }
 
         [JsonPropertyName("usage")]
         public string Usage { get; set; }

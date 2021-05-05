@@ -67,7 +67,10 @@ namespace DiscordBot
             Commands = Client.UseCommandsNext(ccfg);
             Commands.CommandExecuted += CommandExecute;
             Commands.CommandErrored += CommandErrored;
+            Commands.RegisterCommands<ItemCommand>();
             Commands.RegisterCommands<OperatorCommand>();
+            Commands.RegisterCommands<RecruitCommand>();
+            Commands.RegisterCommands<TipCommand>();
             Commands.SetHelpFormatter<HelpFormatter>();
             await Client.ConnectAsync();
             await Task.Delay(-1);
@@ -116,7 +119,11 @@ namespace DiscordBot
             .AddSingleton<OperatorService>()
             .AddSingleton<PictureService>()
             .AddSingleton<RecruitService>()
+            .AddSingleton<TipService>()
+            .AddSingleton<ItemEmbedService>()
             .AddSingleton<OperatorEmbedService>()
+            .AddSingleton<RecruitEmbedService>()
+            .AddSingleton<TipEmbedService>()
             .BuildServiceProvider();
         }
     }

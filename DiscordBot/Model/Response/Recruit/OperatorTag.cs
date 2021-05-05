@@ -13,6 +13,8 @@ namespace DiscordBot.Model.Response.Recruit
         public int Rarity { get; set; }
         [JsonPropertyName("name")]
         public string Name { get; set; }
+        [JsonPropertyName("operatorCode")]
+        public string OperatorCode { get; set; }
         [JsonPropertyName("tags")]
         public List<string> Tags { get; set; }
     }

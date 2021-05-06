@@ -35,6 +35,7 @@ namespace DiscordBot.Command
                 if(operators is null | operators.Count == 0)
                 {
                    await ctx.RespondAsync("No operators data!");
+                   return;
                 }
                 var interactivity = ctx.Client.GetInteractivity();
                 string page = string.Empty;
@@ -63,6 +64,7 @@ namespace DiscordBot.Command
                 if(bb is null)
                 {
                     await ctx.RespondAsync("Operator not found.");
+                    return;
                 }
                 var itr = ctx.Client.GetInteractivity();
                 List<Page> pages = embedService.CreateBaseBuffPages(bb);
@@ -79,7 +81,10 @@ namespace DiscordBot.Command
             try
             {
                 OpDetail op = await operatorService.GetOperatorDetail(name);
-                if(op is null) await ctx.RespondAsync("Operator not found.");
+                if (op is null) { 
+                    await ctx.RespondAsync("Operator not found.");
+                    return;
+                }
                 var itr = ctx.Client.GetInteractivity();
                 List<Page> pages = embedService.CreateOpDetailPages(op);
                 await itr.SendPaginatedMessageAsync(ctx.Channel, ctx.User, pages, timeoutoverride: TimeSpan.FromMinutes(5));
@@ -96,7 +101,11 @@ namespace DiscordBot.Command
             try
             {
                 OpWord op = await operatorService.GetOperatorQuote(name);
-                if (op is null) await ctx.RespondAsync("Operator not found.");
+                if (op is null)
+                {
+                    await ctx.RespondAsync("Operator not found.");
+                    return;
+                }
                 var itr = ctx.Client.GetInteractivity();
                 List<Page> pages = embedService.CreateOpWordPages(op);
                 await itr.SendPaginatedMessageAsync(ctx.Channel, ctx.User, pages, timeoutoverride: TimeSpan.FromMinutes(5));
@@ -112,7 +121,11 @@ namespace DiscordBot.Command
             try
             {
                 OpSkill op = await operatorService.GetOperatorSkill(name);
-                if (op is null) await ctx.RespondAsync("Operator not found.");
+                if (op is null)
+                {
+                    await ctx.RespondAsync("Operator not found.");
+                    return;
+                }
                 var itr = ctx.Client.GetInteractivity();
                 List<Page> pages = embedService.CreateOpSkillPages(op);
                 await itr.SendPaginatedMessageAsync(ctx.Channel, ctx.User, pages, timeoutoverride: TimeSpan.FromMinutes(5));
@@ -128,7 +141,10 @@ namespace DiscordBot.Command
             try
             {
                 OpProfile op = await operatorService.GetOperatorProfile(name);
-                if (op is null) await ctx.RespondAsync("Operator not found.");
+                if (op is null)
+                {
+                    await ctx.RespondAsync("Operator not found.");
+                }
                 var itr = ctx.Client.GetInteractivity();
                 List<Page> pages = embedService.CreateOpProfilePages(op);
                 await itr.SendPaginatedMessageAsync(ctx.Channel, ctx.User, pages, timeoutoverride: TimeSpan.FromMinutes(5));
@@ -145,7 +161,11 @@ namespace DiscordBot.Command
             try
             {
                 OpSkin op = await operatorService.GetOperatorSkin(name);
-                if (op is null) await ctx.RespondAsync("Operator not found.");
+                if (op is null)
+                {
+                    await ctx.RespondAsync("Operator not found.");
+                    return;
+                }
                 var itr = ctx.Client.GetInteractivity();
                 List<Page> pages = embedService.CreateOpSkinPages(op);
                 await itr.SendPaginatedMessageAsync(ctx.Channel, ctx.User, pages, timeoutoverride: TimeSpan.FromMinutes(5));

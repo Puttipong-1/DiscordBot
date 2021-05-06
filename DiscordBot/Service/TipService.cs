@@ -17,18 +17,28 @@ namespace DiscordBot.Service
         {
             try
             {
-                return await api.PostAsync<List<string>>("tip/list",null,null);
+                return await api.PostAsync<List<string>>("tip/category/list", null,null);
             }catch(Exception e)
             {
                 throw e;
             }
         }
-        public async Task<List<Tip>> GetTipByCategory(string category)
+        public async Task<Tip> GetTipByCategory(string category)
         {
             try
             {
-                return await api.PostAsync<List<Tip>>("tip/category/" + category, null, null);
+                return await api.PostAsync<Tip>("tip/category/" + category, null, null);
             }catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public async Task<Dictionary<string,List<TipDetail>>> GetAllTips()
+        {
+            try
+            {
+                return await api.PostAsync<Dictionary<string, List<TipDetail>>>("tip/list",null,null);
+            }catch(Exception e)
             {
                 throw e;
             }

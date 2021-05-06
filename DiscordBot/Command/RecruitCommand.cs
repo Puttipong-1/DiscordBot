@@ -95,7 +95,6 @@ namespace DiscordBot.Command
                     await ctx.RespondAsync("Not found.");
                     return;
                 }
-                Console.WriteLine("list   " + recruits.Count);
                 string text = embedService.CreateRecruitOperators(recruits);
                 var itr = ctx.Client.GetInteractivity();
                 var pages = itr.GeneratePagesInEmbed(text, SplitType.Line);

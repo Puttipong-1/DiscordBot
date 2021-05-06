@@ -31,7 +31,11 @@ namespace DiscordBot.Command
             try
             {
                 List<Item> items = await itemService.GetItemList();
-                if (items == null && items.Count == 0) await ctx.RespondAsync("Items not found");
+                if (items == null && items.Count == 0)
+                {
+                    await ctx.RespondAsync("Items not found");
+                    return;
+                }
                 string text = embedService.CreateItemsString(items);
                 var itr = ctx.Client.GetInteractivity();
                 var embed = new DiscordEmbedBuilder()
@@ -50,7 +54,11 @@ namespace DiscordBot.Command
             try
             {
                 ItemDetail item = await itemService.GetItemDetail(name);
-                if (item == null ) await ctx.RespondAsync("Item not found");
+                if (item == null)
+                {
+                    await ctx.RespondAsync("Item not found");
+                    return;
+                }
                 DiscordEmbed embed = embedService.CreateItemDetailEmbed(item);
                 await ctx.RespondAsync(embed);
             }

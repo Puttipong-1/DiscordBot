@@ -43,5 +43,16 @@ namespace ArknightApi.Service
                 throw e;
             }
         }
+        public async Task<Dictionary<string,List<Tip>>> GetAllTips()
+        {
+            try
+            {
+                var tips = await applicationDb.Tips.ToListAsync();
+                return tips.GroupBy(t => t.Category).Select(t => t).ToDictionary(t=>t.Key,t=>t.ToList());
+            }catch(Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

@@ -9,11 +9,13 @@ namespace DiscordBot.Model.Response.Tip
     {
         [JsonPropertyName("tips")]
         public List<Tips> Tips { get; set; }
+        [JsonPropertyName("category")]
+        public string Category { get; set; }
     }
     public class Tips
     {
         [JsonPropertyName("title")]
-        public object Title { get; set; }
+        public string Title { get; set; }
 
         [JsonPropertyName("description")]
         public string Description { get; set; }

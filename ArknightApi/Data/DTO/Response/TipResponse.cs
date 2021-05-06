@@ -9,12 +9,14 @@ namespace ArknightApi.Data.DTO.Response
     public class TipResponse
     {
         public List<Tips> Tips { get; set; }
+        public string Category { get; set; }
         public TipResponse() { }
         public TipResponse(List<Tip> tips)
         {
             Tips = new List<Tips>();
             if (tips != null)
             {
+                Category = tips[0].Category;
                 foreach(Tip t in tips)
                 {
                     Tips.Add(new Tips(t));

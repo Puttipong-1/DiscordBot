@@ -21,7 +21,7 @@ namespace ArknightApi.Controllers
         /// Get all tip category
         /// </summary>
         /// <returns></returns>
-        [Route("list")]
+        [Route("category/list")]
         [HttpPost]
         [ProducesResponseType(typeof(List<string>),200)]
         public async Task<ActionResult> GetTipCategory()
@@ -52,6 +52,26 @@ namespace ArknightApi.Controllers
                 return Ok(res);
             }
             catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        /// <summary>
+        /// Get all tips
+        /// </summary>
+        /// <returns></returns>
+        [Route("list")]
+        [HttpPost]
+        [ProducesResponseType(typeof(Dictionary<string,List<ArknightApi.Data.Model.Tip>>),200)]
+        public async Task<ActionResult> GetAllTip()
+        {
+            try
+            {
+                var dic=await tipService.GetAllTips();
+                if (dic is null || dic.Count == 0) return NotFound();
+                return Ok(dic);
+                
+            }catch(Exception e)
             {
                 return BadRequest(e.Message);
             }

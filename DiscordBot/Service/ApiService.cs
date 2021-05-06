@@ -19,8 +19,10 @@ namespace DiscordBot.Service
         private async Task<T> HandleApiResponse<T>(HttpResponseMessage responseMessage)
         {
             var responseJson =await responseMessage.Content.ReadAsStringAsync();
+            Console.WriteLine("json   " + responseJson);
             if (responseMessage.IsSuccessStatusCode)
             {
+                Console.WriteLine("Handle  " + responseMessage.IsSuccessStatusCode);
                 var responseObject = JsonSerializer.Deserialize<T>(responseJson);
                 return responseObject;
             }

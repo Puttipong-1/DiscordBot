@@ -98,7 +98,8 @@ namespace DiscordBot
         private async Task CommandErrored(CommandsNextExtension sender, CommandErrorEventArgs e)
         {
             e.Context.Client.Logger.LogError(BotEventId, $"{e.Context.User.Username} tried executing '{e.Command?.QualifiedName ?? "<unknown command>"}' but it errored: {e.Exception.GetType()}: {e.Exception.Message ?? "<no message>"}", DateTime.Now);
-            if(e.Exception is ChecksFailedException ex)
+            Console.WriteLine("error type:   " + e.Exception.GetType());
+            if (e.Exception is ChecksFailedException ex)
             {
                 var emoji = DiscordEmoji.FromName(e.Context.Client, ":no_entry:");
                 var embed = new DiscordEmbedBuilder
@@ -117,7 +118,6 @@ namespace DiscordBot
             .AddSingleton<ApiService>()
             .AddSingleton<ItemService>()
             .AddSingleton<OperatorService>()
-            .AddSingleton<PictureService>()
             .AddSingleton<RecruitService>()
             .AddSingleton<TipService>()
             .AddSingleton<ItemEmbedService>()

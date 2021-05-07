@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Text;
 using DiscordBot.Command;
 using DiscordBot.Model.Response.Operator;
-using DiscordBot.Helper;
+using DiscordBot.Utility;
 using DSharpPlus;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity;

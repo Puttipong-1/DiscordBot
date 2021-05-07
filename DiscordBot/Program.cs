@@ -12,7 +12,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using DSharpPlus.Interactivity.Enums;
-using DiscordBot.Helper;
+using DiscordBot.Utility;
 using System.Configuration;
 using Microsoft.Extensions.Configuration;
 using System.IO;

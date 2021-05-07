@@ -1,4 +1,4 @@
-﻿using DiscordBot.Helper;
+﻿using DiscordBot.Utility;
 using DiscordBot.Model.Response.Tip;
 using DiscordBot.Service;
 using DiscordBot.Service.Embed;

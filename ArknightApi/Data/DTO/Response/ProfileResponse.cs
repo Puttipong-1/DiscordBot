@@ -14,6 +14,7 @@ namespace ArknightApi.Data.DTO.Response
         public int Rarity { get; set; }
         public string Artist { get; set; }
         public string CV { get; set; }
+        public string OperatorCode { get; set; }
         public BasicFile BasicFile { get; set; }
         public PhysicalExam PhysicalExam { get; set; }
         public List<Profile> Profiles { get; set; }
@@ -24,6 +25,7 @@ namespace ArknightApi.Data.DTO.Response
             Rarity = op.Rarity;
             Artist = op.Artist;
             CV = op.CV;
+            OperatorCode = op.OperatorCode;
             Profiles = new List<Profile>();
             if (op.CharInfos != null)
             {

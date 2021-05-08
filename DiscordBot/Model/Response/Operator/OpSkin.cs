@@ -18,6 +18,8 @@ namespace DiscordBot.Model.Response.Operator
     }
     public class Skin
     {
+        [JsonPropertyName("skinCode")]
+        public string SkinCode { get; set; }
         [JsonPropertyName("illustId")]
         public string IllustId { get; set; }
 

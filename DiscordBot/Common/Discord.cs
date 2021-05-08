@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DiscordBot
+namespace DiscordBot.Common
 {
     class Discord
     {

@@ -20,6 +20,7 @@ using DiscordBot.Command;
 using Microsoft.Extensions.Hosting;
 using System.Reflection;
 using DiscordBot.Service.Embed;
+using DiscordBot.Common;
 
 namespace DiscordBot
 {
@@ -40,7 +41,7 @@ namespace DiscordBot
                 .Build();
             Discord discord = new Discord();
             config.GetSection("Discord").Bind(discord);
-            var services = ConfigureService();
+            var services = ConfigureService(config);
             var cfg = new DiscordConfiguration
             {
                 Token = discord.DiscordToken,
@@ -111,20 +112,21 @@ namespace DiscordBot
                 await e.Context.RespondAsync(embed);
             }
         }
-        public ServiceProvider ConfigureService()
+        public ServiceProvider ConfigureService(IConfiguration config)
         {
-           return new ServiceCollection()
-            .AddSingleton<HttpClient>()
-            .AddSingleton<ApiService>()
-            .AddSingleton<ItemService>()
-            .AddSingleton<OperatorService>()
-            .AddSingleton<RecruitService>()
-            .AddSingleton<TipService>()
-            .AddSingleton<ItemEmbedService>()
-            .AddSingleton<OperatorEmbedService>()
-            .AddSingleton<RecruitEmbedService>()
-            .AddSingleton<TipEmbedService>()
-            .BuildServiceProvider();
+            return new ServiceCollection()
+             .AddSingleton<HttpClient>()
+             .AddSingleton<ApiService>()
+             .AddSingleton<ItemService>()
+             .AddSingleton<OperatorService>()
+             .AddSingleton<RecruitService>()
+             .AddSingleton<TipService>()
+             .AddSingleton<ItemEmbedService>()
+             .AddSingleton<OperatorEmbedService>()
+             .AddSingleton<RecruitEmbedService>()
+             .AddSingleton<TipEmbedService>()
+             .Configure<AmazonS3>(config.GetSection("AmazonS3"))
+             .BuildServiceProvider();
         }
     }
 }

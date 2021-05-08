@@ -10,12 +10,14 @@ namespace ArknightApi.Data.DTO.Response
     {
         public string Name { get; set; }
         public int Rarity { get; set; }
+        public string OperatorCode { get; set; }
         public List<Word> Words { get; set; }
         public WordResponse(){}
         public WordResponse(Operator op)
         {
             Name = op.Name;
             Rarity = op.Rarity;
+            OperatorCode = op.OperatorCode;
             Words = new List<Word>();
             foreach (CharWord c in op.CharWords)
             {

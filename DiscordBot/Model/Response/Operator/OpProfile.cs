@@ -18,6 +18,8 @@ namespace DiscordBot.Model.Response.Operator
 
         [JsonPropertyName("cv")]
         public string Cv { get; set; }
+        [JsonPropertyName("operatorCode")]
+        public string OperatorCode { get; set; }
 
         [JsonPropertyName("basicFile")]
         public BasicFile BasicFile { get; set; }

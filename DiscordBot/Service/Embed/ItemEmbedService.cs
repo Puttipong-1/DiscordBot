@@ -1,7 +1,9 @@
-﻿using DiscordBot.Model.Response.Item;
+﻿using DiscordBot.Common;
+using DiscordBot.Model.Response.Item;
 using DSharpPlus;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,11 +12,18 @@ namespace DiscordBot.Service.Embed
 {
     class ItemEmbedService
     {
+        private readonly AmazonS3 s3;
+        public ItemEmbedService(IOptions<AmazonS3> _s3)
+        {
+            s3 = _s3.Value;
+        }
         public DiscordEmbed CreateItemDetailEmbed(ItemDetail item)
         {
+            Console.WriteLine($"{s3.Url}items/{item.IconId}.png");
             DiscordEmbedBuilder embed = new DiscordEmbedBuilder()
                 .WithTitle($"[{item.Rarity}★] {item.Name}")
                 .WithDescription($"{item.Description}")
+                .WithThumbnail($"{s3.Url}items/{item.IconId}")
                 .AddField("Usage", $"{item.Usage}");
             if (item.FormulaDetails != null && item.FormulaDetails.Count>0)
             {

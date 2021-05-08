@@ -28,6 +28,7 @@ namespace ArknightApi.Data.DTO.Response
     }
     public class Skins
     {
+        public string SkinCode { get; set; }
         public string IllustId { get; set; }
         public string AvatarId { get; set; }
         public string PortraitId { get; set; }
@@ -42,6 +43,7 @@ namespace ArknightApi.Data.DTO.Response
         public string Dialog { get; set; }
         public Skins(Skin s)
         {
+            SkinCode = s.SkinCode;
             IllustId = s.IllustId;
             AvatarId = s.AvatarId;
             PortraitId = s.PortraitId;

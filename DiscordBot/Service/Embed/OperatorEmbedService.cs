@@ -10,11 +10,19 @@ using DSharpPlus.Entities;
 using DSharpPlus.Interactivity;
 using static DiscordBot.Model.Response.Operator.OpDetail;
 using System.Linq;
+using Microsoft.Extensions.Options;
+using DiscordBot.Common;
+using DSharpPlus.CommandsNext;
 
 namespace DiscordBot.Service.Embed
 {
     class OperatorEmbedService
     {
+        private readonly AmazonS3 s3;
+        public OperatorEmbedService(IOptions<AmazonS3> _s3)
+        {
+            s3 = _s3.Value;
+        }
         public List<Page> CreateBaseBuffPages(BaseBuff bb)
         {
             List<Page> pages = new List<Page>();
@@ -25,10 +33,10 @@ namespace DiscordBot.Service.Embed
                     var e = new DiscordEmbedBuilder()
                        .WithTitle($"[{bb.Rarity}★] {bb.Name}")
                        .WithDescription($"{b.BuffName}")
-                       .WithThumbnail($"https://gamepress.gg/arknights/sites/arknights/files/2020-09/Bskill_train_guard3.png", 100, 100);
-                    e.AddField("Room", b.RoomType);
-                    e.AddField("Unlock", $"Elite {b.Phase} , Level {b.Lvl}");
-                    e.AddField("Description", b.Description);
+                       .WithThumbnail($"{s3.Url}infrastructure/{b.SkillIcon}.png")
+                       .AddField("Room", b.RoomType)
+                       .AddField("Unlock", $"Elite {b.Phase} , Level {b.Lvl}")
+                       .AddField("Description", b.Description);
                     pages.Add(new Page
                     {
                         Embed = e.Build()
@@ -37,12 +45,33 @@ namespace DiscordBot.Service.Embed
             }
             return pages;
         }
-        public List<Page> CreateOpDetailPages(OpDetail op)
+        public List<Page> CreateOpDetailPages(OpDetail op, DiscordClient client)
         {
+            List<DiscordEmoji> emojis = new List<DiscordEmoji>
+            {
+                DiscordEmoji.FromGuildEmote(client, 840489819812921384),
+                DiscordEmoji.FromGuildEmote(client, 840489819481440267),
+                DiscordEmoji.FromGuildEmote(client, 840489819594555414),
+                DiscordEmoji.FromGuildEmote(client, 840489820177563648),
+                DiscordEmoji.FromGuildEmote(client, 840489820924543016)
+            };
+            int i = 0;
+            string pot = "\u200b";
+            if (op.Potentials != null && op.Potentials.Any())
+            {
+                foreach(var p in op.Potentials)
+                {
+                    pot += $"{emojis[i]} {p.Desc}\n";
+                    i++;
+                }
+                pot = pot.Substring(0, pot.Length - 1);
+            }
+            Console.WriteLine($"{s3.Url}avatars/{op.OperatorCode}.png");
             List<Page> pages = new List<Page>();
             DiscordEmbedBuilder embed = new DiscordEmbedBuilder()
                 .WithTitle($"[{op.Rarity}★] {op.Name}")
                 .WithDescription($"{op.ItemUsage}\n{op.ItemDesc}")
+                .WithThumbnail($"{s3.Url}avatars/{op.OperatorCode}.png",60,60)
                 .AddField("Detail", $"{Formatter.Bold("Affiliation:")} {TextUtil.ToTitleCase(op.Team)}\n" +
                 $"{Formatter.Bold("Obtain:")} {op.ItemObtainApproach}", true)
                 .AddField("\u200b",
@@ -58,7 +87,8 @@ namespace DiscordBot.Service.Embed
                 $"{Formatter.Bold("Cost:")} {op.Elites[0].Cost}\n" +
                 $"{Formatter.Bold("AttackTime:")} 100\n" +
                 $"{Formatter.Bold("Block:")} {op.Elites[0].BlockCnt}\n" +
-                $"{Formatter.Bold("RespawnTime:")} {op.Elites[0].RespawnTime}\n", true);
+                $"{Formatter.Bold("RespawnTime:")} {op.Elites[0].RespawnTime}\n", true)
+                .AddField("Potentials", pot, true);
            if (op.Talents != null && op.Talents.Count > 0)
             {
                 string talent = string.Empty;
@@ -98,6 +128,21 @@ namespace DiscordBot.Service.Embed
                 $"{Formatter.Bold("Attack Time:")} 100\n" +
                 $"{Formatter.Bold("Respawn Time:")} {e.RespawnTime}\n", true)
                 .AddField("Range", AttackRange.GetAttackRange(op.Elites[index].RangeId), true);
+            string img = string.Empty;
+            switch (index)
+            {
+                case 1:
+                    {
+                        if (op.OperatorCode.Equals("Amiya")) embed.WithThumbnail($"{s3.Url}avatars/{op.OperatorCode}_1+.png");
+                        else embed.WithThumbnail($"{s3.Url}avatars/{op.OperatorCode}.png");
+                        break;
+                    }
+                case 2:
+                    {
+                        embed.WithThumbnail($"{s3.Url}avatars/{op.OperatorCode}_2.png");
+                        break;
+                    }
+            }
             if (op.Talents != null && op.Talents.Count > 0)
             {
                 string talent = string.Empty;
@@ -115,26 +160,19 @@ namespace DiscordBot.Service.Embed
         }
         public List<Page> CreateOpProfilePages(OpProfile op)
         {
+            string img = $"{s3.Url}avatars/{op.OperatorCode}.png";
             List<Page> pages = new List<Page>();
-            if(op.Profiles != null && op.Profiles.Any())
-            {
-                foreach (Profile p in op.Profiles)
-                {
-                    DiscordEmbed embed = new DiscordEmbedBuilder()
-                        .WithTitle($"[{op.Rarity}★] {op.Name} - {p.Title}")
-                        .WithDescription($"{p.Text}")
-                        .Build();
-                    pages.Add(new Page { Embed = embed });
-                }
-            }
             if (op.BasicFile != null)
             {
                 DiscordEmbed embed = new DiscordEmbedBuilder()
                     .WithTitle($"[{op.Rarity}★] {op.Name} - Basic File ")
-                    .WithDescription($"{Formatter.Bold("Code Name:")} {op.BasicFile.CodeName}\n" +
+                    .WithThumbnail(img,60,60)
+                    .WithDescription($"{Formatter.Bold("CV:")} {op.Cv}\n" +
+                    $"{Formatter.Bold("Artist:")} {op.Artist}\n" +
+                    $"{Formatter.Bold("Code Name:")} {op.BasicFile.CodeName}\n" +
                     $"{Formatter.Bold("Gender:")} {op.BasicFile.Gender}\n" +
                     $"{Formatter.Bold("Combat Experience:")} {op.BasicFile.CombatExperience}\n" +
-                    $"{Formatter.Bold("Place of Birth:")} {op.BasicFile.PlaceOfBirth}\n"+
+                    $"{Formatter.Bold("Place of Birth:")} {op.BasicFile.PlaceOfBirth}\n" +
                     $"{Formatter.Bold("Date of Birth:")} {op.BasicFile.DateOfBirth}\n" +
                     $"{Formatter.Bold("Race:")} {op.BasicFile.Race}\n" +
                     $"{Formatter.Bold("Height:")} {op.BasicFile.Height}\n" +
@@ -146,19 +184,33 @@ namespace DiscordBot.Service.Embed
             {
                 DiscordEmbed embed = new DiscordEmbedBuilder()
                    .WithTitle($"[{op.Rarity}★] {op.Name} - Physical Exam")
+                   .WithThumbnail(img, 60, 60)
                    .WithDescription($"{Formatter.Bold("Physical Strength:")} {op.PhysicalExam.PhysicalStrength}\n" +
                    $"{Formatter.Bold("Mobility:")} {op.PhysicalExam.Mobility}\n" +
-                   $"{Formatter.Bold("Physical Resilience:")} {op.PhysicalExam.PhysicalResilience}\n"+
+                   $"{Formatter.Bold("Physical Resilience:")} {op.PhysicalExam.PhysicalResilience}\n" +
                    $"{Formatter.Bold("Tactical Acumen:")} {op.PhysicalExam.TacticalAcumen}\n" +
                    $"{Formatter.Bold("Combat Skill:")} {op.PhysicalExam.CombatSkill}\n" +
                    $"{Formatter.Bold("Originium Adaptability:")} {op.PhysicalExam.TacticalAcumen}\n")
                    .Build();
                 pages.Add(new Page { Embed = embed });
             }
+            if (op.Profiles != null && op.Profiles.Any())
+            {
+                foreach (Profile p in op.Profiles)
+                {
+                    DiscordEmbed embed = new DiscordEmbedBuilder()
+                        .WithTitle($"[{op.Rarity}★] {op.Name} - {p.Title}")
+                        .WithThumbnail(img, 60, 60)
+                        .WithDescription($"{p.Text}")
+                        .Build();
+                    pages.Add(new Page { Embed = embed });
+                }
+            }
             return pages;
         }
         public List<Page> CreateOpWordPages(OpWord op)
         {
+            string img = $"{s3.Url}avatars/{op.OperatorCode}.png";
             List<Page> pages = new List<Page>();
             string text = string.Empty;
             int i = 0;
@@ -173,6 +225,7 @@ namespace DiscordBot.Service.Embed
                     {
                         var embed = new DiscordEmbedBuilder()
                             .WithTitle($"[{op.Rarity}★] {op.Name} - Quote {page}")
+                            .WithThumbnail(img, 60, 60)
                             .WithDescription(text)
                             .Build();
                         pages.Add(new Page { Embed = embed });
@@ -185,6 +238,7 @@ namespace DiscordBot.Service.Embed
                 {
                     var embed = new DiscordEmbedBuilder()
                             .WithTitle($"[{op.Rarity}★] {op.Name} - Quote {page}")
+                            .WithThumbnail(img, 60, 60)
                             .WithDescription(text)
                             .Build();
                     pages.Add(new Page { Embed = embed });
@@ -200,12 +254,18 @@ namespace DiscordBot.Service.Embed
             {
                 foreach (Skill skill in op.Skills)
                 {
+                    string range = AttackRange.GetAttackRange(skill.RangeId);
                     var embed = new DiscordEmbedBuilder()
                         .WithTitle($"[{op.Rarity}★] {op.Name} - {skill.SkillName}")
+                        .WithThumbnail($"{s3.Url}skills/skill_icon_{skill.SkillCode}.png",60,60)
                         .AddField("Details", $"{Formatter.Bold("Recovery Type:")} {skill.SpType}\n" +
                         $"{Formatter.Bold("Sp Cost:")} {skill.SpCost} → {skill.MaxSpCost}", true)
-                        .AddField("\u200b", $"{Formatter.Bold("Skill Type:")} {skill.SkillType }", true)
-                        .AddField("Description", $"{skill.SkillDescription}");
+                        .AddField("\u200b", $"{Formatter.Bold("Skill Type:")} {skill.SkillType }", true);
+                    if (!string.IsNullOrWhiteSpace(range))
+                    {
+                        embed.AddField("Range", range, true);
+                    }
+                    embed.AddField("Description", $"{skill.SkillDescription}");
                     if (i == 1)
                     {
                         if (op.AllSkills != null && op.AllSkills.Any())
@@ -259,6 +319,7 @@ namespace DiscordBot.Service.Embed
             {
                 foreach (Skin s in op.Skins)
                 {
+                    string img = s.PortraitId.Replace("#", "%23");
                     string title = $"[{op.Rarity}★] {op.Name}";
                     string f1 = $"{Formatter.Bold("Model:")} {op.Name}\n" +
                         $"{Formatter.Bold("Artist:")} {s.Artist}";
@@ -269,9 +330,11 @@ namespace DiscordBot.Service.Embed
                     if (!string.IsNullOrWhiteSpace(s.Content)) desc = s.Content;
                     DiscordEmbedBuilder embed = new DiscordEmbedBuilder()
                         .WithTitle(title)
+                        .WithThumbnail($"{s3.Url}avatars/{img}.png", 60, 60)
                         .WithDescription(desc)
                         .AddField("Detail", f1, true)
-                        .AddField("\u200b", f2, true);
+                        .AddField("\u200b", f2, true)
+                        .WithImageUrl($"{s3.Url}characters/{img}.png");
                     if (!string.IsNullOrWhiteSpace(s.Usage)) embed.AddField("Usage", s.Usage);
                     if (!string.IsNullOrWhiteSpace(s.Desc)) embed.AddField("Quote", s.Desc);
                     if (!string.IsNullOrWhiteSpace(s.Dialog)) embed.AddField("Information", s.Dialog);

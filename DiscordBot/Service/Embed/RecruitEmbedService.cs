@@ -1,7 +1,9 @@
-﻿using DiscordBot.Model.Response.Recruit;
+﻿using DiscordBot.Common;
+using DiscordBot.Model.Response.Recruit;
 using DSharpPlus;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,6 +12,11 @@ namespace DiscordBot.Service.Embed
 {
     class RecruitEmbedService
     {
+        private readonly AmazonS3 s3;
+        public RecruitEmbedService(IOptions<AmazonS3> _s3)
+        {
+            s3 = _s3.Value;
+        }
         public DiscordEmbedBuilder CreateOperatorTagEmbed(OperatorTag op)
         {
             string tags = "No tag";

@@ -21,6 +21,8 @@ namespace DiscordBot.Model.Response.Operator
 
         [JsonPropertyName("rarity")]
         public int Rarity { get; set; }
+        [JsonPropertyName("operatorCode")]
+        public string OperatorCode { get; set; }
 
         [JsonPropertyName("words")]
         public List<Word> Words { get; set; }

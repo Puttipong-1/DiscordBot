@@ -91,7 +91,7 @@ namespace DiscordBot.Model.Response.Operator
         public int MaxDuration { get; set; }
 
         [JsonPropertyName("rangeId")]
-        public object RangeId { get; set; }
+        public string RangeId { get; set; }
 
         [JsonPropertyName("masteryLevels")]
         public List<MasteryLevel> MasteryLevels { get; set; }

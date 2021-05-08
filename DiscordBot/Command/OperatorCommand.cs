@@ -86,7 +86,7 @@ namespace DiscordBot.Command
                     return;
                 }
                 var itr = ctx.Client.GetInteractivity();
-                List<Page> pages = embedService.CreateOpDetailPages(op);
+                List<Page> pages = embedService.CreateOpDetailPages(op,ctx.Client);
                 await itr.SendPaginatedMessageAsync(ctx.Channel, ctx.User, pages, timeoutoverride: TimeSpan.FromMinutes(5));
             }
             catch(Exception e)

@@ -7,11 +7,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DiscordBot.Common;
+using Microsoft.Extensions.Options;
 
 namespace DiscordBot.Service.Embed
 {
     class TipEmbedService
     {
+        private readonly AmazonS3 s3;
+        public TipEmbedService(IOptions<AmazonS3> _s3)
+        {
+            s3 = _s3.Value;
+        }
         public List<Page> CreateTipEmbed(Tip tip)
         {
             List<Page> pages = new List<Page>();
